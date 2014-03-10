@@ -54,4 +54,13 @@ public class Controler
 		return endereco;
 	}
 	
+	//criando um objeto contato.
+	//retorno Pessoa contato devolve um contato com nome, endereço e telefones.
+	public Pessoa criarContato()
+	{
+		Pessoa contato = new Pessoa( recebeNome(), recebeEndereco(), recebeTelefones() );
+		
+		return contato;
+	}
+	
 }
