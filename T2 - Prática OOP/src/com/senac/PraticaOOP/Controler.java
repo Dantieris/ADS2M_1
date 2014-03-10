@@ -44,7 +44,7 @@ public class Controler
 	
 	//recebe um endereço
 	//retorno String endereco texto digitado pelo usuário.
-	public String recebeEndereço()
+	public String recebeEndereco()
 	{
 		String endereco;
 		
