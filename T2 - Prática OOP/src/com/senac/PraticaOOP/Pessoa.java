@@ -6,11 +6,11 @@ public class Pessoa
 	private String endereco;
 	private String telefone[];
 	
-	public Pessoa(String nome, String endereco, String telefone, int ind) 
+	public Pessoa(String nome, String endereco, String telefone, int indice) 
 	{
-		this.nome 			= nome;
-		this.endereco 		= endereco;
-		this.telefone[ind] 	= telefone;
+		this.nome 				= nome;
+		this.endereco 			= endereco;
+		this.telefone[indice] 	= telefone;
 	}
 	
 	public String getNome()
@@ -23,8 +23,8 @@ public class Pessoa
 		return endereco;
 	}
 	
-	public String getTelefone(int ind)
+	public String getTelefone(int indice)
 	{
-		return telefone[ind];
+		return telefone[indice];
 	}
 }
