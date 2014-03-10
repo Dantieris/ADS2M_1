@@ -29,4 +29,29 @@ public class Controler
 		
 		return telefone;
 	}
+	
+	//recebe um nome.
+	//retorno String nome texto digitado pelo usuário.
+	public String recebeNome()
+	{
+		String nome;
+		
+		impressor.imprimeLinha( "Digite o nome: " );
+		nome = leitor.recebeLinha();
+		
+		return nome;
+	}
+	
+	//recebe um endereço
+	//retorno String endereco texto digitado pelo usuário.
+	public String recebeEndereço()
+	{
+		String endereco;
+		
+		impressor.imprimeLinha( "Digite o endereco: " );
+		endereco = leitor.recebeLinha();
+		
+		return endereco;
+	}
+	
 }
