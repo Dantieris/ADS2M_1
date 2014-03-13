@@ -24,6 +24,7 @@ public class Controler
 		return contato;
 	}
 	
+	//Lista um contato na tela
 	public void listarContato()
 	{
 		Pessoa contato = criarContato();
