@@ -61,13 +61,21 @@ public class View
 			String telefone[] = new String [3];
 			
 			imprimeLinha( "Digite o telefone celular: " );
-			telefone [0] =  recebeLinha();
+			telefone [0] =  recebeLinha().replace(" ", "").trim();
 			
 			imprimeLinha( "Digite o telefone residencial: " );
-			telefone [1] = recebeLinha();
+			telefone [1] = recebeLinha().replace(" ", "").trim();
 			
 			imprimeLinha( "Digite o telefone comercial: " );
-			telefone [2] = recebeLinha();
+			telefone [2] = recebeLinha().replace(" ", "").trim();
+			
+			return telefone;
+		}
+		
+		public String recebeTelefone(String tipoTelefone)
+		{
+			imprimeLinha("Digite o telefone "+ tipoTelefone);
+			String telefone = recebeLinha().replace( "" ,  "" ).trim();
 			
 			return telefone;
 		}
