@@ -1,5 +1,7 @@
 package com.senac.PraticaOOP;
 
+import java.text.DecimalFormat;
+
 public class View 
 {
  		//imprime uma mensagem na tela.

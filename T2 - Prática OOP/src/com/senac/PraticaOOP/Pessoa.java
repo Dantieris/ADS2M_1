@@ -23,8 +23,13 @@ public class Pessoa
 		return endereco;
 	}
 	
-	public String getTelefone(int indice)
+	public String[] getTelefone()
 	{
-		return telefone[indice];
+		return telefone;
+	}
+	
+	public void setTelefone(int indice, String telefone)
+	{
+		this.telefone[indice] = telefone;
 	}
 }
