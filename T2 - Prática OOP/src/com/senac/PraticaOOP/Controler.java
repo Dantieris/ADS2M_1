@@ -31,5 +31,30 @@ public class Controler
 		
 		view.imprimeContato(contato.getNome(), contato.getEndereco(), contato.getTelefone());
 	}
+	
+	//Formata uma string telefone de 7 dígitos
+	// em (00)XXX-XXXX.
+	private String formatarTelefone(String telefone)
+	{
+		String prefixo = (String) telefone.subSequence(0, 4);
+		String sufixo  = (String) telefone.subSequence(4, telefone.length());
+		
+		String telefoneFormatado = "(00)" + prefixo + "-" + sufixo;
+		
+		return telefoneFormatado;
+	}
+	
+	//Formata uma string telefone de 9 dígitos
+	// em (XX)XXX-XXXX.
+	private String formatarTelefoneOperadora(String telefone)
+	{
+		String operadora = (String) telefone.subSequence(0, 2);
+		String prefixo   = (String) telefone.subSequence(2, 5);
+		String sufixo    = (String) telefone.subSequence(5, telefone.length());
+		
+		String telefoneFormatado = "(" + operadora + ")" + prefixo + "-" + sufixo;
+		
+		return telefoneFormatado;
+	}
 		
 }
