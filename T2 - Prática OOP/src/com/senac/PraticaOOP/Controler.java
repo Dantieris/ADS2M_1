@@ -35,10 +35,8 @@ public class Controler
 	}
 	
 	//Lista um contato na tela
-	public void listarContato()
+	public void listarContato(Pessoa contato)
 	{
-		Pessoa contato = criarContato();
-		
 		view.imprimeContato(contato.getNome(), contato.getEndereco(), contato.getTelefone());
 	}
 	
@@ -56,7 +54,7 @@ public class Controler
 	
 	//Formata uma string telefone de 9 dígitos
 	// em (XX)XXX-XXXX.
-	public String formatarTelefoneOperadora(String telefone)
+	private String formatarTelefoneOperadora(String telefone)
 	{
 		String operadora = (String) telefone.subSequence(0, 2);
 		String prefixo   = (String) telefone.subSequence(2, 5);
@@ -70,7 +68,7 @@ public class Controler
 	}
 	
 	//gera uma combinação de um item do vetor primeiroNome, e um item do vetor segundoNome.
-	public String gerarNomeAleatorio()
+	private String gerarNomeAleatorio()
 	{
 		java.util.Random random = new java.util.Random();
 		
@@ -83,7 +81,7 @@ public class Controler
 	}
 	
 	//gera um endereço.
-	public String gerarEnderecoAleatorio()
+	private String gerarEnderecoAleatorio()
 	{
 		String endereco = "Rua " + gerarNomeAleatorio();
 		
@@ -92,7 +90,7 @@ public class Controler
 	
 	//gera um número aleatório entre 0 e o parâmetro numeroLimite exclusivamente.
 	//o número pode chegar até o numeriLimite - 1.
-	public int gerarNumeroAleatorio(int numeroLimite)
+	private int gerarNumeroAleatorio(int numeroLimite)
 	{
 		java.util.Random random = new java.util.Random();
 		
@@ -101,8 +99,26 @@ public class Controler
 		return numeroAleatorio;
 	}
 	
+	private String gerarTelefoneAleatorio()
+	{
+		String telefone = "";
+		while(telefone.length() != 12)
+		{
+			telefone = "(" + ( gerarNumeroAleatorio(50) + 1 ) + ")" + "555-" + gerarNumeroAleatorio(9999);
+		}
+		return telefone;
+	}
+	
+	private String[] gerarTelefones()
+	{
+		String telefones[] = new String[3];
+		for ( int i = 0 ; i < telefones.length ; i++)
+			telefones[i] = gerarTelefoneAleatorio();
+		return telefones;
+	}
+	
 	//Testar os valores do tamanho total de String, em cada índice do vetor.
-	public String[] testaTelefones(String[] telefones)
+	private String[] testaTelefones(String[] telefones)
 	{
 		for ( int i = 0 ; i < telefones.length ; i++)
 		{
@@ -127,6 +143,12 @@ public class Controler
 			System.out.println("telefones " + telefones[i] + "indice " + i);
 		
 		return telefones;
+	}
+	
+	public Pessoa gerarContatoAleatorio()
+	{
+		Pessoa contato = new Pessoa(gerarNomeAleatorio(), gerarEnderecoAleatorio(), gerarTelefones());
+		return contato;
 	}
 	
 }
