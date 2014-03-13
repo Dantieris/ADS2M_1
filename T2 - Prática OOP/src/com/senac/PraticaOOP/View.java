@@ -72,6 +72,9 @@ public class View
 			return telefone;
 		}
 		
+		//recebe um número de telefone,
+		//parâmetro a mensagem descrevendo o tipo do telefone: 
+		//celular, residencial ou comercial.		
 		public String recebeTelefone(String tipoTelefone)
 		{
 			imprimeLinha("Digite o telefone "+ tipoTelefone);

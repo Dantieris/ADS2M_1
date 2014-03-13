@@ -34,7 +34,8 @@ public class Controler
 		return contato;
 	}
 	
-	//Lista um contato na tela
+	//Imprime na tela um contato
+	//parâmetro Pessoa contato é o objeto que será mostrado na tela.
 	public void listarContato(Pessoa contato)
 	{
 		view.imprimeContato(contato.getNome(), contato.getEndereco(), contato.getTelefone());
@@ -67,7 +68,8 @@ public class Controler
 		return telefoneFormatado;
 	}
 	
-	//gera uma combinação de um item do vetor primeiroNome, e um item do vetor segundoNome.
+	//gera uma combinação de um item do vetor primeiroNome, 
+	//e um item do vetor segundoNome.
 	private String gerarNomeAleatorio()
 	{
 		java.util.Random random = new java.util.Random();
@@ -80,7 +82,7 @@ public class Controler
 		return nomeAleatorio;
 	}
 	
-	//gera um endereço.
+	//gera um endereço aleatório
 	private String gerarEnderecoAleatorio()
 	{
 		String endereco = "Rua " + gerarNomeAleatorio();
@@ -99,6 +101,8 @@ public class Controler
 		return numeroAleatorio;
 	}
 	
+	//gera um telefone aleatóriamente, no formato
+	// (XX)XXX-XXXX.
 	private String gerarTelefoneAleatorio()
 	{
 		String telefone = "";
@@ -109,6 +113,8 @@ public class Controler
 		return telefone;
 	}
 	
+	//gera um vetor com 3 telefones, no formato
+	// (XX)XXX-XXXX.
 	private String[] gerarTelefones()
 	{
 		String telefones[] = new String[3];
@@ -117,7 +123,8 @@ public class Controler
 		return telefones;
 	}
 	
-	//Testar os valores do tamanho total de String, em cada índice do vetor.
+	//Testar os valores do tamanho total de String, 
+	//em cada índice do vetor.
 	private String[] testaTelefones(String[] telefones)
 	{
 		for ( int i = 0 ; i < telefones.length ; i++)
@@ -145,6 +152,8 @@ public class Controler
 		return telefones;
 	}
 	
+	//gerar um contato aleatório
+	//retorna este contato.
 	public Pessoa gerarContatoAleatorio()
 	{
 		Pessoa contato = new Pessoa(gerarNomeAleatorio(), gerarEnderecoAleatorio(), gerarTelefones());
