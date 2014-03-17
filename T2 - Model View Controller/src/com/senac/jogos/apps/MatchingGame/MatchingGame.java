@@ -12,12 +12,11 @@ public class MatchingGame {
 					break;
 				game.showStatus(i);
 				while (! game.realizaJogada(i)){ }
-				
-				
 			}
 			
 		}
-		
+		//mostra o resultado de acordo com a quantidade de jogadores.
+		game.mostraResultado( game.getJogador().length );
 	}
 
 }

@@ -34,7 +34,7 @@ public class GameController {
 	//caso contrario retorna TRUE.
 	public boolean realizaJogada(int numeroJogador) 
 	{
-		String op = view.getUserInput();
+		String op = "jogar";
 		
 		if ( op.equalsIgnoreCase("jogar") ) 								//opção de jogada "jogar".
 		{																	
@@ -96,9 +96,52 @@ public class GameController {
 		return quantidade;
 	}
 	
+	//informa qual o jogador com maior pontos.
+	//retorna o jogador vencedor do jogo.
+	public int calculaVencedor()
+	{
+		int maior 	 = -110;
+		int vencedor = 0;
+		
+		for (int i = 0 ; i < jogador.length ; i++)
+		{
+			if ( jogador[i].getPontos() > maior )
+			{
+				maior = jogador[i].getPontos();
+				vencedor = i;
+			}
+		}
+		
+		System.out.println(vencedor);
+		
+		return vencedor;
+	}
+	
+	public void mostraResultado(int quantidadeJogadores)
+	{
+		switch ( quantidadeJogadores )
+		{
+		case 1 : view.imprimeRank(jogador[0].getPontos()); 	break;	//chama o metodo para imprimir o resultado para 1 jogador.
+				
+				
+		case 2 : view.imprimeRank(jogador[0].getPontos()			//chama o metodo para imprimir o resultado para 2 jogadores.
+				, jogador[1].getPontos()
+				, (calculaVencedor() + 1)
+				, jogador[ calculaVencedor() ].getPontos()); break;
+				
+		case 3 : view.imprimeRank(jogador[0].getPontos()			//chama o metodo para imprimir o resultado para 3 jogadores.
+				, jogador[1].getPontos()
+				, jogador[2].getPontos()
+				, (calculaVencedor() + 1)
+				, jogador[ calculaVencedor() ].getPontos()); break;
+				
+		case 4 : view.imprimeRank(jogador[0].getPontos()			//chama o metodo para imprimir o resultado para 4 jogadores.
+				, jogador[1].getPontos()
+				, jogador[2].getPontos()
+				, jogador[3].getPontos()
+				, (calculaVencedor() + 1)
+				, jogador[ calculaVencedor() ].getPontos()); break;
+		}
+	}
+	
 }
-
-
-
-
-
