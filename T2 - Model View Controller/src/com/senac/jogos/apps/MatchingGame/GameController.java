@@ -9,30 +9,35 @@ public class GameController {
 
 	private MatchingGame game;
 	private Baralho baralho;
-	public Jogador[] jogador;
+	private Jogador[] jogador;
 	private GameView view;
 	
-	public GameController() {
-		view = new GameView();
+	public GameController() 
+	{
+		view 	= new GameView();
 		baralho = new Baralho();
-		game = new MatchingGame(baralho.drawCarta());
+		game 	= new MatchingGame(baralho.drawCarta());
 		jogador = new Jogador[ quantidadeJogadores() ];
 		
 		for (int i = 0 ; i < jogador.length ; i++)
 			jogador[i] = new Jogador();
+		
 	}
-	
+
 	public Jogador[] getJogador()
 	{
 		return jogador;
 	}
 
-	//
-	public void realizaJogada(int numeroJogador) 
+	//realiza uma joganda informando se uma das opções foi escolhida
+	//se nenhuma opção tenha sido escolhida retorna FALSE, 
+	//caso contrario retorna TRUE.
+	public boolean realizaJogada(int numeroJogador) 
 	{
 		String op = view.getUserInput();
 		
-		if (op.equalsIgnoreCase("jogar")) {									//opção de jogada "jogar".
+		if ( op.equalsIgnoreCase("jogar") ) 								//opção de jogada "jogar".
+		{																	
 			
 			Carta comprada = baralho.drawCarta();							//compra uma carta par ao usuário.
 			
@@ -42,17 +47,26 @@ public class GameController {
 			jogador[numeroJogador].addPontos( score );						//adiciona esses valores a pontuação do usuário.
 			
 			game.setMesa( comprada );										//coloca a carta comprada pelo usuário na mesa.
-		}
-		else
-		{
-			if ( op.equalsIgnoreCase("passar") )							//opção de jogada "passar".
-			{
-				jogador[ numeroJogador ].subtractPontos( 1 );				//dubtrai um ponto dos pontos do jogador.
-				
-				view.printLine( "Você passou a vez..." );					//informa que o usuário passou uma rodada.
-			}
 			
+			jogador[ numeroJogador ].setPassouRodada(false);
+			
+			return true;
 		}
+		
+		if ( op.equalsIgnoreCase("passar") 									//opção de jogada "passar". Jogador nao pode passar a rodada
+				&& !jogador[ numeroJogador ].isPassouRodada() )				
+		{																	//duas vezes seguidas.
+			jogador[ numeroJogador ].subtractPontos( 1 );					//dubtrai um ponto dos pontos do jogador.
+			
+			view.printLine( "Você passou a vez..." );						//informa que o usuário passou uma rodada.
+			
+			jogador[ numeroJogador ].setPassouRodada(true);
+			
+			return true;
+		}
+		
+		else
+			return false;
 		
 	}
 

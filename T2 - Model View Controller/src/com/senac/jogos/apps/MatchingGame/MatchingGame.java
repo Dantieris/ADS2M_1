@@ -11,7 +11,8 @@ public class MatchingGame {
 				if (game.isOver())
 					break;
 				game.showStatus(i);
-				game.realizaJogada(i);
+				while (! game.realizaJogada(i)){ }
+				
 				
 			}
 			
