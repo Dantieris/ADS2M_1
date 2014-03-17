@@ -21,10 +21,10 @@ public class GameView {
 		System.out.println( mensagem );
 	}
 	
-	public void mostraCarta(Carta carta) {
+	public void mostraCarta(String numero, char naipe) {
 		out.println(String.format("Carta: %s%c",
-				                  carta.getNumero(),
-				                  carta.getNaipe()));
+				                  numero,
+				                  naipe));
 	}
 	
 	public void mostraPontos(int pontos) {

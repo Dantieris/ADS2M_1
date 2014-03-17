@@ -12,6 +12,7 @@ public class MatchingGame {
 					break;
 				game.showStatus(i);
 				game.realizaJogada(i);
+				
 			}
 			
 		}
