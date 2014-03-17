@@ -8,8 +8,17 @@ import javax.swing.text.MaskFormatter;
 public class Controler 
 {
 	private View view;
-	private String primeiroNome[] = { "João" , "Pedro" , "Maria" , "Claudia" , "José" };
-	private String segundoNome[]  = { "Abreu" , "Almeida" , "Alves" , "Barreto" , "Bastos" , "Borges" , "Camargo" , "Coelho" , "Dias" , "Silva"};
+	
+	//vetor armazenando os nomes dos contatos
+	private String primeiroNome[] = { "João" , "Pedro" , "Maria" , "Claudia" , "José" 
+										, "Adriana" , "Alessandra" , "Bruna" , "Camila"
+										, "Caroline" , "Diego" , "Débora" , "Evandro"
+										, "Eduardo" , "Fábio" , "Gabriela" , "Jaqueline" };
+	//vetor armazenando os sobrenomes dos contatos.
+	private String segundoNome[]  = { "Abreu" , "Almeida" , "Alves" , "Barreto" , "Bastos"
+										, "Borges" , "Camargo" , "Coelho" , "Dias" , "Silva"
+										, "Dutra" , "Duarte" , "Fernandes" , "Carvalho" 
+										, "Martins" , "Monteiro" , "Barbosa"};
 	
 	public String[] getPrimeiroNome() {
 		return primeiroNome;
