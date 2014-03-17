@@ -144,4 +144,44 @@ public class GameController {
 		}
 	}
 	
+	public boolean realizaJogadaDuasCartas(int numeroJogador) 
+	{
+		String op = "jogar";
+		
+		if ( op.equalsIgnoreCase("jogar") ) 								
+		{																	
+			
+			Carta comprada1 = baralho.drawCarta();							
+			Carta comprada2 = baralho.drawCarta();
+			
+			view.mostraCarta( comprada1.getNumero(), comprada1.getNaipe() );	
+			view.mostraCarta( comprada2.getNumero(), comprada2.getNaipe() );	
+			
+			int score = game.matchCards( comprada1, comprada2 );						
+			jogador[numeroJogador].addPontos( score );						
+			
+			game.setMesa( comprada2 );										
+			
+			jogador[ numeroJogador ].setPassouRodada(false);
+			
+			return true;
+		}
+		
+		if ( op.equalsIgnoreCase("passar") 									
+				&& !jogador[ numeroJogador ].isPassouRodada() )				
+		{																	
+			jogador[ numeroJogador ].subtractPontos( 1 );					
+			
+			view.printLine( "Você passou a vez..." );						
+			
+			jogador[ numeroJogador ].setPassouRodada(true);
+			
+			return true;
+		}
+		
+		else
+			return false;
+		
+	}
+	
 }
