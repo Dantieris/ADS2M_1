@@ -34,26 +34,54 @@ public class GameController {
 	//caso contrario retorna TRUE.
 	public boolean realizaJogada(int numeroJogador) 
 	{
-		String op = "jogar";
+		String opcao = view.getUserInput();
 		
-		if ( op.equalsIgnoreCase("jogar") ) 								//opção de jogada "jogar".
-		{																	
+		if ( opcao.equalsIgnoreCase("jogar") ) 								//opção de jogada "jogar".
+		{							
+			view.printLine( "Digite 1 para comprar uma carta ou 2 para comprar duas cartas" );
 			
-			Carta comprada = baralho.drawCarta();							//compra uma carta par ao usuário.
+			String opcao2 = view.getUserInput();
 			
-			view.mostraCarta( comprada.getNumero(), comprada.getNaipe() );	//mostra a carta comprada pelo jogador.
-			
-			int score = game.matchCards( comprada );						//calcula o valor de pontos recebidos pela jogada.
-			jogador[numeroJogador].addPontos( score );						//adiciona esses valores a pontuação do usuário.
-			
-			game.setMesa( comprada );										//coloca a carta comprada pelo usuário na mesa.
-			
-			jogador[ numeroJogador ].setPassouRodada(false);
-			
-			return true;
+			do
+			{
+				if ( opcao2.equalsIgnoreCase( "1" ) )
+				{
+					Carta comprada = baralho.drawCarta();							//compra uma carta par ao usuário.
+					
+					view.mostraCarta( comprada.getNumero(), comprada.getNaipe() );	//mostra a carta comprada pelo jogador.
+					
+					int score = game.matchCards( comprada );						//calcula o valor de pontos recebidos pela jogada.
+					jogador[numeroJogador].addPontos( score );						//adiciona esses valores a pontuação do usuário.
+					
+					game.setMesa( comprada );										//coloca a carta comprada pelo usuário na mesa.
+					
+					jogador[ numeroJogador ].setPassouRodada(false);
+					
+					return true;
+				}
+				
+				if ( opcao2.equalsIgnoreCase( "2" ) )
+				{
+					Carta comprada1 = baralho.drawCarta();							
+					Carta comprada2 = baralho.drawCarta();
+					
+					view.mostraCarta( comprada1.getNumero(), comprada1.getNaipe() );	
+					view.mostraCarta( comprada2.getNumero(), comprada2.getNaipe() );	
+					
+					int score = game.matchCards( comprada1, comprada2 );						
+					jogador[numeroJogador].addPontos( score );						
+					
+					game.setMesa( comprada2 );										
+					
+					jogador[ numeroJogador ].setPassouRodada(false);
+					
+					return true;
+				}
+				
+			} while (! opcao2.equalsIgnoreCase("1") || ! opcao2.equalsIgnoreCase("2") );
 		}
 		
-		if ( op.equalsIgnoreCase("passar") 									//opção de jogada "passar". Jogador nao pode passar a rodada
+		if ( opcao.equalsIgnoreCase("passar") 									//opção de jogada "passar". Jogador nao pode passar a rodada
 				&& !jogador[ numeroJogador ].isPassouRodada() )				
 		{																	//duas vezes seguidas.
 			jogador[ numeroJogador ].subtractPontos( 1 );					//dubtrai um ponto dos pontos do jogador.
@@ -142,46 +170,6 @@ public class GameController {
 				, (calculaVencedor() + 1)
 				, jogador[ calculaVencedor() ].getPontos()); break;
 		}
-	}
-	
-	public boolean realizaJogadaDuasCartas(int numeroJogador) 
-	{
-		String op = "jogar";
-		
-		if ( op.equalsIgnoreCase("jogar") ) 								
-		{																	
-			
-			Carta comprada1 = baralho.drawCarta();							
-			Carta comprada2 = baralho.drawCarta();
-			
-			view.mostraCarta( comprada1.getNumero(), comprada1.getNaipe() );	
-			view.mostraCarta( comprada2.getNumero(), comprada2.getNaipe() );	
-			
-			int score = game.matchCards( comprada1, comprada2 );						
-			jogador[numeroJogador].addPontos( score );						
-			
-			game.setMesa( comprada2 );										
-			
-			jogador[ numeroJogador ].setPassouRodada(false);
-			
-			return true;
-		}
-		
-		if ( op.equalsIgnoreCase("passar") 									
-				&& !jogador[ numeroJogador ].isPassouRodada() )				
-		{																	
-			jogador[ numeroJogador ].subtractPontos( 1 );					
-			
-			view.printLine( "Você passou a vez..." );						
-			
-			jogador[ numeroJogador ].setPassouRodada(true);
-			
-			return true;
-		}
-		
-		else
-			return false;
-		
 	}
 	
 }
