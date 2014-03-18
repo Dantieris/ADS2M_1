@@ -10,16 +10,21 @@ public class MatchingGame {
 		mesa = inicial;
 	}
 
+	//coloca uma carta na mesa.
 	public void setMesa(Carta mesa)
 	{
 		this.mesa = mesa;
 	}
 	
+	//informa a carta da mesa.
 	public Carta getMesa()
 	{
 		return mesa;
 	}
 	
+	//determina a pontuacao da jogada, 
+	//de acordo com a equivalencia de valores da carta comprada
+	//comparada com a carta da mesa.
 	public int matchCards(Carta comprada)
 	{
 		int score = -2;
@@ -33,8 +38,8 @@ public class MatchingGame {
 	}
 	
 	//determina a pontuacao da jogada, 
-	//de acordo com a equivalencia de valores da carta
-	//determinado pela comparacao das cartas.
+	//de acordo com a equivalencia de valores das cartas compradas
+	//compradas entre si e com a carta da mesa.
 	public int matchCards(Carta comprada1, Carta comprada2)
 	{
 		int score = -3;
