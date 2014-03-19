@@ -34,12 +34,12 @@ public class GameView {
 	//e os potos dos outros jogadores.
 	public void imprimeRank(int pontos1, int pontos2, int pontos3, int pontos4, int vencedor, int pontosVencedor)
 	{
-		out.printf("### Resultado ###\n"
-				+ "Vencedor %d - %d Pontos\n"
-				+ "-----------\n"
-				+ "Jogador 1 %d Pontos\n"
-				+ "Jogador 2 %d Pontos\n"
-				+ "Jogador 3 %d Pontos\n"
+		out.printf("### Resultado ###%n"
+				+ "Vencedor %d - %d Pontos%n"
+				+ "-----------%n"
+				+ "Jogador 1 %d Pontos%n"
+				+ "Jogador 2 %d Pontos%n"
+				+ "Jogador 3 %d Pontos%n"
 				+ "Jogador 4 %d Pontos", vencedor, pontosVencedor
 									, pontos1
 									, pontos2
@@ -52,12 +52,12 @@ public class GameView {
 	//e os potos dos outros jogadores.
 	public void imprimeRank(int pontos1, int pontos2, int pontos3, int vencedor, int pontosVencedor)
 	{
-		out.printf("### Resultado ###\n"
-				+ "Vencedor %d - %d Pontos\n"
-				+ "-----------\n"
-				+ "Jogador 1 %d Pontos\n"
-				+ "Jogador 2 %d Pontos\n"
-				+ "Jogador 3 %d Pontos\n"
+		out.printf("### Resultado ###%n"
+				+ "Vencedor %d - %d Pontos%n"
+				+ "-----------%n"
+				+ "Jogador 1 %d Pontos%n"
+				+ "Jogador 2 %d Pontos%n"
+				+ "Jogador 3 %d Pontos%n"
 									, vencedor, pontosVencedor
 									, pontos1
 									, pontos2
@@ -69,11 +69,11 @@ public class GameView {
 	//e os pontos dos outros jogadores.
 	public void imprimeRank(int pontos1, int pontos2, int vencedor, int pontosVencedor)
 	{
-		out.printf("### Resultado ###\n"
-				+ "Vencedor %d - %d Pontos\n"
-				+ "-----------\n"
-				+ "Jogador 1 %d Pontos\n"
-				+ "Jogador 2 %d Pontos\n"
+		out.printf("### Resultado ###%n"
+				+ "Vencedor %d - %d Pontos%n"
+				+ "-----------%n"
+				+ "Jogador 1 %d Pontos%n"
+				+ "Jogador 2 %d Pontos%n"
 									, vencedor, pontosVencedor
 									, pontos1
 									, pontos2);
@@ -83,9 +83,9 @@ public class GameView {
 	//informando que é o vencedor e os seus pontos.
 	public void imprimeRank(int pontos)
 	{
-		out.printf("### Resultado ###\n"
+		out.printf("### Resultado ###%n"
 				+ "Vencedor %d - %d Pontos"
-				+ "-----------\n"
+				+ "-----------%n"
 				+ "Jogador 1 %d Pontos", pontos
 									, pontos
 									, pontos);

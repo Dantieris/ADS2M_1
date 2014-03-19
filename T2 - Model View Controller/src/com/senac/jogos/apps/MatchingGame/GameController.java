@@ -171,6 +171,8 @@ public class GameController {
 				, jogador[3].getPontos()
 				, (calculaVencedor() + 1)
 				, jogador[ calculaVencedor() ].getPontos()); break;
+				
+		default : view.printLine( "Número de jogadores indisponível para representaro rank" );
 		}
 	}
 	
