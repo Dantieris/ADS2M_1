@@ -29,11 +29,12 @@ public class GameController {
 		return jogador;
 	}
 
-	//realiza uma joganda informando se uma das opções foi escolhida
+	//realiza uma jogada informando se uma das opções foi escolhida
 	//se nenhuma opção tenha sido escolhida retorna FALSE, 
 	//caso contrario retorna TRUE.
 	public boolean realizaJogada(int numeroJogador) 
 	{
+		view.printLine( "\nDigite \"jogar\" ou \"passar\"" );
 		String opcao = view.getUserInput();
 		
 		if ( opcao.equalsIgnoreCase("jogar") ) 								//opção de jogada "jogar".

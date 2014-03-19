@@ -36,7 +36,7 @@ public class GameView {
 	{
 		out.printf("### Resultado ###%n"
 				+ "Vencedor %d - %d Pontos%n"
-				+ "-----------%n"
+				+ "-----------%n" 
 				+ "Jogador 1 %d Pontos%n"
 				+ "Jogador 2 %d Pontos%n"
 				+ "Jogador 3 %d Pontos%n"
