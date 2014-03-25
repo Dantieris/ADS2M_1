@@ -1,4 +1,4 @@
-package com.senac.PraticaOOP;
+package com.senac.util;
 
 public class Pessoa 
 {

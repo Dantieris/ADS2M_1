@@ -5,6 +5,8 @@ import java.text.ParseException;
 
 import javax.swing.text.MaskFormatter;
 
+import com.senac.util.Pessoa;
+
 public class Controler 
 {
 	private View view;
