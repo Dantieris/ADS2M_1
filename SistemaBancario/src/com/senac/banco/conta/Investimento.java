@@ -2,10 +2,10 @@ package com.senac.banco.conta;
 
 public class Investimento extends Conta
 {
-	private int dataCriacao;
+	private String dataCriacao;
 	private final double taxa;
 	
-	public Investimento( int numConta, int numVerificacao, double saldo, int dataCriacao, double taxa) 
+	public Investimento( int numConta, int numVerificacao, double saldo, String dataCriacao, double taxa) 
 	{
 		super( numConta, numVerificacao, saldo );
 		
@@ -13,12 +13,12 @@ public class Investimento extends Conta
 		this.taxa 		 	= taxa;
 	}
 
-	public int getDataCriacao() 
+	public String getDataCriacao() 
 	{
 		return this.dataCriacao;
 	}
 
-	public void setDataCriacao( int dataCriacao ) 
+	public void setDataCriacao( String dataCriacao ) 
 	{
 		this.dataCriacao = dataCriacao;
 	}

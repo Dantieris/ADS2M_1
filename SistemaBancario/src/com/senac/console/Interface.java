@@ -18,15 +18,26 @@ public class Interface
 																				telefones[0], telefones [1], telefones[2] );
 		}
 		
-		//recebe um valor digitado pelo usuário.
-		//retorna String linha é o valor digitado pelo usuário.
+		//recebe uma linha digitada pelo usuario
+		//retorna String linha é o valor digitado.
 		public String recebeLinha()
 		{
-			java.util.Scanner input = new java.util.Scanner(System.in);
+			java.util.Scanner input = new java.util.Scanner( System.in );
 			String linha = input.nextLine();
 			
 			return linha;
 		}
+		
+		//recebe a primeira palavra digitada pelo usuario
+		//retorna em string o valor digitado.
+		public String recebePalavra()
+		{
+			java.util.Scanner input = new java.util.Scanner( System.in );
+			String palavra = input.next();
+			
+			return palavra;
+		}
+		
 		
 		//recebe um endereço
 		//retorna String endereco texto digitado pelo usuário.

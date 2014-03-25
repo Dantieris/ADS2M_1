@@ -9,7 +9,7 @@ public class Aplicacao
 	{
 		Gerenciador bancoGerenciador = new Gerenciador();
 		
-		
+		bancoGerenciador.cadastrarCliente();
 	}
 
 }

@@ -56,4 +56,13 @@ public class Console extends Interface
 		System.err.println( mensagem );
 	}
 	
+	public String recebeTipoConta()
+	{
+		imprimeLinha( "Digite o tipo de conta: " );
+		
+		String tipo = recebePalavra();
+		
+		return tipo;
+	}
+	
 }
