@@ -73,15 +73,22 @@ public class Gerenciador
 	private String testaTipoConta()
 	{		
 		String tipo;
+		boolean teste = false;
 		
 		do 
 		{
 			tipo = console.recebeTipoConta();
-			System.out.println(tipo);
+			
+			if ( tipo.equalsIgnoreCase( "comum" ) 
+					|| tipo.equalsIgnoreCase( "especial" ) 
+					|| tipo.equalsIgnoreCase( "investimento" ) )
+			{
+				teste = true;
+			}
+			else
+				teste = false;
 		}
-		while ( !tipo.equalsIgnoreCase( "comum" ) 
-				|| !tipo.equalsIgnoreCase( "especial" ) 
-				|| !tipo.equalsIgnoreCase( "investimento" ) );
+		while ( !teste );
 		
 		return tipo;
 	}
