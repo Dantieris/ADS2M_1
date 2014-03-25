@@ -1,5 +1,7 @@
 package com.senac.banco.conta;
 
+import com.senac.banco.exceptions.SaldoInsuficienteException;
+
 public class Conta 
 {
 	private double saldo;
@@ -48,8 +50,25 @@ public class Conta
 		
 	}
 	
+	//reduz um valor do salto total.
+	//parametro double valor, informa o valor a ser retirado da conta.
 	public void sacar( double valor )
 	{
+		try
+		{
+			double saldo = getSaldo() - valor;
+			
+			setSaldo( saldo );
+			
+			if ( saldo < valor )
+				throw new SaldoInsuficienteException( "Saldo Insuficiente" );
+			
+		} 
+		
+		catch ( SaldoInsuficienteException sie)
+		{
+			System.err.println( sie.getMensagem() );
+		}
 		
 	}
 	
