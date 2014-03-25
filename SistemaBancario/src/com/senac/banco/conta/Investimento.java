@@ -26,6 +26,4 @@ public class Investimento extends Conta
 		
 	}
 	
-	
-
 }
