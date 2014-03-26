@@ -52,24 +52,15 @@ public class Conta
 	
 	//reduz um valor do salto total.
 	//parametro double valor, informa o valor a ser retirado da conta.
-	public void sacar( double valor )
+	public void sacar( double valor ) throws SaldoInsuficienteException
 	{
-		try
-		{
-			double saldo = getSaldo() - valor;
-			
-			setSaldo( saldo );
-			
-			if ( saldo < valor )
-				throw new SaldoInsuficienteException( "Saldo Insuficiente" );
-			
-		} 
 		
-		catch ( SaldoInsuficienteException sie)
+		if ( saldo < valor )
+			throw new SaldoInsuficienteException();
+		else
 		{
-			System.err.println( sie.getMensagem() );
+			setSaldo( getSaldo() - valor );
 		}
-		
 	}
 	
 }

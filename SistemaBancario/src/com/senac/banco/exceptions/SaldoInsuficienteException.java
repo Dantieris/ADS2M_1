@@ -2,18 +2,11 @@ package com.senac.banco.exceptions;
 
 public class SaldoInsuficienteException extends Exception 
 {
-	private String mensagem;
+	private static final long serialVersionUID = 8766644292558311761L;
 	
-	public SaldoInsuficienteException( String mensagem )
+	public SaldoInsuficienteException()
 	{
-		super( mensagem );
-		
-		this.mensagem = mensagem;
-	}
-	
-	public String getMensagem()
-	{
-		return mensagem;
+		super( "Saldo Insuficiente" );
 	}
 	
 }
