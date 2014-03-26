@@ -21,6 +21,4 @@ public class Especial extends Conta
 		this.limite = limite;
 	}
 	
-	
-
 }
