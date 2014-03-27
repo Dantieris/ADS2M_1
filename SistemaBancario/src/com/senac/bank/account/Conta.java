@@ -1,6 +1,6 @@
-package com.senac.banco.account;
+package com.senac.bank.account;
 
-import com.senac.banco.exceptions.SaldoInsuficienteException;
+import com.senac.bank.exceptions.SaldoInsuficienteException;
 
 public class Conta 
 {

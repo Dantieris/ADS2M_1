@@ -1,4 +1,4 @@
-package com.senac.banco.exceptions;
+package com.senac.bank.exceptions;
 
 public class SaldoInsuficienteException extends Exception 
 {

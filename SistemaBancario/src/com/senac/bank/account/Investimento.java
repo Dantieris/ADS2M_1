@@ -1,4 +1,4 @@
-package com.senac.banco.account;
+package com.senac.bank.account;
 
 public class Investimento extends Conta
 {
