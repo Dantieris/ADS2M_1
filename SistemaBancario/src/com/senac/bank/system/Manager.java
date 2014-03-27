@@ -2,14 +2,15 @@ package com.senac.bank.system;
 
 import com.senac.bank.account.*;
 import com.senac.bank.console.Console;
+import com.senac.bank.exceptions.SaldoInsuficienteException;
 import com.senac.bank.members.Cliente;
 
-public class System 
+public class Manager
 {
 	private Cliente client;
 	private Console console;
 	
-	public System()
+	public Manager()
 	{
 		console = new Console();
 	}
@@ -76,6 +77,34 @@ public class System
 				, console.inputAccountConfirmationNumber() 
 				, console.inputBalance()
 				, console.inputLimit() );
+	}
+
+	public void menuOperations()
+	{
+		while (true)
+		{
+			console.printMenuOperations();
+			
+			switch ( console.inputInteger() )
+			{
+			case 1 : registeringClient();
+			case 2 : client.getAccount().depositar( console.inputDouble() );
+			case 3 : 
+				{
+					try
+					{
+						client.getAccount().sacar( console.inputDouble() );
+					}
+					catch ( SaldoInsuficienteException e )
+					{
+						console.printError( e.getMessage() + ". Available balance " + client.getAccount().getBalance() );
+					}	
+				}
+			case 4  : System.exit(0);
+			
+			default : console.printError( "Unknown Operation." );
+			}
+		}
 	}
 	
 }

@@ -1,15 +1,15 @@
 package com.senac.bank.apps;
 
-import com.senac.bank.system.System;
+import com.senac.bank.system.Manager;
 
 public class Aplication 
 {
 
 	public static void main(String[] args) 
 	{
-		System bankManager = new System();
+		Manager bankManager = new Manager();
 		
-		bankManager.registeringClient();
+		bankManager.menuOperations();
 	}
 
 }

@@ -36,7 +36,7 @@ public class Console
 	}
 	
 	//print error, parameter message error.
-	public void printErro( String message )
+	public void printError( String message )
 	{
 		System.err.println( message );
 	}
@@ -82,6 +82,15 @@ public class Console
 	public int inputInteger() 
 	{
 		return input.nextInt();
+	}
+	
+	public void printMenuOperations()
+	{
+		printLine( "=== Operations ===\n"
+				+ "\n1 - Register Client"
+				+ "\n2 - Deposit"
+				+ "\n3 - Withdrawal"
+				+ "\n4 - Exit" );
 	}
 	
 }
