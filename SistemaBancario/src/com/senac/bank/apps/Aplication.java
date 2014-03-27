@@ -1,4 +1,4 @@
-package com.senac.bank;
+package com.senac.bank.apps;
 
 import com.senac.bank.system.System;
 
