@@ -1,4 +1,4 @@
-package com.senac.banco.conta;
+package com.senac.banco.account;
 
 import com.senac.banco.exceptions.SaldoInsuficienteException;
 

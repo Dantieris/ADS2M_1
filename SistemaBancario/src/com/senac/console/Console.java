@@ -1,43 +1,41 @@
 package com.senac.console;
 
-public class Console extends Interface
+import java.util.Scanner;
+
+public class Console 
 {
-	//recebe um numero fracionario
-	//parametro String mensagem, a mensagem informa pro usuario qual numero deve digitar.
-	//retorna um numero double.
-	public double recebeNumeroDouble( String mensagem )
+	
+	Scanner input = new Scanner( System.in );
+	
+	public String inputName()
 	{
-		imprimeLinha( mensagem );
-		
-		double numero = 0;
-		
-		try
-		{
-			String stringNumero =  recebeLinha();
-			
-			numero = Double.parseDouble( stringNumero );
-			
-		}
-		catch ( Exception e )
-		{
-			printErro( "O valor digitado é incompatível" );
-		}
-		
-		return numero;
+		printLine( "Enter your name: " );
+		return input.nextLine();
 	}
 	
+	public double inputBalance()
+	{
+		printLine( "Enter the account intial balance: " );
+		return input.nextDouble();
+	}
+	
+	public double inputLimit()
+	{
+		printLine( "Enter the account limit withdrawal: " );
+		return input.nextDouble();
+	}
 	//recebe um numero inteiro
 	//parametro String mensagem, a mensagem informa pro usuario qual numero deve digitar.
 	//retorna um numero int.
 	public int recebeNumeroInteiro( String mensagem )
 	{
-		imprimeLinha( mensagem );
+		printLine( mensagem );
 		
 		int numero = 0;
 		
 		try
 		{
-			String stringNumero = recebeLinha();
+			String stringNumero = inputLine();
 			
 			numero = Integer.parseInt( stringNumero );
 		}
@@ -58,11 +56,37 @@ public class Console extends Interface
 	
 	public String recebeTipoConta()
 	{
-		imprimeLinha( "Digite o tipo de conta: " );
+		printLine( "Digite o tipo de conta: " );
 		
-		String tipo = recebePalavra();
+		String tipo = inputWord();
 		
 		return tipo;
+	}
+
+	public void printLine( String message ) 
+	{
+		System.out.println( message );
+		
+	}
+
+	public String inputLine() 
+	{
+		return input.nextLine();
+	}
+	
+	public String inputWord()
+	{
+		return input.next();
+	}
+
+	public double inputDouble() 
+	{
+		return input.nextDouble();
+	}
+
+	public int inputInteger() 
+	{
+		return input.nextInt();
 	}
 	
 }

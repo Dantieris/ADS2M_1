@@ -1,4 +1,4 @@
-package com.senac.banco.conta;
+package com.senac.banco.account;
 
 public class Especial extends Conta 
 {
