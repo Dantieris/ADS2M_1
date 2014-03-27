@@ -4,18 +4,20 @@ public class Especial extends Conta
 {
 	private double limite;
 	
-	public Especial( int numConta, int numVerificacao, double saldo, double limite) 
+	public Especial( int accountNumber, int accountConfirmationNumber, double balance, double limitWithdrawal ) 
 	{
-		super( numConta, numVerificacao, saldo );
+		super( accountNumber, accountConfirmationNumber, balance );
 		
-		this.limite = limite;
+		this.limite = limitWithdrawal;
 	}
 
+	//return the withdrawal limit.
 	public double getLimite() 
 	{
 		return limite;
 	}
 
+	//define the withdrawal limit.
 	public void setLimite( double limite ) 
 	{
 		this.limite = limite;
