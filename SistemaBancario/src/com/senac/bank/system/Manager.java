@@ -85,7 +85,7 @@ public class Manager
 	//2 to deposit an amount to the account.
 	//3 to withdraw an amount of the account.
 	//4 to print the extract.
-	//5 to close the app.
+	//5 to close the application.
 	public void menuOperations()
 	{
 			console.printMenuOperations();
@@ -94,6 +94,7 @@ public class Manager
 			
 			switch ( operations )
 			{
+			//operation register client.
 			case 1 : 
 				{
 					if ( getClient() == null )
@@ -104,6 +105,7 @@ public class Manager
 					}
 				}
 					break;
+			//operation deposit.
 			case 2 : 
 				{
 					try
@@ -120,6 +122,7 @@ public class Manager
 					}					
 				}
 					break;
+			//operation withdraw.
 			case 3 : 
 				{
 					try
@@ -145,6 +148,7 @@ public class Manager
 					
 				}
 					break;
+			//operation print extract.
 			case 4  : 
 				{
 					try
@@ -164,7 +168,7 @@ public class Manager
 					}
 				}
 					break;
-					
+			//operation close the application.
 			case 5  : System.exit(0);
 					break;
 			

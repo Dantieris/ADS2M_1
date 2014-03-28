@@ -2,7 +2,7 @@ package com.senac.bank.apps;
 
 import com.senac.bank.system.Manager;
 
-public class Aplication 
+public class Application 
 {
 
 	public static void main(String[] args) 
