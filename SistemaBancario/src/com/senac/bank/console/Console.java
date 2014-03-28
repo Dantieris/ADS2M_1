@@ -57,44 +57,49 @@ public class Console
 		printLine( "Enter the account confirmation number: " );
 		return extracted().nextInt();
 	}
-
+	
+	//return the amount of withdrawal.
+	public double inputAmountToWithdrawal()
+	{
+		printLine( "Enter the amount to withdraw: " );
+		return extracted().nextDouble();
+	}
+	
+	//return the amount to deposit.
+	public double inputAmountToDeposit()
+	{
+		printLine( "Enther the amount to deposit: " );
+		return extracted().nextDouble();
+	}
+	
 	//parameter message to print.
 	public void printLine( String message ) 
 	{
 		System.out.println( message );
 	}
-
-	//return the next user input line.
-	public String inputLine() 
-	{
-		return extracted().nextLine();
-	}
 	
-	//return the next user input word.
-	public String inputWord()
-	{
-		return extracted().next();
-	}
-
-	//return the next user input double.
-	public double inputDouble() 
-	{
-		return extracted().nextDouble();
-	}
-
-	//return the next user input integer.
-	public int inputInteger() 
+	//return an integer.
+	public int inputInteger()
 	{
 		return extracted().nextInt();
 	}
 	
+	public void printExtract( int accountNumber, int accountVerificationNumber, double accountBalance )
+	{
+		printLine( "\n=== Extract ==="
+				+ "\nAccount Number: " + accountNumber + "-" + accountVerificationNumber
+				+ "\nAccount Balance: " + accountBalance);
+	}
+	
+	//print the menu operations of the system.
 	public void printMenuOperations()
 	{
 		printLine( "\n=== Operations ==="
 				+ "\n1 - Register Client"
 				+ "\n2 - Deposit"
 				+ "\n3 - Withdrawal"
-				+ "\n4 - Exit" );
+				+ "\n4 - extract"
+				+ "\n5 - Exit" );
 	}
 	
 }

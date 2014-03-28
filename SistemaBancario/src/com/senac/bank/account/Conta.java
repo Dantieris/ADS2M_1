@@ -8,10 +8,10 @@ public class Conta
 	private int numConta;
 	private int numVerificacao;
 	
-	public Conta( int accountNumber, int accountConfirmationNumber, double balance )
+	public Conta( int accountNumber, int accountVerificationNumber, double balance )
 	{
 		this.numConta 		= accountNumber;
-		this.numVerificacao = accountConfirmationNumber;
+		this.numVerificacao = accountVerificationNumber;
 		this.saldo 			= balance;
 	}
 	
@@ -28,21 +28,21 @@ public class Conta
 	}
 
 	//return the account number.
-	public int getNumConta() 
+	public int getAccountNumber() 
 	{
 		return numConta;
 	}
 
 	//return the account confirmation number.
-	public int getNumVerificacao() 
+	public int getVerificationNumber() 
 	{
 		return numVerificacao;
 	}
 
 	//define the account confirmation number.
-	public void setNumVerificacao( int numVerificacao ) 
+	public void setVerificationNumber( int verificationNumber ) 
 	{
-		this.numVerificacao = numVerificacao;
+		this.numVerificacao = verificationNumber;
 	}
 	
 	//add an value to the current balance.

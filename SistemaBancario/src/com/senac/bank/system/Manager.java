@@ -61,7 +61,7 @@ public class Manager
 				, console.inputBalance() );
 	}
 	
-	//return an investiment account.
+	//return an investment account.
 	private Investimento registeringInvestimentAccount()
 	{
 		return new Investimento ( console.inputAccountNumber() 
@@ -80,6 +80,12 @@ public class Manager
 				, console.inputLimit() );
 	}
 
+	//show a menu with operations.
+	//1 to register client.
+	//2 to deposit an amount to the account.
+	//3 to withdraw an amount of the account.
+	//4 to print the extract.
+	//5 to close the app.
 	public void menuOperations()
 	{
 			console.printMenuOperations();
@@ -88,7 +94,15 @@ public class Manager
 			
 			switch ( operations )
 			{
-			case 1 : registeringClient(); 
+			case 1 : 
+				{
+					if ( getClient() == null )
+						registeringClient(); 
+					else
+					{
+						console.printError("There is one client registered already.");
+					}
+				}
 					break;
 			case 2 : 
 				{
@@ -97,7 +111,7 @@ public class Manager
 						if ( getClient() == null )		
 							throw new NoClientFoundException();
 						
-						client.getAccount().depositar( console.inputDouble() );
+						client.getAccount().depositar( console.inputAmountToDeposit() );
 						
 					}
 					catch ( NoClientFoundException ncfe )
@@ -116,7 +130,7 @@ public class Manager
 						{
 							try
 							{
-								client.getAccount().sacar( console.inputDouble() );
+								client.getAccount().sacar( console.inputAmountToWithdrawal() );
 							}
 							catch ( SaldoInsuficienteException e )
 							{
@@ -131,7 +145,27 @@ public class Manager
 					
 				}
 					break;
-			case 4  : System.exit(0);
+			case 4  : 
+				{
+					try
+					{
+						if ( getClient() == null)
+							throw new NoClientFoundException();
+						else
+						{
+							console.printExtract( client.getAccount().getAccountNumber()
+									, client.getAccount().getVerificationNumber()
+									, client.getAccount().getBalance() );
+						}
+					}
+					catch ( NoClientFoundException ncfe )
+					{
+						console.printError( ncfe.getMessage() );
+					}
+				}
+					break;
+					
+			case 5  : System.exit(0);
 					break;
 			
 			default : console.printError( "Unknown Operation." );
