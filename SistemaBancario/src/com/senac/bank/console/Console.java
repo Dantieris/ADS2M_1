@@ -5,34 +5,37 @@ import java.util.Scanner;
 public class Console 
 {
 	
-	Scanner input = new Scanner( System.in );
+	//return a object type Scanner.
+	private Scanner extracted() {
+		return new Scanner( System.in );
+	}
 	
 	//return user name.
 	public String inputName()
 	{
 		printLine( "Enter your name: " );
-		return input.nextLine();
+		return extracted().nextLine();
 	}
 	
 	//return account balance.
 	public double inputBalance()
 	{
 		printLine( "Enter the account intial balance: " );
-		return input.nextDouble();
+		return extracted().nextDouble();
 	}
 	
 	//return account withdrawal limit.
 	public double inputLimit()
 	{
 		printLine( "Enter the account limit withdrawal: " );
-		return input.nextDouble();
+		return extracted().nextDouble();
 	}
 	
 	//return account number.
 	public int inputAccountNumber()
 	{
 		printLine( "Enter the account number: " );
-		return input.nextInt();
+		return extracted().nextInt();
 	}
 	
 	//print error, parameter message error.
@@ -45,13 +48,14 @@ public class Console
 	public String inputAccountType()
 	{
 		printLine( "Enter the account type: " );
-		return input.next();
+		return extracted().next();
 	}
 	
+	//return the account confirmation number.
 	public int inputAccountConfirmationNumber()
 	{
 		printLine( "Enter the account confirmation number: " );
-		return input.nextInt();
+		return extracted().nextInt();
 	}
 
 	//parameter message to print.
@@ -63,30 +67,30 @@ public class Console
 	//return the next user input line.
 	public String inputLine() 
 	{
-		return input.nextLine();
+		return extracted().nextLine();
 	}
 	
 	//return the next user input word.
 	public String inputWord()
 	{
-		return input.next();
+		return extracted().next();
 	}
 
 	//return the next user input double.
 	public double inputDouble() 
 	{
-		return input.nextDouble();
+		return extracted().nextDouble();
 	}
 
-	//return the next user input int.
+	//return the next user input integer.
 	public int inputInteger() 
 	{
-		return input.nextInt();
+		return extracted().nextInt();
 	}
 	
 	public void printMenuOperations()
 	{
-		printLine( "=== Operations ===\n"
+		printLine( "\n=== Operations ==="
 				+ "\n1 - Register Client"
 				+ "\n2 - Deposit"
 				+ "\n3 - Withdrawal"

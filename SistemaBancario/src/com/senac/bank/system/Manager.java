@@ -2,6 +2,7 @@ package com.senac.bank.system;
 
 import com.senac.bank.account.*;
 import com.senac.bank.console.Console;
+import com.senac.bank.exceptions.NoClientFoundException;
 import com.senac.bank.exceptions.SaldoInsuficienteException;
 import com.senac.bank.members.Cliente;
 
@@ -81,30 +82,61 @@ public class Manager
 
 	public void menuOperations()
 	{
-		while (true)
-		{
 			console.printMenuOperations();
 			
-			switch ( console.inputInteger() )
+			int operations = console.inputInteger();
+			
+			switch ( operations )
 			{
-			case 1 : registeringClient();
-			case 2 : client.getAccount().depositar( console.inputDouble() );
+			case 1 : registeringClient(); 
+					break;
+			case 2 : 
+				{
+					try
+					{
+						if ( getClient() == null )		
+							throw new NoClientFoundException();
+						
+						client.getAccount().depositar( console.inputDouble() );
+						
+					}
+					catch ( NoClientFoundException ncfe )
+					{
+						console.printError( ncfe.getMessage() );
+					}					
+				}
+					break;
 			case 3 : 
 				{
 					try
 					{
-						client.getAccount().sacar( console.inputDouble() );
+						if ( getClient() == null )
+							throw new NoClientFoundException();
+						else
+						{
+							try
+							{
+								client.getAccount().sacar( console.inputDouble() );
+							}
+							catch ( SaldoInsuficienteException e )
+							{
+								console.printError( e.getMessage() + ". Available balance " + client.getAccount().getBalance() );
+							}	
+						}
 					}
-					catch ( SaldoInsuficienteException e )
+					catch ( NoClientFoundException ncfe )
 					{
-						console.printError( e.getMessage() + ". Available balance " + client.getAccount().getBalance() );
-					}	
+						console.printError( ncfe.getMessage() );
+					}
+					
 				}
+					break;
 			case 4  : System.exit(0);
+					break;
 			
 			default : console.printError( "Unknown Operation." );
+					break;
 			}
-		}
 	}
 	
 }

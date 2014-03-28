@@ -8,8 +8,11 @@ public class Aplication
 	public static void main(String[] args) 
 	{
 		Manager bankManager = new Manager();
-		
-		bankManager.menuOperations();
+		do
+		{
+			bankManager.menuOperations();
+		}
+		while (true);
 	}
 
 }
