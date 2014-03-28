@@ -84,6 +84,7 @@ public class Console
 		return extracted().nextInt();
 	}
 	
+	//print the extract of the account.
 	public void printExtract( int accountNumber, int accountVerificationNumber, double accountBalance )
 	{
 		printLine( "\n=== Extract ==="

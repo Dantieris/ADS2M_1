@@ -1,5 +1,7 @@
 package com.senac.bank.account;
 
+import com.senac.bank.exceptions.SaldoInsuficienteException;
+
 public class Especial extends Conta 
 {
 	private double limite;
@@ -21,6 +23,15 @@ public class Especial extends Conta
 	public void setLimite( double limite ) 
 	{
 		this.limite = limite;
+	}
+	
+	//reduce an value from the current balance.
+	public void sacar( double value ) throws SaldoInsuficienteException
+	{
+		if ( value > getLimite() )
+			throw new SaldoInsuficienteException();
+		
+		setBalance( getBalance() - value );
 	}
 	
 }
