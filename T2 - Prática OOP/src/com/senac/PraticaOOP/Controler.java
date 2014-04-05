@@ -81,7 +81,7 @@ public class Controler
 	
 	//gera uma combinação de um item do vetor primeiroNome, 
 	//e um item do vetor segundoNome.
-	private String gerarNomeAleatorio()
+	public String gerarNomeAleatorio()
 	{
 		java.util.Random random = new java.util.Random();
 		
@@ -94,7 +94,7 @@ public class Controler
 	}
 	
 	//gera um endereço aleatório
-	private String gerarEnderecoAleatorio()
+	public String gerarEnderecoAleatorio()
 	{
 		String endereco = "Rua " + gerarNomeAleatorio();
 		
@@ -114,7 +114,7 @@ public class Controler
 	
 	//gera um telefone aleatóriamente, no formato
 	// (XX)XXX-XXXX.
-	private String gerarTelefoneAleatorio()
+	public String gerarTelefoneAleatorio()
 	{
 		String telefone = "";
 		while(telefone.length() != 12)

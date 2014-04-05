@@ -1,30 +1,22 @@
-package com.senac.filesystem.manager;
+package com.senac.filesystem.contacts;
 
 import java.io.FileNotFoundException;
 import java.util.Formatter;
+import java.util.FormatterClosedException;
 
 import com.senac.bank.console.Console;
 
-public class FileManager 
+public class FileContacts 
 {
 	private Formatter file;
 	private Console console;
 	
-	public FileManager()
+	public FileContacts()
 	{
-		file = null;
+		file = null;	
 	}
 	
-	//
-	public void openFile()
-	{
-		if ( !isFileExisting() )
-		{
-			
-		}
-	}
-	
-	//create a new file named contacts.txt.
+	//create one file named contacts.txt.
 	public void createFile()
 	{
 		try
@@ -45,33 +37,30 @@ public class FileManager
 		}
 	}
 	
-	//
-	public void editFile()
+	//record in file: name, address and phone.
+	public void writeFile( String name, String address, String phone )
 	{
-		
-	}
-	
-	//
-	public void readeFile()
-	{
+		try
+		{
+			file.format( "Name: %s - Address: %s - Phone: %s%n" , 
+					name,
+					address,
+					phone
+					);
+		}
+		catch ( FormatterClosedException fce )
+		{
+			console.printError( "Error writing to file." );
+			return;
+		}
 		
 	}
 	
 	//close a existing file.
 	public void closeFile()
 	{
-		if ( !isFileExisting() )
-			file.close();
+		file.close();
 	}
 	
-	//returns true if file is different from null,
-	//else returns false.
-	private boolean isFileExisting()
-	{
-		if ( file.equals( null ) )
-			return false;
-		else
-			return true;
-	}
 	
 }
