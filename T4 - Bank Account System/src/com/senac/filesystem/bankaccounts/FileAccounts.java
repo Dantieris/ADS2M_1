@@ -1,4 +1,4 @@
-package com.senac.filesystem.contacts;
+package com.senac.filesystem.bankaccounts;
 
 import java.io.FileNotFoundException;
 import java.util.Formatter;
@@ -6,28 +6,28 @@ import java.util.FormatterClosedException;
 
 import com.senac.bank.console.Console;
 
-public class FileContacts 
+public class FileAccounts 
 {
 	private Formatter file;
 	private Console console;
 	
-	public FileContacts()
+	public FileAccounts()
 	{
-		file = null;	
+		file = null;
 	}
 	
-	//create one file named contacts.txt.
+	//create one file named accounts.txt.
 	public void createFile()
 	{
 		try
 		{
-			file = new Formatter( "contacts.txt" );
+			file = new Formatter( "accounts.txt" );
 		}
 		catch ( SecurityException se )
 		{
 			console.printError( 
 					"You dont have write access to this file." );
-			return;
+		return;
 		}
 		catch ( FileNotFoundException fnfe )
 		{
@@ -56,11 +56,10 @@ public class FileContacts
 		
 	}
 	
-	//close a existing file.
+	//close the file.
 	public void closeFile()
 	{
 		file.close();
 	}
-	
-	
+
 }
