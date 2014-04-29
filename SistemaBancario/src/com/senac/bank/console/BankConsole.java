@@ -2,7 +2,7 @@ package com.senac.bank.console;
 
 import java.util.Scanner;
 
-public class Console 
+public class BankConsole 
 {
 	
 	//return a object type Scanner.

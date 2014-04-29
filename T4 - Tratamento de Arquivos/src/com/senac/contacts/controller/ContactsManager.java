@@ -1,4 +1,4 @@
-package com.senac.bank.contacts;
+package com.senac.contacts.controller;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,23 +9,23 @@ import java.util.Formatter;
 import java.util.FormatterClosedException;
 
 import com.senac.PraticaOOP.Controler;
-import com.senac.bank.console.Console;
+import com.senac.bank.console.BankConsole;
 import com.senac.util.Pessoa;
 
-public class BankContactsManager {
+public class ContactsManager {
 	
 	private Controler contactsController;
 	private Formatter contacts;
-	private Console printer;
+	private BankConsole printer;
 
-	public BankContactsManager()
+	public ContactsManager()
 	{
 		contactsController 	= new Controler();
-		printer				= new Console();
+		printer				= new BankConsole();
 	}
 	
 	// cria um arquivo Contacts.txt.
-	public void createFile()
+	public void createFileContacts()
 	{
 		new File( "Contacts.txt" );
 	}
@@ -47,7 +47,7 @@ public class BankContactsManager {
 	// adiciona um contato ao arquivo Contacts.txt.
 	public void addContact( Pessoa contact ) throws FormatterClosedException
 	{
-		contacts.format( "%s;%s;%s", contact.getNome(), 
+		contacts.format( "%s:%s:%s%n", contact.getNome(), 
 				contact.getEndereco(),
 				contact.getTelefone()[0] );
 	}
@@ -57,7 +57,7 @@ public class BankContactsManager {
 		Pessoa contact = null;
 		
 		// Criando o arquivo.
-		createFile();
+		createFileContacts();
 		
 		// Abrindo o arquivo.
 		try 

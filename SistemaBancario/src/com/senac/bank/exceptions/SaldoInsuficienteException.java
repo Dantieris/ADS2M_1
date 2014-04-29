@@ -6,7 +6,7 @@ public class SaldoInsuficienteException extends Exception
 	
 	public SaldoInsuficienteException()
 	{
-		super( "Insufficient funds" );
+		super( "Insufficient funds." );
 	}
 	
 }

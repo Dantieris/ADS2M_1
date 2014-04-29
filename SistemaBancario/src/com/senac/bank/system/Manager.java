@@ -1,7 +1,7 @@
 package com.senac.bank.system;
 
 import com.senac.bank.account.*;
-import com.senac.bank.console.Console;
+import com.senac.bank.console.BankConsole;
 import com.senac.bank.exceptions.NoClientFoundException;
 import com.senac.bank.exceptions.SaldoInsuficienteException;
 import com.senac.bank.members.Cliente;
@@ -9,11 +9,11 @@ import com.senac.bank.members.Cliente;
 public class Manager
 {
 	private Cliente client;
-	private Console console;
+	private BankConsole console;
 	
 	public Manager()
 	{
-		console = new Console();
+		console = new BankConsole();
 	}
 	
 	//return the client.
