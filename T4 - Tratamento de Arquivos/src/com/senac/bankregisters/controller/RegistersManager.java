@@ -29,6 +29,12 @@ public class RegistersManager {
 		consoleView = new BankView();
 	}
 	
+	// Abre o arquivo BankRegisters.txt para leitura.
+	public void opneBankRegistersToRead() throws FileNotFoundException, IOException
+	{
+		registers = new Scanner ( new BufferedReader( new FileReader( "BankRegisters.txt" ) ) );
+	}
+	
 	// Abre um arquivo BankRegisters.txt para escrever, caso nao exista um, será criado.
 	public void openFileBankRegister() throws FileNotFoundException, IOException
 	{
@@ -123,13 +129,24 @@ public class RegistersManager {
 			recordBankRegisterForEachContact();
 		else
 		{
+			try 
+			{
+				opneBankRegistersToRead();
+			} 
+			catch (FileNotFoundException e1) 
+			{
+				consoleView.printError( "Error BankRegisters.txt file not found." );
+			} 
+			catch (IOException e1) 
+			{
+				consoleView.printError( "Error opening BankRegisters.txt file failed." );
+			}
+			
 			Conta account = null;
 			String [] register = getRegisterFromFile();
 			account = registredAccount( register[0], register[1], register[2] );
 			
 			consoleView.printMenu();
-			consoleView.printDepositOperation();
-			consoleView.printWithdrawalOperation();
 			if ( register[1].equalsIgnoreCase( "investimento" ) || register[1].equalsIgnoreCase( "investment" ) )
 				consoleView.printDividendsOperation();
 			
@@ -137,19 +154,32 @@ public class RegistersManager {
 			
 			switch ( op )
 			{
-			case 1 : account.depositar( consoleView.inputAmountToDeposit() );
+			case 1 : account.depositar( consoleView.inputAmountToDeposit() ); break;
 			case 2 : 
 				try 
 				{
 					account.sacar( consoleView.inputAmountToWithdrawal() );
+					System.out.println( account.getBalance() );
 				} 
 				catch (SaldoInsuficienteException e) 
 				{
-					consoleView.printError( e.getMessage() + " Available amount: " + account.getBalance() );
-				}
+					if ( account.getClass().equals( Especial.class ) )
+						consoleView.printError( e.getMessage() + " Available amount: " + ((Especial) account).getLimite() );
+					else
+						consoleView.printError( e.getMessage() + " Available amount: " + account.getBalance() );
+				} break;
 			case 3 : 
+				if ( account.getClass().equals( Investimento.class ) )
+				{
+					Investimento acc = (Investimento) account;
+					acc.dividendos( 0.14 );
+				} break;
 				
+			default : consoleView.printError( "Error incorrect operation." );
+			
 			}
+			register[3] = String.valueOf( account.getBalance() );
+			
 			
 		}
 	}
@@ -164,6 +194,10 @@ public class RegistersManager {
 	public String[] getRegisterFromFile()
 	{
 		String[] register = registers.nextLine().split( ":" );
+		
+		for (int i = 0 ; i < register.length ; i++)
+			System.out.println(register[i]);
+		
 		return register;
 	}
 	
