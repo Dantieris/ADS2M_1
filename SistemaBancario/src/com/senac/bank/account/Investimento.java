@@ -3,32 +3,24 @@ package com.senac.bank.account;
 public class Investimento extends Conta
 {
 	private int data;
-	private final double taxa;
 	
-	public Investimento( int numConta, int numVerificacao, double saldo, int data, double taxa) 
+	public Investimento() 
 	{
-		super( numConta, numVerificacao, saldo );
-		
-		this.data 	= data;
-		this.taxa 	= taxa;
+		super();
+		this.data = 0;
 	}
 
-	//return the date creation.
+	// Retorna a data de criacao da conta.
 	public int getDataCriacao() 
 	{
 		return this.data;
 	}
 	
-	//return the investment rate.
-	public double getTaxa()
-	{
-		return this.taxa;
-	}
-	
-	//calculates a percentage of profit based on the current balance.
+	// Gera um aumento do saldo de acordo com a taxa, e deposita na conta.
 	public void dividendos( double taxa )
 	{
-		setBalance( ( (getBalance() / 100 ) * taxa) + getBalance() );
+		double value = ( (getBalance() / 100 ) * taxa) + getBalance();
+		depositar(value);
 	}
 	
 }

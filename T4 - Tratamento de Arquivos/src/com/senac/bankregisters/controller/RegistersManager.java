@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Formatter;
-import java.util.Random;
 import java.util.Scanner;
 
 import com.senac.bank.account.Conta;
@@ -23,14 +22,23 @@ public class RegistersManager {
 	private Scanner contacts; // Arquivo Contacts.txt.
 	private Scanner registers; // Arquivo BankRegisters.txt para leitura.
 	private Formatter bankRegister; // Arquivo BankRegisters.txt.
+	private String[] register;
 	
+	public String[] getRegister() {
+		return register;
+	}
+
+	public void setRegister(String[] register) {
+		this.register = register;
+	}
+
 	public RegistersManager()
 	{
 		consoleView = new BankView();
 	}
 	
 	// Abre o arquivo BankRegisters.txt para leitura.
-	public void opneBankRegistersToRead() throws FileNotFoundException, IOException
+	public void openBankRegistersToRead() throws FileNotFoundException, IOException
 	{
 		registers = new Scanner ( new BufferedReader( new FileReader( "BankRegisters.txt" ) ) );
 	}
@@ -129,9 +137,10 @@ public class RegistersManager {
 			recordBankRegisterForEachContact();
 		else
 		{
+			// Abrindo BankRegisters.txt para escrita.
 			try 
 			{
-				opneBankRegistersToRead();
+				openBankRegistersToRead();
 			} 
 			catch (FileNotFoundException e1) 
 			{
@@ -142,46 +151,93 @@ public class RegistersManager {
 				consoleView.printError( "Error opening BankRegisters.txt file failed." );
 			}
 			
-			Conta account = null;
-			String [] register = getRegisterFromFile();
-			account = registredAccount( register[0], register[1], register[2] );
-			
-			consoleView.printMenu();
-			if ( register[1].equalsIgnoreCase( "investimento" ) || register[1].equalsIgnoreCase( "investment" ) )
-				consoleView.printDividendsOperation();
-			
-			int op = consoleView.inputInteger();
-			
-			switch ( op )
+			while( registers.hasNext() )
 			{
-			case 1 : account.depositar( consoleView.inputAmountToDeposit() ); break;
-			case 2 : 
+				Conta account = null;
+				register = getRegisterFromFile();
+				account = registredAccount( register[0], register[1], register[2] );
+				
+				consoleView.printMenu();
+				if ( register[1].equalsIgnoreCase( "investimento" ) || register[1].equalsIgnoreCase( "investment" ) )
+					consoleView.printDividendsOperation();
+				
+				int op = consoleView.inputInteger();
+				
+				switch ( op )
+				{
+				case 1 : 
+					account.depositar( consoleView.inputAmountToDeposit() ); break;
+				case 2 : 
+					try 
+					{
+						account.sacar( consoleView.inputAmountToWithdrawal() );
+						System.out.println( account.getBalance() );
+					} 
+					catch (SaldoInsuficienteException e) 
+					{
+						if ( account.getClass().equals( Especial.class ) )
+							consoleView.printError( e.getMessage() + " Available amount: " + ((Especial) account).getLimite() );
+						else
+							consoleView.printError( e.getMessage() + " Available amount: " + account.getBalance() );
+					} break;
+				case 3 : 
+					if ( account.getClass().equals( Investimento.class ) )
+					{
+						Investimento acc = (Investimento) account;
+						acc.dividendos( 0.14 );
+					} break;
+					
+				default : consoleView.printError( "Error incorrect operation." );
+				}
+				
+				String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];
+				String acc		= account.getAccountNumber()+ ":" +register[1]+":" +account.getBalance();
+				
+				// Abre o arquivo para armazenar o log.
 				try 
 				{
-					account.sacar( consoleView.inputAmountToWithdrawal() );
-					System.out.println( account.getBalance() );
+					openFileBankRegister();
 				} 
-				catch (SaldoInsuficienteException e) 
+				catch (FileNotFoundException e1) 
 				{
-					if ( account.getClass().equals( Especial.class ) )
-						consoleView.printError( e.getMessage() + " Available amount: " + ((Especial) account).getLimite() );
-					else
-						consoleView.printError( e.getMessage() + " Available amount: " + account.getBalance() );
-				} break;
-			case 3 : 
-				if ( account.getClass().equals( Investimento.class ) )
+					consoleView.printError( "Error BankRegisters.txt file not found." );
+				} 
+				catch (IOException e1) 
 				{
-					Investimento acc = (Investimento) account;
-					acc.dividendos( 0.14 );
-				} break;
+					consoleView.printError( "Error opening BankRegisters.txt file failed." );
+				}
 				
-			default : consoleView.printError( "Error incorrect operation." );
-			
+				// Adiciona o log ao arquivo
+				try 
+				{
+					addLog(contact, acc);
+				} 
+				catch (FileNotFoundException e) 
+				{
+					consoleView.printError( "Error file not found." );
+				}
+				
+				// Salva o arquivo.
+				saveFileBankRegister();
+				
 			}
-			register[3] = String.valueOf( account.getBalance() );
-			
 			
 		}
+	}
+	
+	// Adiciona um log ao historico do arquivo.
+	public void addLog( String contact, String account) throws FileNotFoundException
+	{
+		String history = "";
+		while( registers.hasNext() )
+		{
+			history += registers.nextLine()+ "\n";
+		}
+		
+		System.out.println(history);
+		bankRegister.format("%s", history);
+		
+		addBankRegister(contact, account);
 	}
 	
 	// Separa em um vetor os valores de uma linha de registro
@@ -208,47 +264,20 @@ public class RegistersManager {
 		
 		if ( type.equalsIgnoreCase( "common" ) || type.equalsIgnoreCase( "comum" ) )
 		{
-			account = registeringCommonAccount( number, balance );
+			account = new Conta();
 		}
 		
 		if ( type.equalsIgnoreCase( "especial" ) )
 		{
-			account = registeringEspecialAccount( number, balance );
+			account = new Especial( consoleView.inputLimit() );
 		}
 		
 		if ( type.equalsIgnoreCase( "investiment" ) || type.equalsIgnoreCase( "investimento" ) )
 	{
-			account = registeringInvestimentAccount( number, balance );
+			account = new Investimento();
 		}
 		
 		return account;
-	}
-	
-	// Cria uma conta do tipo Comum
-	private Conta registeringCommonAccount( String number, String balance )
-	{
-		return new Conta ( Integer.parseInt( number )
-				, number.charAt(0)
-				, Double.parseDouble( balance ) );
-	}
-	
-	// Cria uma conta do tipo Investimento
-	private Investimento registeringInvestimentAccount( String number, String balance )
-	{
-		return new Investimento ( Integer.parseInt( number ) 
-				, number.charAt(0)
-				, Double.parseDouble( balance )
-				, 0
-				, 0.43 );
-	}
-	
-	// Cria uma conta do tip 
-	private Especial registeringEspecialAccount( String number, String balance )
-	{
-		return new Especial ( Integer.parseInt( number )
-				, number.charAt(0) 
-				, Double.parseDouble( balance )
-				, ( Double.parseDouble( balance ) * 2 ) );
 	}
 	
 }

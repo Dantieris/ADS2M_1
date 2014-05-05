@@ -37,49 +37,22 @@ public class Manager
 		
 		if ( type.equalsIgnoreCase( "common" ) )
 		{
-			account = registeringCommonAccount();
+			account = new Conta();
 		}
 		
 		if ( type.equalsIgnoreCase( "especial" ) )
 		{
-			account = registeringEspecialAccount();
+			account = new Especial( console.inputLimit() );
 		}
 		
 		if ( type.equalsIgnoreCase( "investiment" ) )
 		{
-			account = registeringInvestimentAccount();
+			account = new Investimento();
 		}
 		
 		return account;
 	}
 	
-	//return a common account.
-	private Conta registeringCommonAccount()
-	{
-		return new Conta ( console.inputAccountNumber()
-				, console.inputAccountConfirmationNumber()
-				, console.inputBalance() );
-	}
-	
-	//return an investment account.
-	private Investimento registeringInvestimentAccount()
-	{
-		return new Investimento ( console.inputAccountNumber() 
-				, console.inputAccountConfirmationNumber()
-				, console.inputBalance() 
-				, 0
-				, 0.43 );
-	}
-	
-	//return an especial account.
-	private Especial registeringEspecialAccount()
-	{
-		return new Especial ( console.inputAccountNumber()
-				, console.inputAccountConfirmationNumber() 
-				, console.inputBalance()
-				, console.inputLimit() );
-	}
-
 	//show a menu with operations.
 	//1 to register client.
 	//2 to deposit an amount to the account.

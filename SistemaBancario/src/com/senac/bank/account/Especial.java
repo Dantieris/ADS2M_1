@@ -6,11 +6,13 @@ public class Especial extends Conta
 {
 	private double limite;
 	
-	public Especial( int accountNumber, int accountConfirmationNumber, double balance, double limitWithdrawal ) 
+	public Especial( double limite ) 
 	{
-		super( accountNumber, accountConfirmationNumber, balance );
+		super();
+		this.limite = limite;
 		
-		this.limite = limitWithdrawal;
+		if (limite < 0)
+			this.limite = 1000.0;
 	}
 
 	//return the withdrawal limit.
@@ -18,20 +20,14 @@ public class Especial extends Conta
 	{
 		return limite;
 	}
-
-	//define the withdrawal limit.
-	public void setLimite( double limite ) 
-	{
-		this.limite = limite;
-	}
 	
 	//reduce an value from the current balance.
 	public void sacar( double value ) throws SaldoInsuficienteException
 	{
-		if ( value > getLimite() )
+		if ( value > getLimite() || value < 0 )
 			throw new SaldoInsuficienteException();
 		
-		setBalance( getBalance() - value );
+		saldo -= value;
 	}
 	
 }

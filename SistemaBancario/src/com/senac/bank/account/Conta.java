@@ -4,60 +4,58 @@ import com.senac.bank.exceptions.SaldoInsuficienteException;
 
 public class Conta 
 {
-	private double saldo;
+	
+	protected double saldo;
 	private int numConta;
 	private int numVerificacao;
+	private static int proximaConta = 10000;
 	
-	public Conta( int accountNumber, int accountVerificationNumber, double balance )
+	public Conta( )
 	{
-		this.numConta 		= accountNumber;
-		this.numVerificacao = accountVerificationNumber;
-		this.saldo 			= balance;
+		this.numConta 		= proximaConta;
+		proximaConta++;
+		this.numVerificacao = this.numConta % 100;
+		this.saldo 			= 0;
 	}
 	
-	//return the account balance.
+	// Retorna o valor do saldo.
 	public double getBalance() 
 	{
 		return saldo;
 	}
 
-	//define the account balance.
+	//
 	protected void setBalance( double balance ) 
 	{
 		this.saldo = balance;
 	}
 
-	//return the account number.
+	// Retorna o numero da conta.
 	public int getAccountNumber() 
 	{
 		return numConta;
 	}
 
-	//return the account confirmation number.
+	// Retorna o numero de verificacao.
 	public int getVerificationNumber() 
 	{
 		return numVerificacao;
 	}
-
-	//define the account confirmation number.
-	public void setVerificationNumber( int verificationNumber ) 
-	{
-		this.numVerificacao = verificationNumber;
-	}
 	
-	//add an value to the current balance.
+	// Adiciona um valor ao saldo.
 	public void depositar( double value )
 	{
-		setBalance( getBalance() + value );
+		if ( value > 0 )
+			saldo += value;
 	}
 	
-	//reduce an value from the current balance.
+	// Retira um valor do saldo.
 	public void sacar( double value ) throws SaldoInsuficienteException
 	{
-		if ( getBalance() < value )
+		if ( getBalance() < value || value < 0 )
 			throw new SaldoInsuficienteException();
 		
-		setBalance( getBalance() - value );
+		saldo -= value;
 	}
 	
 }
