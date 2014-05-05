@@ -11,6 +11,8 @@ public class Cliente
 	{
 		this.account 	= account;	
 		this.name		= name;
+		if ( name.equals(null) )
+			name = "cliente";
 	}
 
 	//return the client account.
