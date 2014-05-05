@@ -19,7 +19,7 @@ public class Investimento extends Conta
 	// Gera um aumento do saldo de acordo com a taxa, e deposita na conta.
 	public void dividendos( double taxa )
 	{
-		double value = ( (getBalance() / 100 ) * taxa) + getBalance();
+		double value = ( (getBalance() / 100 ) * taxa );
 		depositar(value);
 	}
 	
