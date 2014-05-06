@@ -23,14 +23,14 @@ public class Manager
 	}
 
 	//register a client in the system.
-	public void registeringClient()
+	private void registeringClient()
 	{
 		client = new Cliente( console.inputName()  
 				, registeringAccount() );
 	}
 	
 	//register an account according to the type.
-	public Conta registeringAccount()
+	private Conta registeringAccount()
 	{
 		Conta account = null;
 		String type = console.inputAccountType();
@@ -39,16 +39,18 @@ public class Manager
 		{
 			account = new Conta();
 		}
-		
-		if ( type.equalsIgnoreCase( "especial" ) )
-		{
-			account = new Especial( console.inputLimit() );
-		}
-		
-		if ( type.equalsIgnoreCase( "investiment" ) )
-		{
-			account = new Investimento();
-		}
+		else
+			if ( type.equalsIgnoreCase( "especial" ) )
+			{
+				account = new Especial( console.inputLimit() );
+			}
+			else
+				if ( type.equalsIgnoreCase( "investment" ) )
+				{
+					account = new Investimento();
+				}
+				else
+						account = new Conta();
 		
 		return account;
 	}
@@ -74,7 +76,7 @@ public class Manager
 						registeringClient(); 
 					else
 					{
-						console.printError("There is one client registered already.");
+						console.printError("There is one client registered.");
 					}
 				}
 					break;
