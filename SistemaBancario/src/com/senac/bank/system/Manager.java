@@ -23,14 +23,14 @@ public class Manager
 	}
 
 	//register a client in the system.
-	private void registeringClient()
+	public void registeringClient()
 	{
 		client = new Cliente( console.inputName()  
 				, registeringAccount() );
 	}
 	
 	//register an account according to the type.
-	private Conta registeringAccount()
+	public Conta registeringAccount()
 	{
 		Conta account = null;
 		String type = console.inputAccountType();

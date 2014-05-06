@@ -111,5 +111,59 @@ public class ManagerTest {
 		assertFalse( gerenciador.getClient().getAccount().getBalance() != 100 );
 	}
 	
+	@Test
+	public void testRegisteringAccountRegistrandoContaTipoCommon() {
+		System.out.println( "\nTipo: \"common\"." );
+		
+		Conta conta = gerenciador.registeringAccount();
+		
+		assertTrue( conta.getClass().equals(Conta.class) );
+	}
 	
+	@Test
+	public void testRegisteringAccountRegistrandoContaTipoInvestment() {
+		System.out.println( "\nTipo: \"investment\"." );
+		
+		Conta conta = gerenciador.registeringAccount();
+		
+		assertTrue( conta.getClass().equals(Investimento.class) );
+	}
+	
+	@Test
+	public void testRegisteringAccountRegistrandoContaTipoEspecial() {
+		System.out.println( "\nTipo: \"especial\". \nLimite: 0." );
+		
+		Conta conta = gerenciador.registeringAccount();
+		
+		assertTrue( conta.getClass().equals(Especial.class) );
+	}
+	
+	@Test
+	public void testRegisteringAccountRegistrandoContaComTipoDiferenteDeCommonInvestmentEspecialRegistrarContaCommon() {
+		System.out.println( "\nTipo: \"diferente\"." );
+		
+		Conta conta = gerenciador.registeringAccount();
+		
+		assertTrue( conta.getClass().equals(Conta.class) );
+	}
+	
+	@Test
+	public void testRegisteringClientComNomeDiferenteDeNuloContaCommonGetClient() {
+		System.out.println( "\nNome: \"naoNulo\". \nConta: \"Common\"." );
+		
+		gerenciador.registeringClient();
+		
+		assertTrue( gerenciador.getClient().getName().equalsIgnoreCase("naoNulo") &&
+					gerenciador.getClient().getAccount().getClass().equals(Conta.class) );
+	}
+	
+	@Test
+	public void testRegisteringClientFalharAoRegistrarNomeNuloContaCommonGetClient() {
+		System.out.println( "\nNome: nulo. \nConta: \"Common\"." );
+		
+		gerenciador.registeringClient();
+		
+		assertFalse( gerenciador.getClient().getName().equalsIgnoreCase(null) );
+		System.out.println(gerenciador.getClient().getName());
+	}
 }

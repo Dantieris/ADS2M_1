@@ -14,6 +14,7 @@ import com.senac.bank.account.Conta;
 import com.senac.bank.account.Especial;
 import com.senac.bank.account.Investimento;
 import com.senac.bank.exceptions.SaldoInsuficienteException;
+import com.senac.bank.system.Manager;
 import com.senac.bankregisters.view.BankView;
 
 public class RegistersManager {
@@ -24,17 +25,18 @@ public class RegistersManager {
 	private Formatter bankRegister; // Arquivo BankRegisters.txt.
 	private String[] register;
 	
+	// Construtor
+	public RegistersManager()
+	{
+		consoleView = new BankView();
+	}
+	
 	public String[] getRegister() {
 		return register;
 	}
 
 	public void setRegister(String[] register) {
 		this.register = register;
-	}
-
-	public RegistersManager()
-	{
-		consoleView = new BankView();
 	}
 	
 	// Abre o arquivo BankRegisters.txt para leitura.
@@ -108,10 +110,8 @@ public class RegistersManager {
 			
 			while( contacts.hasNext() )
 			{
-				account = consoleView.inputAccountNumber() + ":";
-				account += consoleView.inputAccountType() + ":";
-				account += consoleView.inputBalance();				
-							
+				Manager gc = new Manager();
+				gc.menuOperations();
 				contact = getContactRegisterFromContacts();
 				
 				try 
@@ -163,10 +163,15 @@ public class RegistersManager {
 				
 				int op = consoleView.inputInteger();
 				
+				// 1 - Depositar
+				// 2 - Sacar
+				// 3 - Gerar Dividendos
 				switch ( op )
 				{
 				case 1 : 
-					account.depositar( consoleView.inputAmountToDeposit() ); break;
+					account.depositar( consoleView.inputAmountToDeposit() ); 
+					break;
+					
 				case 2 : 
 					try 
 					{
@@ -179,15 +184,19 @@ public class RegistersManager {
 							consoleView.printError( e.getMessage() + " Available amount: " + ((Especial) account).getLimite() );
 						else
 							consoleView.printError( e.getMessage() + " Available amount: " + account.getBalance() );
-					} break;
+					} 
+					break;
+					
 				case 3 : 
 					if ( account.getClass().equals( Investimento.class ) )
 					{
 						Investimento acc = (Investimento) account;
-						acc.dividendos( 0.14 );
-					} break;
+						acc.dividendos( 0.43 );
+					} 
+					break;
 					
 				default : consoleView.printError( "Error incorrect operation." );
+				
 				}
 				
 				String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];

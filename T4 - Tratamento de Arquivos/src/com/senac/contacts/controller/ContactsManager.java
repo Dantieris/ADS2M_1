@@ -34,9 +34,7 @@ public class ContactsManager {
 	public void openFile() throws FileNotFoundException, IOException
 	{
 		contacts = new Formatter( new BufferedWriter ( new FileWriter( "Contacts.txt" ) ) );
-	
 	}
-	
 	
 	// fecha o arquivo Contacts.txt, salvando o texto.
 	public void saveFile()
