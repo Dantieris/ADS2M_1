@@ -103,4 +103,13 @@ public class BankConsole
 				+ "\n5 - Exit" );
 	}
 	
+	// Imprimer os tipos de contas disponiveis para cadastro.
+	public void printMenuAccountTypes()
+	{
+		printLine( "\n=== Acocunt Types ==="
+				+ "\n1 - Common"
+				+ "\n2 - Investment"
+				+ "\n3 - Especial" );
+	}
+	
 }

@@ -16,14 +16,13 @@ import com.senac.bank.account.Investimento;
 import com.senac.bank.exceptions.SaldoInsuficienteException;
 import com.senac.bank.system.Manager;
 import com.senac.bankregisters.view.BankView;
+import com.senac.util.Pessoa;
 
 public class RegistersManager {
 
 	private BankView consoleView;
-	private Scanner contacts; // Arquivo Contacts.txt.
-	private Scanner registers; // Arquivo BankRegisters.txt para leitura.
-	private Formatter bankRegister; // Arquivo BankRegisters.txt.
-	private String[] register;
+	private Scanner reader; // Arquivo BankRegisters.txt para leitura.
+	private Formatter writer; // Arquivo BankRegisters.txt.
 	
 	// Construtor
 	public RegistersManager()
@@ -31,104 +30,84 @@ public class RegistersManager {
 		consoleView = new BankView();
 	}
 	
-	public String[] getRegister() {
-		return register;
-	}
-
-	public void setRegister(String[] register) {
-		this.register = register;
+	// Abre um arquivo para leitura, parametro caminho ou nome do arquivo.
+	public void openFileToRead( String path ) throws FileNotFoundException, IOException
+	{
+		reader = new Scanner ( new BufferedReader( new FileReader( path ) ) );
 	}
 	
-	// Abre o arquivo BankRegisters.txt para leitura.
-	public void openBankRegistersToRead() throws FileNotFoundException, IOException
+	// Abre um arquito para escrita, parametro caminho ou nome do arquivo.
+	public void openFileToWrite( String path ) throws FileNotFoundException, IOException
 	{
-		registers = new Scanner ( new BufferedReader( new FileReader( "BankRegisters.txt" ) ) );
-	}
-	
-	// Abre um arquivo BankRegisters.txt para escrever, caso nao exista um, será criado.
-	public void openFileBankRegister() throws FileNotFoundException, IOException
-	{
-		bankRegister = new Formatter( new BufferedWriter ( new FileWriter( "BankRegisters.txt" ) ) );
-	}
-	
-	// Abre o arquivo Contacts.txt.
-	public void openContacts() throws FileNotFoundException
-	{
-		contacts = new Scanner ( new BufferedReader( new FileReader( "Contacts.txt" ) ) );
-	}
-	
-	// Fecha o arquivo BankRegisters.txt.
-	public void saveFileBankRegister()
-	{
-		bankRegister.close();
+		writer = new Formatter( new BufferedWriter ( new FileWriter( path ) ) );
 	}
 	
 	// Armazena um registro bancário ao arquivo BankRegisters.txt.
 	public void addBankRegister( String contact, String account ) throws FileNotFoundException
 	{
-		bankRegister.format( "%s:%s%n" , account
-										, contact);
-	}
-	
-	// Recebe um contato do arquivo Contacts.txt.
-	public String getContactRegisterFromContacts()
-	{
-		return contacts.nextLine();
+		writer.format( "%s:%s%n" , account
+								 , contact);
 	}
 	
 	// Armazena uma conta para cada contato.
 	public void recordBankRegisterForEachContact()
 	{
-			String contact = null;
-			String account = null;
+		Manager manager = new Manager();
+		String contactRegister = null;
+		Conta account 	= null;
+		
+		// Abrindo arquivos para leitur e escrita.
 			
-			// Abrindo arquivos para leitur e escrita.
-			
-			// Contacts arquivo.
-			try 
-			{
-				openContacts();
-			} 
-			catch (FileNotFoundException e1) 
-			{
-				consoleView.printError( "Error Contacts.txt file not found." );
-			}
-			
-			// Bank Registers arquivo.
-			try 
-			{
-				openFileBankRegister();
-			} 
-			catch (FileNotFoundException e1) 
-			{
-				consoleView.printError( "Error BankRegisters.txt file not found." );
-			} 
-			catch (IOException e1) 
-			{
+		// Contacts arquivo.
+		try 
+		{
+			openFileToRead( "Contacts.txt" );
+		} 
+		catch (FileNotFoundException fnfe) 
+		{
+			consoleView.printError( "Error Contacts.txt file not found." );
+		} catch (IOException e) 
+		{
+			consoleView.printError( "Error opening Contacts.txt file failed." );
+		}
+		
+		// Bank Registers arquivo.
+		try 
+		{
+			openFileToWrite( "BankRegisters.txt" );
+		} 
+		catch (FileNotFoundException fnfe) 
+		{
+			consoleView.printError( "Error BankRegisters.txt file not found." );
+		}
+		 
+		catch (IOException ioe) 
+		{
 				consoleView.printError( "Error opening BankRegisters.txt file failed." );
-			}
+		}
+					
+		while( reader.hasNext() )
+		{
+			account = manager.registeringAccount();
+			contactRegister = reader.nextLine();
 			
-			while( contacts.hasNext() )
+			try 
 			{
-				Manager gc = new Manager();
-				gc.menuOperations();
-				contact = getContactRegisterFromContacts();
-				
-				try 
-				{
-					addBankRegister(contact, account);
-				} 
-				catch (FileNotFoundException e) 
-				{
+				String accRegister = account.getAccountNumber() + ":" + account.getClass() + ":" + account.getBalance();
+				addBankRegister( contactRegister, accRegister );
+			} 
+			catch (FileNotFoundException e) 
+			{
 					consoleView.printError( "Error file not found." );
-				}
-				
-				contact = null;
-				account = null;
 			}
 			
-			// Fecha BankRegisters.txt.
-			saveFileBankRegister();
+			contactRegister = null;
+			account = null;
+		}
+		
+		// Fecha BankRegisters.txt.
+		reader.close();
+		writer.close();
 	}
 
 	public void startSystem()
@@ -140,7 +119,7 @@ public class RegistersManager {
 			// Abrindo BankRegisters.txt para escrita.
 			try 
 			{
-				openBankRegistersToRead();
+				openFileToWrite( "BankRegisters.txt" );
 			} 
 			catch (FileNotFoundException e1) 
 			{
@@ -151,14 +130,17 @@ public class RegistersManager {
 				consoleView.printError( "Error opening BankRegisters.txt file failed." );
 			}
 			
-			while( registers.hasNext() )
+			while( reader.hasNext() )
 			{
+				Manager manager = new Manager();
 				Conta account = null;
-				register = getRegisterFromFile();
-				account = registredAccount( register[0], register[1], register[2] );
+				String[] register = getRegisterFromFile();
+				
+				manager.registeringAccount();
+				account.depositar( Double.valueOf(register[2]) );
 				
 				consoleView.printMenu();
-				if ( register[1].equalsIgnoreCase( "investimento" ) || register[1].equalsIgnoreCase( "investment" ) )
+				if ( register[1].equalsIgnoreCase( "Investimento" ) )
 					consoleView.printDividendsOperation();
 				
 				int op = consoleView.inputInteger();
@@ -196,16 +178,15 @@ public class RegistersManager {
 					break;
 					
 				default : consoleView.printError( "Error incorrect operation." );
-				
 				}
 				
 				String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];
 				String acc		= account.getAccountNumber()+ ":" +register[1]+":" +account.getBalance();
 				
-				// Abre o arquivo para armazenar o log.
+				// Abre o arquivo BankRegisters.txt para armazenar o log.
 				try 
 				{
-					openFileBankRegister();
+					openFileToWrite( "BankRegisters.txt" );
 				} 
 				catch (FileNotFoundException e1) 
 				{
@@ -227,8 +208,8 @@ public class RegistersManager {
 				}
 				
 				// Salva o arquivo.
-				saveFileBankRegister();
-				
+				writer.close();
+								
 			}
 			
 		}
@@ -238,13 +219,13 @@ public class RegistersManager {
 	public void addLog( String contact, String account) throws FileNotFoundException
 	{
 		String history = "";
-		while( registers.hasNext() )
+		while( reader.hasNext() )
 		{
-			history += registers.nextLine()+ "\n";
+			history += reader.nextLine()+ "\n";
 		}
 		
 		System.out.println(history);
-		bankRegister.format("%s", history);
+		writer.format("%s", history);
 		
 		addBankRegister(contact, account);
 	}
@@ -258,7 +239,7 @@ public class RegistersManager {
 	// indice 5 contem o telefone do cliente.
 	public String[] getRegisterFromFile()
 	{
-		String[] register = registers.nextLine().split( ":" );
+		String[] register = reader.nextLine().split( ":" );
 		
 		for (int i = 0 ; i < register.length ; i++)
 			System.out.println(register[i]);

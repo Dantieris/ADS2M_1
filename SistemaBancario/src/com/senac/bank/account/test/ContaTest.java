@@ -74,6 +74,7 @@ public class ContaTest {
 		conta.sacar(-10);
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testNumeroDaTerceiraContaCriadaAposUltimaConta() {
 		Conta ultima 	= new Conta();
