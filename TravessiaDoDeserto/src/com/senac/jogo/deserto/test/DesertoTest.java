@@ -10,25 +10,24 @@ import com.senac.jogo.deserto.Deserto;
 
 public class DesertoTest {
 
+	Deserto deserto;
 	@Before
 	public void setUp() throws Exception {
+		deserto = new Deserto();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		deserto = null;
 	}
 
 	@Test
 	public void testGetDistanciaEstadoInicialValorZero() {
-		Deserto deserto = new Deserto();
-		
 		assertTrue( deserto.getDistancia() == 0 );
 	}
 	
 	@Test
 	public void testAddDistanciaAumentaValorNaDistancia() {
-		Deserto deserto = new Deserto();
-		
 		deserto.addDistancia();
 		
 		assertTrue( deserto.getDistancia() == 1 );
@@ -36,12 +35,18 @@ public class DesertoTest {
 	
 	@Test
 	public void testDimDistanciaDiminuiValorNaDistanciaMaiorQueZero() {
-		Deserto deserto = new Deserto();
-		
 		deserto.addDistancia();
 		deserto.dimDistancia();
 		
 		assertTrue( deserto.getDistancia() == 0 );
+	}
+	
+	@Test
+	public void testAddDistanciaDuasVezesAumentaEmDoisDistancia() {
+		deserto.addDistancia();
+		deserto.addDistancia();
+		
+		assertTrue( deserto.getDistancia() == 2 );
 	}
 
 }

@@ -8,7 +8,7 @@ public class Deserto {
 	}
 
 	public void addDistancia() {
-		distancia = 1;
+		distancia++;
 	}
 
 	public void dimDistancia() {
