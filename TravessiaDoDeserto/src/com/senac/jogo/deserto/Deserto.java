@@ -31,7 +31,8 @@ public class Deserto {
 		unidades[distancia]++;
 	}
 	public void dimUnidade() {
-		unidades[distancia]--;
+		if ( getUnidades()[distancia] > 0 )
+			unidades[distancia]--;
 	}
 
 }

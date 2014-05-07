@@ -82,6 +82,13 @@ public class DesertoTest {
 		
 		assertEquals( 0 , deserto.getUnidades()[ deserto.getDistancia() ]);
 	}
+	
+	@Test
+	public void testDimUnidadeFalhaAoDiminuitValorAtualSendoZero() {
+		deserto.dimUnidade();
+		
+		assertFalse( deserto.getUnidades()[deserto.getDistancia()] < 0 );
+	}
 
 }
 
