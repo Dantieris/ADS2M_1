@@ -55,22 +55,18 @@ public class DesertoTest {
 		
 		assertFalse( deserto.getDistancia() == -1 );
 	}
+	
+	@Test
+	public void testAddDistanciaFalharAoPassarDezDistancias() {
+		for ( int i = 0 ; i < 11 ; i++ )
+			deserto.addDistancia();
+		assertFalse( deserto.getDistancia() > 10 );
+	}
+	
+	@Test
+	public void testGetUnidadesPossuiDezPosicoesDisponiveis() {
+		assertTrue( deserto.getUnidades().length == 10 );
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -8,12 +8,17 @@ public class Deserto {
 	}
 
 	public void addDistancia() {
-		distancia++;
+		if ( distancia < 10 )
+			distancia++;
 	}
 
 	public void dimDistancia() {
 		if ( getDistancia() > 0 )
 			distancia -= 1;
+	}
+
+	public int[] getUnidades() {
+		return new int[10];
 	}
 
 }
