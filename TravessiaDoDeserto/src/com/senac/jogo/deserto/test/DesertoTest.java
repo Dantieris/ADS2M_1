@@ -33,5 +33,15 @@ public class DesertoTest {
 		
 		assertTrue( deserto.getDistancia() == 1 );
 	}
+	
+	@Test
+	public void testDimDistanciaDiminuiValorNaDistanciaMaiorQueZero() {
+		Deserto deserto = new Deserto();
+		
+		deserto.addDistancia();
+		deserto.dimDistancia();
+		
+		assertTrue( deserto.getDistancia() == 0 );
+	}
 
 }
