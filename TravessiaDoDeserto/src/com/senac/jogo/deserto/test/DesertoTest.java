@@ -67,6 +67,13 @@ public class DesertoTest {
 	public void testGetUnidadesPossuiDezPosicoesDisponiveis() {
 		assertTrue( deserto.getUnidades().length == 10 );
 	}
+	
+	@Test
+	public void testAddUnidadeAumentaValorNaPosicaoAtual() {
+		deserto.addUnidade();
+		
+		assertEquals( 1, deserto.getUnidades()[ deserto.getDistancia() ]);
+	}
 
 }
 
