@@ -9,6 +9,7 @@ import com.senac.bank.members.Cliente;
 public class Manager
 {
 	private Cliente client;
+	private Conta account;
 	private BankConsole console;
 	
 	public Manager()
@@ -26,33 +27,34 @@ public class Manager
 	public void registeringClient()
 	{
 		client = new Cliente( console.inputName()  
-				, registeringAccount() );
+				, account );
 	}
 	
 	//register an account according to the type.
-	public Conta registeringAccount()
+	public void registeringAccount()
 	{
-		Conta account = null;
-		String type = console.inputAccountType();
+		int op = console.inputInteger();
 		
-		if ( type.equalsIgnoreCase( "common" ) )
+		switch ( op )
 		{
-			account = new Conta();
+		case 1 : account = registeringCommonAccount(); break;
+		case 2 : account = registeringInvestmentAccount(); break;
+		case 3 : account = registeringEspecialAccount(); break;
+		default: account = registeringCommonAccount();
 		}
-		else
-			if ( type.equalsIgnoreCase( "especial" ) )
-			{
-				account = new Especial( console.inputLimit() );
-			}
-			else
-				if ( type.equalsIgnoreCase( "investment" ) )
-				{
-					account = new Investimento();
-				}
-				else
-						account = new Conta();
-		
-		return account;
+
+	}
+	
+	public Conta registeringCommonAccount() {
+		return new Conta();
+	}
+	
+	public Conta registeringInvestmentAccount() {
+		return new Investimento();
+	}
+	
+	public Conta registeringEspecialAccount() {
+		return new Especial( 1000.0 );
 	}
 	
 	//show a menu with operations.
@@ -73,7 +75,7 @@ public class Manager
 			case 1 : 
 				{
 					if ( getClient() == null )
-						registeringClient(); 
+						registeringClient();
 					else
 					{
 						console.printError("There is one client registered.");

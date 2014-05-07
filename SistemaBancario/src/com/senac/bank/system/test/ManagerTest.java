@@ -112,39 +112,39 @@ public class ManagerTest {
 	}
 	
 	@Test
-	public void testRegisteringAccountRegistrandoContaTipoCommon() {
-		System.out.println( "\nTipo: \"common\"." );
+	public void testRegisteringAccountRegistrandoContaTipoComun() {
+		System.out.println( "\nOpcao 1." );
 		
-		Conta conta = gerenciador.registeringAccount();
+		gerenciador.registeringAccount();
 		
-		assertTrue( conta.getClass().equals(Conta.class) );
+		assertTrue( gerenciador.getClient().getAccount().equals(Conta.class) );
 	}
 	
 	@Test
 	public void testRegisteringAccountRegistrandoContaTipoInvestment() {
-		System.out.println( "\nTipo: \"investment\"." );
+		System.out.println( "\nOpcao 2." );
 		
-		Conta conta = gerenciador.registeringAccount();
+		gerenciador.registeringAccount();
 		
-		assertTrue( conta.getClass().equals(Investimento.class) );
+		assertTrue( gerenciador.getClient().getAccount().getClass().equals(Investimento.class) );
 	}
 	
 	@Test
 	public void testRegisteringAccountRegistrandoContaTipoEspecial() {
-		System.out.println( "\nTipo: \"especial\". \nLimite: 0." );
+		System.out.println( "\nOpcao 3. \nLimite: 0." );
 		
-		Conta conta = gerenciador.registeringAccount();
+		gerenciador.registeringAccount();
 		
-		assertTrue( conta.getClass().equals(Especial.class) );
+		assertTrue( gerenciador.getClient().getAccount().getClass().equals(Especial.class) );
 	}
 	
 	@Test
 	public void testRegisteringAccountRegistrandoContaComTipoDiferenteDeCommonInvestmentEspecialRegistrarContaCommon() {
-		System.out.println( "\nTipo: \"diferente\"." );
+		System.out.println( "\nOpcao 6." );
 		
-		Conta conta = gerenciador.registeringAccount();
+		gerenciador.registeringAccount();
 		
-		assertTrue( conta.getClass().equals(Conta.class) );
+		assertTrue( gerenciador.getClient().getAccount().getClass().equals(Conta.class) );
 	}
 	
 	@Test

@@ -1,7 +1,6 @@
 package com.senac.contacts.controller;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +14,7 @@ import com.senac.util.Pessoa;
 public class ContactsManager {
 	
 	private Controler contactsController;
-	private Formatter contacts;
+	private Formatter writer;
 	private BankConsole printer;
 
 	public ContactsManager()
@@ -24,28 +23,22 @@ public class ContactsManager {
 		printer				= new BankConsole();
 	}
 	
-	// cria um arquivo Contacts.txt.
-	public void createFileContacts()
-	{
-		new File( "Contacts.txt" );
-	}
-	
 	// abre o arquivo Contacts.txt no Formatter contacts.
-	public void openFile() throws FileNotFoundException, IOException
+	public void openFileToWrite( String path ) throws FileNotFoundException, IOException
 	{
-		contacts = new Formatter( new BufferedWriter ( new FileWriter( "Contacts.txt" ) ) );
+		writer = new Formatter( new BufferedWriter ( new FileWriter( path ) ) );
 	}
 	
 	// fecha o arquivo Contacts.txt, salvando o texto.
-	public void saveFile()
+	public void saveFile( Formatter ft )
 	{
-		contacts.close();
+		ft.close();
 	}
 	
 	// adiciona um contato ao arquivo Contacts.txt.
 	public void addContact( Pessoa contact ) throws FormatterClosedException
 	{
-		contacts.format( "%s:%s:%s%n", contact.getNome(), 
+		writer.format( "%s:%s:%s%n", contact.getNome(), 
 				contact.getEndereco(),
 				contact.getTelefone()[0] );
 	}
@@ -54,13 +47,10 @@ public class ContactsManager {
 	{
 		Pessoa contact = null;
 		
-		// Criando o arquivo.
-		createFileContacts();
-		
 		// Abrindo o arquivo.
 		try 
 		{
-			openFile();
+			openFileToWrite( "Contacts.txt" );
 		} 
 		catch (FileNotFoundException e) 
 		{
@@ -79,7 +69,7 @@ public class ContactsManager {
 		}
 		
 		// Fechando o arquivo.
-		saveFile();
+		saveFile( writer );
 		
 		// Imprime mensagem de operação concluida.
 		printer.printLine( "Operation completed." );
