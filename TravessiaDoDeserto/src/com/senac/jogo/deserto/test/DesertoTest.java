@@ -74,6 +74,14 @@ public class DesertoTest {
 		
 		assertEquals( 1, deserto.getUnidades()[ deserto.getDistancia() ]);
 	}
+	
+	@Test
+	public void testDimUnidadeDiminuiValorNaPosicaoAtual() {
+		deserto.addUnidade();
+		deserto.dimUnidade();
+		
+		assertEquals( 0 , deserto.getUnidades()[ deserto.getDistancia() ]);
+	}
 
 }
 

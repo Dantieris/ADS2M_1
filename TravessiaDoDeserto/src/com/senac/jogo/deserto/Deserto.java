@@ -3,10 +3,11 @@ package com.senac.jogo.deserto;
 public class Deserto {
 
 	private int unidades[];
-	private int distancia = 0;
+	private int distancia;
 	
 	public Deserto() {
 		unidades = new int[10];
+		distancia = 0;
 	}
 	public int getDistancia() {
 		return distancia;
@@ -28,6 +29,9 @@ public class Deserto {
 
 	public void addUnidade() {
 		unidades[distancia]++;
+	}
+	public void dimUnidade() {
+		unidades[distancia]--;
 	}
 
 }
