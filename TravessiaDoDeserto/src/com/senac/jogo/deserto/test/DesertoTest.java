@@ -24,5 +24,14 @@ public class DesertoTest {
 		
 		assertTrue( deserto.getDistancia() == 0 );
 	}
+	
+	@Test
+	public void testAddDistanciaAumentaValorNaDistancia() {
+		Deserto deserto = new Deserto();
+		
+		deserto.addDistancia();
+		
+		assertTrue( deserto.getDistancia() == 1 );
+	}
 
 }
