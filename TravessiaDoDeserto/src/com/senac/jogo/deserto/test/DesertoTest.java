@@ -10,7 +10,7 @@ import com.senac.jogo.deserto.Deserto;
 
 public class DesertoTest {
 
-	Deserto deserto;
+	private Deserto deserto;
 	@Before
 	public void setUp() throws Exception {
 		deserto = new Deserto();
@@ -48,5 +48,29 @@ public class DesertoTest {
 		
 		assertTrue( deserto.getDistancia() == 2 );
 	}
+	
+	@Test
+	public void testDimDistanciaFalharAoDiminuirDistanciaNaPosicaoInicial() {
+		deserto.dimDistancia();
+		
+		assertFalse( deserto.getDistancia() == -1 );
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

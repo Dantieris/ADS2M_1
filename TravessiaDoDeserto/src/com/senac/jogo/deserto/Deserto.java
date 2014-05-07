@@ -12,7 +12,8 @@ public class Deserto {
 	}
 
 	public void dimDistancia() {
-		distancia -= 1;
+		if ( getDistancia() > 0 )
+			distancia -= 1;
 	}
 
 }
