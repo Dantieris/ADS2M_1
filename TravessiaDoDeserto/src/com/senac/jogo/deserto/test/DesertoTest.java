@@ -89,6 +89,8 @@ public class DesertoTest {
 		
 		assertFalse( deserto.getUnidades()[deserto.getDistancia()] < 0 );
 	}
+	
+	
 
 }
 

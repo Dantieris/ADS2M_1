@@ -9,6 +9,7 @@ public class Deserto {
 		unidades = new int[10];
 		distancia = 0;
 	}
+	
 	public int getDistancia() {
 		return distancia;
 	}
@@ -30,9 +31,12 @@ public class Deserto {
 	public void addUnidade() {
 		unidades[distancia]++;
 	}
+	
 	public void dimUnidade() {
 		if ( getUnidades()[distancia] > 0 )
 			unidades[distancia]--;
 	}
+	
+	
 
 }
