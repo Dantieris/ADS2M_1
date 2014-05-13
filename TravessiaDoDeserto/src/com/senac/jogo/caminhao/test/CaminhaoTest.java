@@ -68,16 +68,4 @@ public class CaminhaoTest {
 		assertEquals( 2, caminhao.getCargas());
 	}
 	
-	@Test
-	public void testCarregarFalharCarregarMaisSeisCargas() {
-		caminhao.carregar();
-		
-		assertFalse( caminhao.getCargas() > 6 );
-	}
-	
 }
-
-
-
-
-

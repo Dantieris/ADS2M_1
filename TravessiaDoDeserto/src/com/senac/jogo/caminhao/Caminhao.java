@@ -18,8 +18,7 @@ public class Caminhao {
 	}
 
 	public void carregar() {
-		if ( cargas < 6 )
-			cargas++;
+		cargas++;
 	}
 
 }
