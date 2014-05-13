@@ -82,7 +82,9 @@ public class Jogo {
 				return;
 			}
 			else
-				if ( caminhao.getCargas() <= 0 ) {
+				if ( caminhao.getCargas() <= 0 &&
+					 deserto.getUnidades()[ deserto.getDistancia() ] <= 0 &&
+					 deserto.getDistancia() > 0) {
 					view.printLine( "Você perdeu, tente novamente." );
 					return;
 				}	
