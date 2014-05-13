@@ -2,15 +2,18 @@ package com.senac.jogo.jogo;
 
 import com.senac.jogo.caminhao.Caminhao;
 import com.senac.jogo.deserto.Deserto;
+import com.senac.jogo.view.JogoView;
 
 public class Jogo {
 
 	private Caminhao caminhao;
 	private Deserto deserto;
+	private JogoView view;
 	
 	public Jogo() {
 		caminhao = new Caminhao();
-		deserto = new Deserto();
+		deserto  = new Deserto();
+		view 	 = new JogoView();
 	}	
 	
 	public void descarregar() {
@@ -50,4 +53,46 @@ public class Jogo {
 		}
 	}
 
+	public void run() {
+		while(true) {
+			view.printLine( "\nDigite o comando:" );
+			
+			String comando = view.getStringLowCase();
+			
+			if ( comando.equalsIgnoreCase( "avançar" ) ) {
+				avancar();
+			}
+			else
+				if ( comando.equalsIgnoreCase( "voltar" ) ) {
+					recuar();
+				}
+				else
+					if ( comando.equalsIgnoreCase( "largar" ) ) {
+						descarregar();
+					}
+					else
+						if ( comando.equalsIgnoreCase( "carregar" ) ) {
+							carregar();
+						}
+						else
+							view.printLine( "Comando inválido. Tente novamente.\n" );
+		
+			if ( deserto.getDistancia() == 10 ) {
+				view.printLine( "Parabéns, Você ganhou!" );
+				return;
+			}
+			else
+				if ( caminhao.getCargas() <= 0 ) {
+					view.printLine( "Você perdeu, tente novamente." );
+					return;
+				}	
+			printStatus();
+		}
+		
+	}
+	
+	private void printStatus() {
+		view.printLine( "\nPosição do caminhão: " + getDeserto().getDistancia()
+				+ "\nCombustível do caminhão: " + getCaminhao().getCargas());
+	}
 }

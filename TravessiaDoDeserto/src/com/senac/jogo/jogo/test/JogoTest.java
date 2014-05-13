@@ -104,7 +104,6 @@ public class JogoTest {
 		
 		jogo.recuar();
 		
-		assertFalse( jogo.getDeserto().getDistancia() == 5 );
-		
+		assertFalse( jogo.getDeserto().getDistancia() == 5 );	
 	}
 }
