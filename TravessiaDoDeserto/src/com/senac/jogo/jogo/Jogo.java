@@ -39,8 +39,10 @@ public class Jogo {
 	}
 	
 	public void avancar() {
-		caminhao.dimCargas();
-		deserto.addDistancia();
+		if ( caminhao.getCargas() > 0 ) {
+			caminhao.dimCargas();
+			deserto.addDistancia();
+		}
 	}
 
 }

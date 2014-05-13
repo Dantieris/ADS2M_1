@@ -64,4 +64,12 @@ public class JogoTest {
 		assertTrue( jogo.getCaminhao().getCargas() == 5 && 
 					jogo.getDeserto().getDistancia() == 1 );
 	}
+	
+	@Test
+	public void testAvancarFalharAoAvancarCaminhaoSemCarga() {
+		for ( int i = 0 ; i < 7 ; i++ )
+			jogo.avancar();
+		
+		assertFalse( jogo.getDeserto().getDistancia() > 6 );
+	}
 }
