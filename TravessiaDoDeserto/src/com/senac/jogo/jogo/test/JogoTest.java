@@ -49,4 +49,11 @@ public class JogoTest {
 					jogo.getDeserto().getUnidades()[ jogo.getDeserto().getDistancia() ] == 5 );
 	}
 	
+	@Test
+	public void testCarregarFalarComCaminhaoCarregado() {	
+		jogo.carregar();
+		
+		assertFalse( jogo.getCaminhao().getCargas() > 6 || 
+					jogo.getDeserto().getUnidades()[ jogo.getDeserto().getDistancia() ] > 0 );
+	}
 }
