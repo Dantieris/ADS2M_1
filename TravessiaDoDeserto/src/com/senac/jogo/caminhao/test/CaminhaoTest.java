@@ -48,6 +48,14 @@ public class CaminhaoTest {
 		
 		assertFalse( caminhao.getCargas() < 0 );
 	}
+
+	@Test
+	public void testCarregarCargaAumentaUmaCargaQuandoCargaMenorQueSeis() {
+		caminhao.descarregar();
+		caminhao.carregar();
+		
+		assertEquals( 6 , caminhao.getCargas());
+	}
 }
 
 
