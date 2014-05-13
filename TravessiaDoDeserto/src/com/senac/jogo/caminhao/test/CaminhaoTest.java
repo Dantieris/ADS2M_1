@@ -32,6 +32,14 @@ public class CaminhaoTest {
 		
 		assertEquals( 5, caminhao.getCargas());
 	}
+	
+	@Test
+	public void testDescarregarDuasVezesDiminuiDuasCargasCaminhao() {
+		caminhao.descarregar();
+		caminhao.descarregar();
+		
+		assertEquals( 4,  caminhao.getCargas());
+	}
 }
 
 
