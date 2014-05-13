@@ -10,18 +10,19 @@ import com.senac.jogo.jogo.Jogo;
 
 public class JogoTest {
 
+	private Jogo jogo;
 	@Before
 	public void setUp() throws Exception {
+		jogo = new Jogo();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		jogo = null;
 	}
 
 	@Test
 	public void testDescarregarDiminuiCargaDoCaminhaoEAddUnidadeNoDesertoGetCaminhaoGetDeserto() {
-		Jogo jogo = new Jogo();
-		
 		jogo.descarregar();
 		
 		assertTrue( jogo.getCaminhao().getCargas() == 5 &&
@@ -30,8 +31,6 @@ public class JogoTest {
 	
 	@Test
 	public void testDescarregarFalharComCaminhaoSemCargas() {
-		Jogo jogo = new Jogo();
-		
 		for ( int i = 0 ; i < 7 ; i++)
 			jogo.descarregar();
 		
@@ -39,5 +38,15 @@ public class JogoTest {
 				jogo.getDeserto().getUnidades()[ jogo.getDeserto().getDistancia() ] > 6 );
 	}
 	
+	@Test
+	public void testCarregarAumentarCargaCaminhaoDimUnidadeDeserto() {
+		for ( int i = 0 ; i < 6 ; i++ )
+			jogo.descarregar();
+		
+		jogo.carregar();
+		
+		assertTrue( jogo.getCaminhao().getCargas() == 1 && 
+					jogo.getDeserto().getUnidades()[ jogo.getDeserto().getDistancia() ] == 5 );
+	}
 	
 }

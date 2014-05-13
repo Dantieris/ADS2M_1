@@ -32,4 +32,10 @@ public class Jogo {
 		return deserto;
 	}
 
+
+	public void carregar() {
+		caminhao.addCargas();
+		deserto.dimUnidade();
+	}
+
 }
