@@ -47,7 +47,7 @@ public class Jogo {
 	}
 
 	public void recuar() {
-		if ( caminhao.getCargas() > 0 ) {
+		if ( caminhao.getCargas() > 0 && deserto.getDistancia() > 0 ) {
 			caminhao.dimCargas();
 			deserto.dimDistancia();
 		}

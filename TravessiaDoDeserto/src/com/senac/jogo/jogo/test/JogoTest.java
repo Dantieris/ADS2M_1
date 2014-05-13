@@ -86,7 +86,8 @@ public class JogoTest {
 	public void testRecuarFalharNaPosicaoInicial() {
 		jogo.recuar();
 		
-		assertFalse( jogo.getDeserto().getDistancia() < 0 );
+		assertFalse( jogo.getDeserto().getDistancia() < 0 ||
+					jogo.getCaminhao().getCargas() == 5);
 	}
 	
 	@Test
