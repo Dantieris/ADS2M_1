@@ -40,6 +40,14 @@ public class CaminhaoTest {
 		
 		assertEquals( 4,  caminhao.getCargas());
 	}
+	
+	@Test
+	public void testDescarregarFalharAoDescarregarComZeroCargas() {
+		for (int i = 0 ; i < 7 ; i++)
+			caminhao.descarregar();
+		
+		assertFalse( caminhao.getCargas() < 0 );
+	}
 }
 
 

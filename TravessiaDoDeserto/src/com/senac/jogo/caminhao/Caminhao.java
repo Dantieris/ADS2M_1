@@ -13,7 +13,8 @@ public class Caminhao {
 	}
 
 	public void descarregar() {
-		cargas--;
+		if ( cargas > 0 )
+			cargas--;
 	}
 
 }
