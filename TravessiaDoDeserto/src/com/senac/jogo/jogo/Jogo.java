@@ -37,5 +37,10 @@ public class Jogo {
 		caminhao.addCargas();
 		deserto.dimUnidade();
 	}
+	
+	public void avancar() {
+		caminhao.dimCargas();
+		deserto.addDistancia();
+	}
 
 }

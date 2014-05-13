@@ -50,10 +50,18 @@ public class JogoTest {
 	}
 	
 	@Test
-	public void testCarregarFalarComCaminhaoCarregado() {	
+	public void testCarregarFalharComCaminhaoCarregado() {	
 		jogo.carregar();
 		
 		assertFalse( jogo.getCaminhao().getCargas() > 6 || 
 					jogo.getDeserto().getUnidades()[ jogo.getDeserto().getDistancia() ] > 0 );
+	}
+	
+	@Test
+	public void testAvancarDiminuiCargaCaminhaoAumentaDistanciaDeserto() {
+		jogo.avancar();
+		
+		assertTrue( jogo.getCaminhao().getCargas() == 5 && 
+					jogo.getDeserto().getDistancia() == 1 );
 	}
 }
