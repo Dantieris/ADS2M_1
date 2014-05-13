@@ -11,8 +11,7 @@ public class Jogo {
 	public Jogo() {
 		caminhao = new Caminhao();
 		deserto = new Deserto();
-	}
-	
+	}	
 	
 	public void descarregar() {
 		if ( caminhao.getCargas() > 0 ) {
@@ -22,16 +21,13 @@ public class Jogo {
 		
 	}
 
-
 	public Caminhao getCaminhao() {
 		return caminhao;
 	}
 
-
 	public Deserto getDeserto() {
 		return deserto;
 	}
-
 
 	public void carregar() {
 		if ( deserto.getUnidades()[ deserto.getDistancia() ] > 0 ) {
@@ -45,12 +41,13 @@ public class Jogo {
 			caminhao.dimCargas();
 			deserto.addDistancia();
 		}
-		
 	}
 
 	public void recuar() {
-		caminhao.dimCargas();
-		deserto.dimDistancia();
+		if ( caminhao.getCargas() > 0 ) {
+			caminhao.dimCargas();
+			deserto.dimDistancia();
+		}
 	}
 
 }

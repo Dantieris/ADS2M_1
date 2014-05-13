@@ -96,4 +96,15 @@ public class JogoTest {
 		
 		assertFalse( jogo.getCaminhao().getCargas() == 6 );
 	}
+	
+	@Test
+	public void testRecuarFalharCaminhaoSemCarga() {
+		for( int i = 0 ; i < 6 ; i++ ) 
+			jogo.avancar();
+		
+		jogo.recuar();
+		
+		assertFalse( jogo.getDeserto().getDistancia() == 5 );
+		
+	}
 }
