@@ -88,13 +88,12 @@ public class JogoTest {
 		
 		assertFalse( jogo.getDeserto().getDistancia() < 0 );
 	}
+	
+	@Test
+	public void testCarregarFalharAoCarregarOndeNaoPossuiCarga() {
+		jogo.avancar();
+		jogo.carregar();
+		
+		assertFalse( jogo.getCaminhao().getCargas() == 6 );
+	}
 }
-
-
-
-
-
-
-
-
-

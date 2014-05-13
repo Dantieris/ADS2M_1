@@ -34,8 +34,10 @@ public class Jogo {
 
 
 	public void carregar() {
-		caminhao.addCargas();
-		deserto.dimUnidade();
+		if ( deserto.getUnidades()[ deserto.getDistancia() ] > 0 ) {
+			caminhao.addCargas();
+			deserto.dimUnidade();
+		}
 	}
 	
 	public void avancar() {
@@ -45,7 +47,6 @@ public class Jogo {
 		}
 		
 	}
-
 
 	public void recuar() {
 		caminhao.dimCargas();
