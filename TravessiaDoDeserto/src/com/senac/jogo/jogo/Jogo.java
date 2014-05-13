@@ -33,7 +33,8 @@ public class Jogo {
 	}
 
 	public void carregar() {
-		if ( deserto.getUnidades()[ deserto.getDistancia() ] > 0 ) {
+		if ( deserto.getUnidades()[ deserto.getDistancia() ] > 0 ||
+			 deserto.getDistancia() == 0 ) {
 			caminhao.addCargas();
 			deserto.dimUnidade();
 		}

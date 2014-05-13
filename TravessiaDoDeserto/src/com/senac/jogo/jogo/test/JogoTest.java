@@ -107,4 +107,15 @@ public class JogoTest {
 		
 		assertFalse( jogo.getDeserto().getDistancia() == 5 );	
 	}
+	
+	@Test
+	public void testCarregarInfinitoPosicaoInicial() {
+		jogo.avancar();
+		jogo.recuar();
+		
+		jogo.carregar();
+		jogo.carregar();
+		
+		assertEquals( 6 , jogo.getCaminhao().getCargas());
+	}
 }
