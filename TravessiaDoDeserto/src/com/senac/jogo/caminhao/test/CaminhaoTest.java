@@ -6,19 +6,25 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.senac.jogo.caminhao.Caminhao;
+
 public class CaminhaoTest {
 
+	private Caminhao caminhao;
 	@Before
 	public void setUp() throws Exception {
+		caminhao = new Caminhao();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		caminhao = null;
 	}
 
 	@Test
-	public void test() {
-		
+	public void testGetCargasRetornaSeisInicioJogo() {
+		assertEquals( 6, caminhao.getCargas());
 	}
+	
 
 }
