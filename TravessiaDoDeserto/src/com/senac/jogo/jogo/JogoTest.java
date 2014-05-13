@@ -17,8 +17,13 @@ public class JogoTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testDescarregarDiminuiCargaDoCaminhaoEAddUnidadeNoDesertoGetCaminhaoGetDeserto() {
+		Jogo jogo = new Jogo();
+		
+		jogo.descarregar();
+		
+		assertTrue( jogo.getCaminhao().getCargas() == 5 &&
+					jogo.getDeserto().getUnidades()[ jogo.getDeserto().getDistancia() ] == 1 );
 	}
 
 }
