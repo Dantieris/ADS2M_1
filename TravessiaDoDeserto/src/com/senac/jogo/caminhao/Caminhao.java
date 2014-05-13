@@ -18,7 +18,7 @@ public class Caminhao {
 	}
 
 	public void carregar() {
-		cargas = 6;
+		cargas++;
 	}
 
 }

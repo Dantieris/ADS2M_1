@@ -56,6 +56,18 @@ public class CaminhaoTest {
 		
 		assertEquals( 6 , caminhao.getCargas());
 	}
+	
+	@Test
+	public void testCarregarDuasVezesAumentaDuasCargasComCargasZero() {
+		for ( int i = 0; i < 6 ; i++ )
+			caminhao.descarregar();
+		
+		caminhao.carregar();
+		caminhao.carregar();
+
+		assertEquals( 2, caminhao.getCargas());
+	}
+	
 }
 
 
