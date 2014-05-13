@@ -15,8 +15,11 @@ public class Jogo {
 	
 	
 	public void descarregar() {
-		caminhao.dimCargas();
-		deserto.addUnidade();
+		if ( caminhao.getCargas() > 0 ) {
+			caminhao.dimCargas();
+			deserto.addUnidade();
+		}
+		
 	}
 
 
