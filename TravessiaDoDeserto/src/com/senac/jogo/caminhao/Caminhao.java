@@ -12,12 +12,12 @@ public class Caminhao {
 		return cargas;
 	}
 
-	public void descarregar() {
+	public void dimCargas() {
 		if ( cargas > 0 )
 			cargas--;
 	}
 
-	public void carregar() {
+	public void addCargas() {
 		cargas++;
 	}
 

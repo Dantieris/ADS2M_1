@@ -27,43 +27,43 @@ public class CaminhaoTest {
 	}
 	
 	@Test
-	public void testDescarregarDiminuiUmaCargaCaminhao() {
-		caminhao.descarregar();
+	public void testDimCargasDiminuiUmaCargaCaminhao() {
+		caminhao.dimCargas();
 		
 		assertEquals( 5, caminhao.getCargas());
 	}
 	
 	@Test
-	public void testDescarregarDuasVezesDiminuiDuasCargasCaminhao() {
-		caminhao.descarregar();
-		caminhao.descarregar();
+	public void testDimCargasDuasVezesDiminuiDuasCargasCaminhao() {
+		caminhao.dimCargas();
+		caminhao.dimCargas();
 		
 		assertEquals( 4,  caminhao.getCargas());
 	}
 	
 	@Test
-	public void testDescarregarFalharAoDescarregarComZeroCargas() {
+	public void testDimCargasFalharAoDescarregarComZeroCargas() {
 		for (int i = 0 ; i < 7 ; i++)
-			caminhao.descarregar();
+			caminhao.dimCargas();
 		
 		assertFalse( caminhao.getCargas() < 0 );
 	}
 
 	@Test
-	public void testCarregarCargaAumentaUmaCargaQuandoCargaMenorQueSeis() {
-		caminhao.descarregar();
-		caminhao.carregar();
+	public void testAddCargasAumentaUmaCargaQuandoCargaMenorQueSeis() {
+		caminhao.dimCargas();
+		caminhao.addCargas();
 		
 		assertEquals( 6 , caminhao.getCargas());
 	}
 	
 	@Test
-	public void testCarregarDuasVezesAumentaDuasCargasComCargasZero() {
+	public void testAddCargasDuasVezesAumentaDuasCargasComCargasZero() {
 		for ( int i = 0; i < 6 ; i++ )
-			caminhao.descarregar();
+			caminhao.dimCargas();
 		
-		caminhao.carregar();
-		caminhao.carregar();
+		caminhao.addCargas();
+		caminhao.addCargas();
 
 		assertEquals( 2, caminhao.getCargas());
 	}
