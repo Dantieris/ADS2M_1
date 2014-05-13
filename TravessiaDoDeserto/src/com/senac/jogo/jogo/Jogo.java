@@ -39,10 +39,17 @@ public class Jogo {
 	}
 	
 	public void avancar() {
-		if ( caminhao.getCargas() > 0 ) {
+		if ( caminhao.getCargas() > 0 && deserto.getDistancia() < 10) {
 			caminhao.dimCargas();
 			deserto.addDistancia();
 		}
+		
+	}
+
+
+	public void recuar() {
+		caminhao.dimCargas();
+		deserto.dimDistancia();
 	}
 
 }

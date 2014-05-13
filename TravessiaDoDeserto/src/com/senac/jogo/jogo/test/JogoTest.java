@@ -72,4 +72,13 @@ public class JogoTest {
 		
 		assertFalse( jogo.getDeserto().getDistancia() > 6 );
 	}
+	
+	@Test
+	public void testRecuarDiminuiCargaCaminhaoDiminuiDistanciaDeserto() {
+		jogo.avancar();
+		jogo.recuar();
+		
+		assertTrue( jogo.getCaminhao().getCargas() == 4 && 
+					jogo.getDeserto().getDistancia() == 0 );
+	}
 }
