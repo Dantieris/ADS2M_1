@@ -2,13 +2,13 @@ package com.senac.estruturadados;
 
 public class Nodo<T> {
 
-	private int valor;
+	private T valor;
 	
-	public void setValor( int valor ) {
+	public void setValor( T valor ) {
 		this.valor = valor;
 	}
 
-	public Object getValor() {
+	public T getValor() {
 		return valor;
 	}
 

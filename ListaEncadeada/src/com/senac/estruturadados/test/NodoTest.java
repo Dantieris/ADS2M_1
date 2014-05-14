@@ -23,8 +23,6 @@ public class NodoTest {
 
 	@Test
 	public void testSetValorUmGetValor() {
-		nodulo = new Nodo();
-		
 		nodulo.setValor( 1 );
 		
 		assertEquals( 1 , nodulo.getValor());
@@ -32,18 +30,35 @@ public class NodoTest {
 	
 	@Test
 	public void testSetValorZeroGetValor() {
-		nodulo = new Nodo();
-		
 		nodulo.setValor( 0 );
 		
 		assertEquals( 0 , nodulo.getValor());
 	}
 	
 	@Test
-	public void testGetValorSemSetValorRetornarZero() {
-		nodulo = new Nodo();
+	public void testGetValorRetornarNuloInicioDaAplicacao() {
+		assertEquals( null , nodulo.getValor());
+	}
+	
+	@Test
+	public void testSetValorMaiorQueZero() {
+		nodulo.setValor(10);
 		
-		assertEquals( 0 , nodulo.getValor());
+		assertEquals( 10, nodulo.getValor());
+	}
+	
+	@Test
+	public void testSetValorMenorQueZero() {
+		nodulo.setValor(-10);
+		
+		assertEquals( -10, nodulo.getValor());
+	}
+	
+	@Test
+	public void testSetValorString() {
+		nodulo.setValor( "String" );
+		
+		assertEquals( "String" , nodulo.getValor());
 	}
 
 }
