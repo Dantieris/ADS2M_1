@@ -61,6 +61,22 @@ public class NodoTest {
 		assertEquals( "String" , nodulo.getValor());
 	}
 
+	@Test
+	public void testSetNextNulo() {
+		nodulo.setNext(null);
+		
+		assertEquals(null, nodulo.getNext());
+	}
+	
+	@Test
+	public void testSetNextNaoNulo() {
+		Nodo next = new Nodo<String>();
+		next.setValor("valorDoNext");
+		nodulo.setNext( next );
+		
+		assertEquals( next.getValor() , nodulo.getNext().getValor());
+	}
+	
 }
 
 

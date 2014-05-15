@@ -52,10 +52,6 @@ public class RegistersManager {
 	// Armazena uma conta para cada contato.
 	public void recordBankRegisterForEachContact()
 	{
-		Manager manager = new Manager();
-		String contactRegister = null;
-		Conta account 	= null;
-		
 		// Abrindo arquivos para leitur e escrita.
 			
 		// Contacts arquivo.
@@ -88,12 +84,23 @@ public class RegistersManager {
 					
 		while( reader.hasNext() )
 		{
-			account = manager.registeringAccount();
-			contactRegister = reader.nextLine();
+			Conta account;
+			String contactRegister = reader.nextLine();
+			
+			consoleView.printMenuAccountTypes();
+			int op = consoleView.inputAccountNumber();
+			
+			switch ( op ) 
+			{
+			case 1 : account = new Manager().registeringCommonAccount();
+			case 2 : account = new Manager().registeringInvestmentAccount();
+			case 3 : account = new Manager().registeringEspecialAccount();
+			default: account = new Manager().registeringCommonAccount();
+			}
 			
 			try 
 			{
-				String accRegister = account.getAccountNumber() + ":" + account.getClass() + ":" + account.getBalance();
+				String accRegister = account.getAccountNumber() + ":" + account.getType() + ":" + account.getBalance();
 				addBankRegister( contactRegister, accRegister );
 			} 
 			catch (FileNotFoundException e) 

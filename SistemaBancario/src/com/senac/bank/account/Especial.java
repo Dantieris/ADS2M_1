@@ -5,6 +5,7 @@ import com.senac.bank.exceptions.SaldoInsuficienteException;
 public class Especial extends Conta 
 {
 	private double limite;
+	private final String type = "Especial";
 	
 	public Especial( double limite ) 
 	{
@@ -30,4 +31,7 @@ public class Especial extends Conta
 		saldo -= value;
 	}
 	
+	public String getType() {
+		return type;
+	}
 }

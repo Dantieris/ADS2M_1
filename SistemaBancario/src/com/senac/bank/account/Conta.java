@@ -5,6 +5,7 @@ import com.senac.bank.exceptions.SaldoInsuficienteException;
 public class Conta 
 {
 	
+	private final String type = "Conta";
 	protected double saldo;
 	private int numConta;
 	private int numVerificacao;
@@ -58,4 +59,7 @@ public class Conta
 		saldo -= value;
 	}
 	
+	public String getType() {
+		return type;
+	}
 }
