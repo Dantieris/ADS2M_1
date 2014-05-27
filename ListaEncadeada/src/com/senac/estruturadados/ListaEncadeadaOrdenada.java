@@ -2,20 +2,17 @@ package com.senac.estruturadados;
 
 public class ListaEncadeadaOrdenada<T extends Comparable<T>> {
 
-	@SuppressWarnings("rawtypes")
-	private Nodo head;
+	private Nodo<T> head;
 
-	@SuppressWarnings("rawtypes")
-	public void setHead(Nodo head) {
+	public void setHead(Nodo<T> head) {
 		this.head = head;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public Nodo getHead() {
+	public Nodo<T> getHead() {
 		return head;
 	}
 
-	public void inserir(@SuppressWarnings("rawtypes") Nodo nodo) {
+	public void inserir( Nodo<T> nodo ) {
 		head.setNext(nodo);
 	}
 	

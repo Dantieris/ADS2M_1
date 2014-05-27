@@ -3,7 +3,7 @@ package com.senac.estruturadados;
 public class Nodo<T> {
 
 	private T valor;
-	private Nodo next;
+	private Nodo<T> next;
 	
 	public void setValor( T valor ) {
 		this.valor = valor;
@@ -14,11 +14,11 @@ public class Nodo<T> {
 		return valor;
 	}
 
-	public void setNext(Nodo next) {
+	public void setNext(Nodo<T> next) {
 		this.next = next;
 	}
 
-	public Nodo getNext() {
+	public Nodo<T> getNext() {
 		return next;
 	}
 
