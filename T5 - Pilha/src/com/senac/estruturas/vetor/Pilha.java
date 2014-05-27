@@ -38,10 +38,10 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		return 0;
 	}
 
-	@Override
-	public Object getTop() {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getTop() throws ContainerEmptyException {
+		if ( isEmpty() )
+			throw new ContainerEmptyException();
+		return vetor [count - 1];
 	}
 
 	public void push(Object obj) throws ContainerFullException {
@@ -50,9 +50,8 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		vetor[count++] = obj;
 	}
 
-	@Override
 	public Object pop() throws ContainerEmptyException {
-		if (count == 0)
+		if ( isEmpty() )
 			throw new ContainerEmptyException ();
 		Object resultado = vetor [-count];
 		vetor [count] = null;

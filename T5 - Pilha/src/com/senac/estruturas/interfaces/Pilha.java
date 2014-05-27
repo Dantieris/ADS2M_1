@@ -5,7 +5,7 @@ import com.senac.estruturas.exceptions.ContainerFullException;
 
 public interface Pilha extends Container {
 
-	Object getTop ();
+	Object getTop () throws ContainerEmptyException;
 	void push (Object obj) throws ContainerFullException;
 	Object pop () throws ContainerEmptyException;
 }
