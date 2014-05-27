@@ -22,6 +22,11 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 	}
 
 	public void accept(Visitor visitor) {
+		for ( int i = 0 ; i < count ; i++ ) {
+			visitor.visit(vetor [i]);
+			if ( visitor.isDone() )
+				return;
+		}
 		
 	}
 
