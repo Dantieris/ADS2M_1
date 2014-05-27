@@ -16,11 +16,19 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		vetor = new Object [tamanho];
 	}
 	
+	/**
+	 * Esvazia a pilha.
+	 */
 	public void purge() {
 		while ( count > 0 )
 			vetor[--count] = null;
 	}
 
+	/**
+	 * Aceita um visitante e faz ele visitar um por um dos objetos da pilha.
+	 * 
+	 * @param Visitor visitor - O visitante que irá visitar os objetos da pilha.
+	 */
 	public void accept(Visitor visitor) {
 		for ( int i = 0 ; i < count ; i++ ) {
 			visitor.visit(vetor [i]);
@@ -29,7 +37,12 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		}
 		
 	}
-
+	
+	/**
+	 * Retorna uma Enumeration da Pilha.
+	 * 
+	 * @return A Enumeration da pilha.
+	 */
 	@SuppressWarnings("rawtypes")
 	public Enumeration getEnumeration() {
 		return new Enumeration() {
@@ -47,18 +60,33 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		};
 	}
 
+	/**
+	 * Retorna o ultimo elemento da pilha.
+	 * 
+	 * @return O último item da pilha.
+	 */
 	public Object getTop() throws ContainerEmptyException {
 		if ( isEmpty() )
 			throw new ContainerEmptyException();
 		return vetor [count - 1];
 	}
 
+	/**
+	 * Adiciona um elemento na pilha.
+	 * 
+	 * @param Object obj - O elemento a ser inserido na pilha.
+	 */
 	public void push(Object obj) throws ContainerFullException {
 		if ( count == vetor.length )
 			throw new ContainerFullException ();
 		vetor[count++] = obj;
 	}
 
+	/**
+	 * Retira um elemento da pilha.
+	 * 
+	 * @return O elemento que foi retirado.
+	 */
 	public Object pop() throws ContainerEmptyException {
 		if ( isEmpty() )
 			throw new ContainerEmptyException ();
@@ -70,5 +98,5 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 	protected int compareTo(com.senac.estruturas.interfaces.Comparable arg) {
 		return 0;
 	}
-
+	
 }
