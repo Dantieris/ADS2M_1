@@ -1,6 +1,7 @@
 package com.senac.estruturas.vetor;
 
 import java.util.Enumeration;
+import java.util.NoSuchElementException;
 
 import com.senac.estruturas.abstratos.AbstractContainer;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
@@ -31,15 +32,23 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Override
 	public Enumeration getEnumeration() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Enumeration() {
+			protected int posicao = 0;
+			
+			public boolean hasMoreElements() {
+				return posicao < getCount();
+			}
+			
+			public Object nextElement() {
+				if (posicao >= getCount())
+					throw new NoSuchElementException();
+				return vetor [posicao++];
+			}
+		};
 	}
 
-	@Override
 	protected int compareTo(Comparable arg) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
