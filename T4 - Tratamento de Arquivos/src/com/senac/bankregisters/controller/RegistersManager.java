@@ -111,9 +111,6 @@ public class RegistersManager {
 			String[] register = getRegisterFromFile();
 			String type = register[1];
 			
-			for (int i = 0 ; i < register.length ; i++)
-				System.out.println(register[i]);
-			
 			switch ( type ) {
 			case "Comum" : account = new Conta( Integer.valueOf(register[0]), Double.valueOf(register[2]) ); break;
 			case "Investimento" : account = new Investimento( Integer.valueOf(register[0]), Double.valueOf(register[2]) ); break;
@@ -160,7 +157,7 @@ public class RegistersManager {
 			default : consoleView.printError( "Error incorrect operation." );
 			}
 			
-			String contact 	= register[0]+ ":" +register[1]+ ":" +register[2];
+			String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];
 			String acc		= account.getAccountNumber()+ ":" +type+ ":" +account.getBalance();
 			
 			addBankRegister(contact, acc);
