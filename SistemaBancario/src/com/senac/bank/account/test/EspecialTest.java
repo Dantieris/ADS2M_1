@@ -1,6 +1,6 @@
 package com.senac.bank.account.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -25,4 +25,10 @@ public class EspecialTest {
 		assertEquals(-1000, conta.getBalance(), 0);
 	}
 
+	@Test
+	public void testGetTypeRetornaEspecial() {
+		Especial conta = new Especial(1);
+		
+		assertTrue( conta.getType() == "Especial" );
+	}
 }

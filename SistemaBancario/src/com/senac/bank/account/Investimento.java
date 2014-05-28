@@ -3,7 +3,6 @@ package com.senac.bank.account;
 public class Investimento extends Conta
 {
 	private int data;
-	private final String type = "Investimento";
 	
 	public Investimento() 
 	{
@@ -25,7 +24,7 @@ public class Investimento extends Conta
 	}
 	
 	public String getType() {
-		return type;
+		return "Investimento";
 	}
 	
 }

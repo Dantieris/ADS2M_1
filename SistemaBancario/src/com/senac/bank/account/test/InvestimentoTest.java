@@ -24,5 +24,12 @@ public class InvestimentoTest {
 		
 		assertEquals( 0, conta.getDataCriacao());
 	}
+	
+	@Test
+	public void testGetType() {
+		Investimento conta = new Investimento();
+		
+		assertTrue( conta.getType() == "Investimento" );
+	}
 
 }
