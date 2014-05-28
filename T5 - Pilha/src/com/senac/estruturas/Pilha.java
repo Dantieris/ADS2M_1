@@ -90,7 +90,7 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 	public Object pop() throws ContainerEmptyException {
 		if ( isEmpty() )
 			throw new ContainerEmptyException ();
-		Object resultado = vetor [-count];
+		Object resultado = vetor [--count];
 		vetor [count] = null;
 		return resultado;
 	}
