@@ -27,6 +27,7 @@ public class RegistersManager {
 
 	private BankView consoleView;
 	private Scanner contacts; 
+	private Scanner bankRegisters;
 	private Formatter registers; 
 	
 	/**
@@ -39,6 +40,7 @@ public class RegistersManager {
 	{
 		consoleView = new BankView();
 		contacts = new Scanner ( new BufferedReader( new FileReader( "Contacts.txt") ) );
+		contacts = new Scanner ( new BufferedReader( new FileReader( "Registers.txt") ) );
 		registers = new Formatter( new BufferedWriter ( new FileWriter( "Registers.txt", true ) ) );
 	}
 	
@@ -97,85 +99,70 @@ public class RegistersManager {
 	}
 	
 	/**
-	 * 
+	 * Carrega dados dos registros bancarios, realiza operacoes de saque e dividendos, e armazena atualizacoes ao arquivo.
 	 */
-	public void startSystem()
+	public void updateBankRegisters()
 	{
-		if ( !(new File( "Registers.txt").length() > 0) )
-			recordBankRegisterForEachContact();
-		else
-		{	
-			while( contacts.hasNext() )
-			{
-				Manager manager = new Manager();
-				Conta account = null;
-				String[] register = getRegisterFromFile();
-				
-				manager.registeringAccount();
-				account.depositar( Double.valueOf(register[2]) );
-				
-				consoleView.printMenu();
-				if ( register[1].equalsIgnoreCase( "Investimento" ) )
-					consoleView.printDividendsOperation();
-				
-				int op = consoleView.inputInteger();
-				
-				// 1 - Depositar
-				// 2 - Sacar
-				// 3 - Gerar Dividendos
-				switch ( op )
-				{
-				case 1 : 
-					account.depositar( consoleView.inputAmountToDeposit() ); 
-					break;
-					
-				case 2 : 
-					try 
-					{
-						account.sacar( consoleView.inputAmountToWithdrawal() );
-						System.out.println( account.getBalance() );
-					} 
-					catch (SaldoInsuficienteException e) 
-					{
-						if ( account.getClass().equals( Especial.class ) )
-							consoleView.printError( e.getMessage() + " Available amount: " + ((Especial) account).getLimite() );
-						else
-							consoleView.printError( e.getMessage() + " Available amount: " + account.getBalance() );
-					} 
-					break;
-					
-				case 3 : 
-					if ( account.getClass().equals( Investimento.class ) )
-					{
-						Investimento acc = (Investimento) account;
-						acc.dividendos( 0.43 );
-					} 
-					break;
-					
-				default : consoleView.printError( "Error incorrect operation." );
-				}
-				
-				String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];
-				String acc		= account.getAccountNumber()+ ":" +register[1]+":" +account.getBalance();
-	
+		while( bankRegisters.hasNext() )
+		{
+			Manager manager = new Manager();
+			Conta account = null;
+			String[] register = getRegisterFromFile();
+			
+			switch ( register[1] ) {
+			case "Comum" : account = new Conta( Integer.valueOf(register[0]), Integer.valueOf(register[3]) ); break;
+			case "Investimento" : account = new Investimento( Integer.valueOf(register[0]), Integer.valueOf(register[3]) ); break;
+			case "Especial" : account = new Especial(Integer.valueOf(register[0]), Integer.valueOf(register[3]), 1000); break;
+			default: account = new Conta();
 			}
 			
-		}
-	}
-	
-	// Adiciona um log ao historico do arquivo.
-	public void addLog( String contact, String account) throws FileNotFoundException
-	{
-		String history = "";
-		while( contacts.hasNext() )
-		{
-			history += contacts.nextLine()+ "\n";
+			consoleView.printMenu();
+			if ( register[1].equalsIgnoreCase( "Investimento" ) )
+				consoleView.printDividendsOperation();
+			
+			int op = consoleView.inputInteger();
+			
+			// 1 - Depositar
+			// 2 - Sacar
+			// 3 - Gerar Dividendos
+			switch ( op )
+			{
+			case 1 : 
+				account.depositar( consoleView.inputAmountToDeposit() ); 
+				break;
+				
+			case 2 : 
+				try 
+				{
+					account.sacar( consoleView.inputAmountToWithdrawal() );
+					System.out.println( account.getBalance() );
+				} 
+				catch (SaldoInsuficienteException e) 
+				{
+					if ( account.getClass().equals( Especial.class ) )
+						consoleView.printError( e.getMessage() + " Available amount: " + ((Especial) account).getLimite() );
+					else
+						consoleView.printError( e.getMessage() + " Available amount: " + account.getBalance() );
+					} 
+				break;
+				
+			case 3 : 
+				if ( account.getClass().equals( Investimento.class ) )
+				{
+					Investimento acc = (Investimento) account;
+					acc.dividendos( 0.43 );
+				} 
+				break;
+				
+			default : consoleView.printError( "Error incorrect operation." );
+			}
+			
+			String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];
+			String acc		= account.getAccountNumber()+ ":" +register[1]+":" +account.getBalance();
+
 		}
 		
-		System.out.println(history);
-		registers.format("%s", history);
-		
-		addBankRegister(contact, account);
+
 	}
 	
 	// Separa em um vetor os valores de uma linha de registro
