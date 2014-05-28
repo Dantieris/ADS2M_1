@@ -94,14 +94,14 @@ public class ContaTest {
 	
 	@Test
 	public void testConstruirContaDefinindoNumeroNaCriacao() {
-		Conta conta = new Conta(1000);
+		Conta conta = new Conta(1000, 0);
 		
 		assertEquals( 1000 , conta.getAccountNumber());
 	}
 	
 	@Test
 	public void testConstruirContaDefinindoNumeroNaCriacaoFalharComNumeroNegativo() {
-		Conta conta = new Conta(-1000);
+		Conta conta = new Conta(-1000, 0);
 		
 		assertFalse( conta.getAccountNumber() == -1000 );
 	}
@@ -111,5 +111,12 @@ public class ContaTest {
 		Conta conta = new Conta();
 		
 		assertTrue( conta.getType() == "Comum" );
+	}
+	
+	@Test
+	public void testConstruirContaDefinindoNumeroSaldoNaCriacao() {
+		Conta conta = new Conta(1000, 500);
+		
+		assertTrue( conta.getAccountNumber() == 1000 && conta.getBalance() == 500 );
 	}
 }

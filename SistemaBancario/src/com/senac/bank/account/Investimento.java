@@ -10,6 +10,11 @@ public class Investimento extends Conta
 		this.data = 0;
 	}
 
+	public Investimento(int numConta, int saldo) {
+		super(numConta, saldo);
+		this.data = 0;
+	}
+
 	// Retorna a data de criacao da conta.
 	public int getDataCriacao() 
 	{

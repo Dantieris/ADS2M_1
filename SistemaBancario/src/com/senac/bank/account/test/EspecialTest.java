@@ -31,4 +31,11 @@ public class EspecialTest {
 		
 		assertTrue( conta.getType() == "Especial" );
 	}
+	
+	@Test
+	public void testConstruirContaDefinindoNumeroESaldoNaCriacao() {
+		Especial conta = new Especial(1000, 500, 100);
+		
+		assertTrue( conta.getAccountNumber() == 1000 && conta.getBalance() == 500 );		
+	}
 }

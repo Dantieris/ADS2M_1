@@ -15,6 +15,14 @@ public class Especial extends Conta
 			this.limite = 1000.0;
 	}
 
+	public Especial(int numConta, int saldo, double limite) {
+		super(numConta, saldo);
+		this.limite = limite;
+		
+		if(limite < 0)
+			this.limite = 1000.0;
+	}
+
 	//return the withdrawal limit.
 	public double getLimite() 
 	{

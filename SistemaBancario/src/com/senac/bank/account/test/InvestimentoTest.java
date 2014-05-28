@@ -31,5 +31,13 @@ public class InvestimentoTest {
 		
 		assertTrue( conta.getType() == "Investimento" );
 	}
+	
+	@Test
+	public void testConstruirContaDefinindoNumeroESaldoNaCriacao() {
+		Investimento conta = new Investimento(1000, 500);
+		
+		assertTrue( conta.getAccountNumber() == 1000 && conta.getBalance() == 500 );
+	}
+	
 
 }

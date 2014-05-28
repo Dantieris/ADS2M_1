@@ -17,7 +17,7 @@ public class Conta
 		this.saldo 			= 0;
 	}
 	
-	public Conta(int numConta) {
+	public Conta(int numConta, int saldo) {
 		if (numConta > 0)
 			this.numConta = numConta;
 		else {
@@ -26,7 +26,7 @@ public class Conta
 		}
 		
 		this.numVerificacao = this.numConta % 100;
-		this.saldo			= 0;
+		this.saldo			= saldo;
 	}
 
 	// Retorna o valor do saldo.
@@ -71,6 +71,6 @@ public class Conta
 	
 	// Retorna o tipo da conta.
 	public String getType() {
-		return "Comom";
+		return "Comum";
 	}
 }
