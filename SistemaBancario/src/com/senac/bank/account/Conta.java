@@ -17,7 +17,7 @@ public class Conta
 		this.saldo 			= 0;
 	}
 	
-	public Conta(int numConta, int saldo) {
+	public Conta(int numConta, double saldo) {
 		if (numConta > 0)
 			this.numConta = numConta;
 		else {

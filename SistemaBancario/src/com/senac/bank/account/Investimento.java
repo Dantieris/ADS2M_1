@@ -10,7 +10,7 @@ public class Investimento extends Conta
 		this.data = 0;
 	}
 
-	public Investimento(int numConta, int saldo) {
+	public Investimento(int numConta, double saldo) {
 		super(numConta, saldo);
 		this.data = 0;
 	}

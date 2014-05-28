@@ -15,7 +15,7 @@ public class Especial extends Conta
 			this.limite = 1000.0;
 	}
 
-	public Especial(int numConta, int saldo, double limite) {
+	public Especial(int numConta, double saldo, double limite) {
 		super(numConta, saldo);
 		this.limite = limite;
 		
