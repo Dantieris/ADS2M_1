@@ -1,13 +1,27 @@
 package com.senac.bankregisters.apps;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import com.senac.bankregisters.controller.RegistersManager;
 
 public class RegistersManagerApp {
 
 	public static void main ( String args[] )
 	{
-		RegistersManager registersManager = new RegistersManager();
+		RegistersManager registersManager = null;
+		
+		try 
+		{
+			registersManager = new RegistersManager();
+		} 
+		catch (FileNotFoundException e) {
+			System.out.println("File not found.");
+		} catch (IOException e) {
+			System.out.println( "I/O failed." );
+		}
 		
 		registersManager.startSystem();
+		registersManager.saveFiles();
 	}
 }
