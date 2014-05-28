@@ -70,21 +70,21 @@ public class RegistersManager {
 			String contactRegister = contacts.nextLine();
 			
 			consoleView.printMenuAccountTypes();
-			int op = consoleView.inputAccountNumber();
+			String op = consoleView.inputAccountType();
 			
 			switch ( op ) 
 			{
-			case 1 : account = new Manager().registeringCommonAccount();
-			case 2 : account = new Manager().registeringInvestmentAccount();
-			case 3 : account = new Manager().registeringEspecialAccount();
-			default: account = new Manager().registeringCommonAccount();
+			case "1" : account = new Conta(); break;
+			case "2" : account = new Investimento(); break;
+			case "3" : account = new Especial(1000); break;
+			default: account = new Conta();
 			}
 			
 			try 
 			{
 				String accRegister = account.getAccountNumber() + ":" + account.getType() + ":" + account.getBalance();
 				addBankRegister( contactRegister, accRegister );
-			} 
+			}
 			catch (FileNotFoundException e) 
 			{
 					consoleView.printError( "File not found." );
@@ -101,7 +101,7 @@ public class RegistersManager {
 	 */
 	public void startSystem()
 	{
-		if ( !new File( "BankRegisters.txt").exists() )
+		if ( !(new File( "Registers.txt").length() > 0) )
 			recordBankRegisterForEachContact();
 		else
 		{	
@@ -157,10 +157,7 @@ public class RegistersManager {
 				
 				String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];
 				String acc		= account.getAccountNumber()+ ":" +register[1]+":" +account.getBalance();
-				
-				// Salva o arquivo.
-				registers.close();
-								
+	
 			}
 			
 		}
@@ -197,29 +194,7 @@ public class RegistersManager {
 		
 		return register;
 	}
-	
-	// Switch que define qual conta sera criada, de acordo com o tipo.
-	public Conta registredAccount( String number, String type, String balance )
-	{
-		Conta account = null;
-		
-		if ( type.equalsIgnoreCase( "common" ) || type.equalsIgnoreCase( "comum" ) )
-		{
-			account = new Conta();
-		}
-		
-		if ( type.equalsIgnoreCase( "especial" ) )
-		{
-			account = new Especial( consoleView.inputLimit() );
-		}
-		
-		if ( type.equalsIgnoreCase( "investiment" ) || type.equalsIgnoreCase( "investimento" ) )
-	{
-			account = new Investimento();
-		}
-		
-		return account;
-	}
+
 	 /**
 	  * Fecha os arquivos, salvando informações inseridas.
 	  */
