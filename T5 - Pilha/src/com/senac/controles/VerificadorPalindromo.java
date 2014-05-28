@@ -9,7 +9,7 @@ import com.senac.estruturas.exceptions.ContainerFullException;
  * Recebe uma string do usuário, compara e informa se é um palimdromo.
  * 
  * @author 631320025
- *
+ * 
  */
 public class VerificadorPalindromo {
 
@@ -66,12 +66,12 @@ public class VerificadorPalindromo {
 		
 		return flag;
 	}
+	
 	 /**
 	  * Recebe uma String do usuário, e a retorna.
 	  * 
 	  * @return A String digitada pelo usuário.
 	  */
-	
 	private String inputString() {
 		return view.nextString();
 	}

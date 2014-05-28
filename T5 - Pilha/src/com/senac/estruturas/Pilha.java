@@ -99,4 +99,13 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		return 0;
 	}
 	
+	/**
+	 * Informa se a pilha está cheia.
+	 * 
+	 * @return Verdadeiro se estiver cheia, falso senão.
+	 */
+	public boolean isFull() {
+		return count >= vetor.length;
+	}
+	
 }

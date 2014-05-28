@@ -30,4 +30,14 @@ public class Console {
 	private Scanner scanner() {
 		return new Scanner(System.in);
 	}
+
+	/**
+	 * Recebe um número inteiro digitado pelo usuário, e o retorna.
+	 * 
+	 * @return O número digitado.
+	 */
+	public int nextInt() {
+		return scanner().nextInt();
+	}
+
 }
