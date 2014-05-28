@@ -2,7 +2,6 @@ package com.senac.bankregisters.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,7 +13,6 @@ import com.senac.bank.account.Conta;
 import com.senac.bank.account.Especial;
 import com.senac.bank.account.Investimento;
 import com.senac.bank.exceptions.SaldoInsuficienteException;
-import com.senac.bank.system.Manager;
 import com.senac.bankregisters.view.BankView;
 
 /**
