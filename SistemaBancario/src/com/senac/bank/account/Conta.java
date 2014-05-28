@@ -4,8 +4,6 @@ import com.senac.bank.exceptions.SaldoInsuficienteException;
 
 public class Conta 
 {
-	
-	private final String type = "Conta";
 	protected double saldo;
 	private int numConta;
 	private int numVerificacao;
@@ -19,6 +17,18 @@ public class Conta
 		this.saldo 			= 0;
 	}
 	
+	public Conta(int numConta) {
+		if (numConta > 0)
+			this.numConta = numConta;
+		else {
+			this.numConta = proximaConta;
+			proximaConta++;
+		}
+		
+		this.numVerificacao = this.numConta % 100;
+		this.saldo			= 0;
+	}
+
 	// Retorna o valor do saldo.
 	public double getBalance() 
 	{
@@ -59,7 +69,8 @@ public class Conta
 		saldo -= value;
 	}
 	
+	// Retorna o tipo da conta.
 	public String getType() {
-		return type;
+		return "Comom";
 	}
 }

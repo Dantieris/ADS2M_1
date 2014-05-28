@@ -92,4 +92,24 @@ public class ContaTest {
 		assertEquals( (conta.getAccountNumber() % 100), conta.getVerificationNumber() );
 	}
 	
+	@Test
+	public void testConstruirContaDefinindoNumeroNaCriacao() {
+		Conta conta = new Conta(1000);
+		
+		assertEquals( 1000 , conta.getAccountNumber());
+	}
+	
+	@Test
+	public void testConstruirContaDefinindoNumeroNaCriacaoFalharComNumeroNegativo() {
+		Conta conta = new Conta(-1000);
+		
+		assertFalse( conta.getAccountNumber() == -1000 );
+	}
+	
+	@Test
+	public void testGetTypeRetornaTipoDaConta() {
+		Conta conta = new Conta();
+		
+		assertTrue( conta.getType() == "Comum" );
+	}
 }
