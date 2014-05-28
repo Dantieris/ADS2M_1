@@ -21,7 +21,18 @@ public class RegistersManagerApp {
 			System.out.println( "I/O failed." );
 		}
 		
-		registersManager.startSystem();
+		if ( !registersManager.isRegistersEmpty() )
+			registersManager.recordBankRegisterForEachContact();
+		else {
+			try 
+			{	
+				registersManager.updateBankRegisters();
+			} 
+			catch (FileNotFoundException e) {
+				System.out.println( "File not found." );
+			}
+		}
+		
 		registersManager.saveFiles();
 	}
 }

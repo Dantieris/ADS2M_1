@@ -40,7 +40,7 @@ public class RegistersManager {
 	{
 		consoleView = new BankView();
 		contacts = new Scanner ( new BufferedReader( new FileReader( "Contacts.txt") ) );
-		contacts = new Scanner ( new BufferedReader( new FileReader( "Registers.txt") ) );
+		bankRegisters = new Scanner ( new BufferedReader( new FileReader( "Registers.txt") ) );
 		registers = new Formatter( new BufferedWriter ( new FileWriter( "Registers.txt", true ) ) );
 	}
 	
@@ -65,7 +65,7 @@ public class RegistersManager {
 	 */
 	
 	public void recordBankRegisterForEachContact()
-	{					
+	{
 		while( contacts.hasNext() )
 		{
 			Conta account;
@@ -100,24 +100,28 @@ public class RegistersManager {
 	
 	/**
 	 * Carrega dados dos registros bancarios, realiza operacoes de saque e dividendos, e armazena atualizacoes ao arquivo.
+	 * 
+	 * @throws (@exception FileNotFoundException) Arquivo nao encontrado. 
 	 */
-	public void updateBankRegisters()
+	public void updateBankRegisters() throws FileNotFoundException
 	{
 		while( bankRegisters.hasNext() )
 		{
-			Manager manager = new Manager();
-			Conta account = null;
+			Conta account = new Conta();
 			String[] register = getRegisterFromFile();
+			String type = register[1];
 			
-			switch ( register[1] ) {
-			case "Comum" : account = new Conta( Integer.valueOf(register[0]), Integer.valueOf(register[3]) ); break;
-			case "Investimento" : account = new Investimento( Integer.valueOf(register[0]), Integer.valueOf(register[3]) ); break;
-			case "Especial" : account = new Especial(Integer.valueOf(register[0]), Integer.valueOf(register[3]), 1000); break;
-			default: account = new Conta();
+			for (int i = 0 ; i < register.length ; i++)
+				System.out.println(register[i]);
+			
+			switch ( type ) {
+			case "Comum" : account = new Conta( Integer.valueOf(register[0]), Double.valueOf(register[2]) ); break;
+			case "Investimento" : account = new Investimento( Integer.valueOf(register[0]), Double.valueOf(register[2]) ); break;
+			case "Especial" : account = new Especial(Integer.valueOf(register[0]), Double.valueOf(register[2]), 1000); break;
 			}
 			
 			consoleView.printMenu();
-			if ( register[1].equalsIgnoreCase( "Investimento" ) )
+			if ( type.equalsIgnoreCase( "Investimento" ) )
 				consoleView.printDividendsOperation();
 			
 			int op = consoleView.inputInteger();
@@ -128,14 +132,13 @@ public class RegistersManager {
 			switch ( op )
 			{
 			case 1 : 
-				account.depositar( consoleView.inputAmountToDeposit() ); 
+				account.depositar( consoleView.inputAmountToDeposit() );
 				break;
 				
 			case 2 : 
 				try 
 				{
 					account.sacar( consoleView.inputAmountToWithdrawal() );
-					System.out.println( account.getBalance() );
 				} 
 				catch (SaldoInsuficienteException e) 
 				{
@@ -157,12 +160,12 @@ public class RegistersManager {
 			default : consoleView.printError( "Error incorrect operation." );
 			}
 			
-			String contact 	= register[3]+ ":" +register[4]+ ":" +register[5];
-			String acc		= account.getAccountNumber()+ ":" +register[1]+":" +account.getBalance();
-
+			String contact 	= register[0]+ ":" +register[1]+ ":" +register[2];
+			String acc		= account.getAccountNumber()+ ":" +type+ ":" +account.getBalance();
+			
+			addBankRegister(contact, acc);
 		}
 		
-
 	}
 	
 	// Separa em um vetor os valores de uma linha de registro
@@ -173,20 +176,23 @@ public class RegistersManager {
 	// indice 4 contem o endereco do cliente
 	// indice 5 contem o telefone do cliente.
 	public String[] getRegisterFromFile()
-	{
-		String[] register = contacts.nextLine().split( ":" );
-		
-		for (int i = 0 ; i < register.length ; i++)
-			System.out.println(register[i]);
-		
-		return register;
+	{ 
+		return bankRegisters.nextLine().split( ":" );
 	}
 
 	 /**
 	  * Fecha os arquivos, salvando informações inseridas.
 	  */
 	public void saveFiles() {
-		contacts.close();
 		registers.close();
+	}
+	
+	/**
+	 * Informa se o arquivo com registros esta vazio.
+	 * 
+	 * @return Retorna verdadeiro se o arquivo com os registros possui informacao, caso contrario retorna falso.
+	 */
+	public boolean isRegistersEmpty() {
+		return bankRegisters.hasNext();
 	}
 }
