@@ -17,16 +17,11 @@ public class ContactsManager {
 	private Formatter writer;
 	private BankConsole printer;
 
-	public ContactsManager()
+	public ContactsManager() throws IOException, FileNotFoundException
 	{
 		contactsController 	= new Controler();
 		printer				= new BankConsole();
-	}
-	
-	// abre o arquivo Contacts.txt no Formatter contacts.
-	public void openFileToWrite( String path ) throws FileNotFoundException, IOException
-	{
-		writer = new Formatter( new BufferedWriter ( new FileWriter( path ) ) );
+		writer = new Formatter( new BufferedWriter ( new FileWriter( "Contacts.txt" ) ) );
 	}
 	
 	// fecha o arquivo Contacts.txt, salvando o texto.
@@ -48,18 +43,7 @@ public class ContactsManager {
 		Pessoa contact = null;
 		
 		// Abrindo o arquivo.
-		try 
-		{
-			openFileToWrite( "Contacts.txt" );
-		} 
-		catch (FileNotFoundException e) 
-		{
-			printer.printError( "Error file not found." );
-		} 
-		catch (IOException e) 
-		{
-			printer.printError( "Error opening file failed." );
-		}
+
 		
 		// Criando 20 contatos e armazenando no arquivo.
 		for ( int i = 0 ; i < 20 ; i++ )

@@ -21,6 +21,7 @@ public class RegistersManagerApp {
 			System.out.println( "I/O failed." );
 		}
 		
+		if (registersManager != null) {
 		if ( !registersManager.isRegistersEmpty() )
 			registersManager.recordBankRegisterForEachContact();
 		else {
@@ -34,5 +35,6 @@ public class RegistersManagerApp {
 		}
 		
 		registersManager.saveFiles();
+		}
 	}
 }

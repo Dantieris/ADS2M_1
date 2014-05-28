@@ -112,9 +112,9 @@ public class RegistersManager {
 			String type = register[1];
 			
 			switch ( type ) {
-			case "Comum" : account = new Conta( Integer.valueOf(register[0]), Double.valueOf(register[2]) ); break;
-			case "Investimento" : account = new Investimento( Integer.valueOf(register[0]), Double.valueOf(register[2]) ); break;
-			case "Especial" : account = new Especial(Integer.valueOf(register[0]), Double.valueOf(register[2]), 1000); break;
+			case "Comum" : account = new Conta( Integer.parseInt(register[0]), Double.parseDouble(register[2]) ); break;
+			case "Investimento" : account = new Investimento( Integer.parseInt(register[0]), Double.parseDouble(register[2]) ); break;
+			case "Especial" : account = new Especial(Integer.parseInt(register[0]), Double.parseDouble(register[2]), 1000); break;
 			}
 			
 			consoleView.printMenu();
