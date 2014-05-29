@@ -15,50 +15,6 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 	public Pilha(int tamanho) {
 		vetor = new Object [tamanho];
 	}
-	
-	/**
-	 * Esvazia a pilha.
-	 */
-	public void purge() {
-		while ( count > 0 )
-			vetor[--count] = null;
-	}
-
-	/**
-	 * Aceita um visitante e faz ele visitar um por um dos objetos da pilha.
-	 * 
-	 * @param Visitor visitor - O visitante que irá visitar os objetos da pilha.
-	 */
-	public void accept(Visitor visitor) {
-		for ( int i = 0 ; i < count ; i++ ) {
-			visitor.visit(vetor [i]);
-			if ( visitor.isDone() )
-				return;
-		}
-		
-	}
-	
-	/**
-	 * Retorna uma Enumeration da Pilha.
-	 * 
-	 * @return A Enumeration da pilha.
-	 */
-	@SuppressWarnings("rawtypes")
-	public Enumeration getEnumeration() {
-		return new Enumeration() {
-			protected int posicao = 0;
-			
-			public boolean hasMoreElements() {
-				return posicao < getCount();
-			}
-			
-			public Object nextElement() {
-				if (posicao >= getCount())
-					throw new NoSuchElementException();
-				return vetor [posicao++];
-			}
-		};
-	}
 
 	/**
 	 * Retorna o ultimo elemento da pilha.
@@ -95,10 +51,6 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		return resultado;
 	}
 
-	protected int compareTo(com.senac.estruturas.interfaces.Comparable arg) {
-		return 0;
-	}
-	
 	/**
 	 * Informa se a pilha está cheia.
 	 * 
