@@ -1,100 +1,72 @@
 package com.senac.controles;
 
-import com.senac.console.Console;
 import com.senac.estruturas.Pilha;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
 import com.senac.estruturas.exceptions.ContainerFullException;
 
 /**
- * Recebe uma string do usuário, compara e informa se é um palimdromo.
+ * Verifica se uma palavra é um palimdromo. 
+ * Esta classe implementa a comparação utilizando uma pilha de caracteres, 
+ * a comparação é feita char por char.
  * 
- * @author 631320025
+ * @author Dantiéris Castilhos Rabelini
  * 
  */
 public class VerificadorPalindromo {
-
-	private Pilha invertida;
-	private Pilha normal;
-	private Console view;
-	
-	 /**
-	  * Inicializa um objeto VerificadorPalimdromo recém-criado.
-	  */
-	public VerificadorPalindromo() {
-		view = new Console();
-	}
 	
 	/**
-	 * Compara dois objetos, retornando verdadeiro se são iguais, e falso senão.
+	 * Compara dois caracteres, retornando verdadeiro se forem iguais, e falso senão.
 	 * 
-	 * @param a Primeiro objeto a ser comparado.
-	 * @param b Segundo objeto a ser comparado.
-	 * @return Verdadeiro se Object a é igual a Object b, senão retorna falso.
+	 * @param a Primeiro char a ser comparado.
+	 * @param b Segundo char a ser comparado.
+	 * @return Verdadeiro se a é igual a b, senão retorna falso.
 	 */
-	private boolean comparaObjects(Object a, Object b) {
+	private boolean comparaCaractere(char a, char b) {
 		return a == b;
 	}
 	
 	/**
-	 * Verifica se uma String é um palimdromo, retornando verdadeiro se for, e falso senão. 
-	 * Recebe uma String do usuário, coloca a String em duas pilhas, e compara caracter por caractere.
+	 * Verifica se uma palavra é um palimdromo, retornando verdadeiro se for, e falso senão. 
+	 * Este método implementa a comparação utilizando a estrutura pilha
 	 * 
+	 * @param palavra A palavra a ser verificada.
 	 * @return Verdadeiro se for palimdromo, falso senão.
-	 * @throws (@exception ContainerFullException) Se a pilha está cheia.
-	 * @throws (@exception ContainerEmptyException) Se a pilha está vazia.
 	 */
-	public boolean verificaPalimdromo() throws ContainerFullException, ContainerEmptyException {
-		boolean flag = false;
-		view.printLine( "Digite o palimdromo: " );
-		String palavra = inputString();
+	public boolean verificaPalimdromo( String palavra ) {
+		Pilha<Character> pilha = new Pilha<Character>(palavra.length());
 		
-		normal = new Pilha(palavra.length());
-		invertida = new Pilha(palavra.length());
-
-		addNormal(palavra);
-		addInvertida(palavra);
+		empilharPalavra(palavra, pilha);
 		
 		for ( int i = 0 ; i < palavra.length() ; i++ ) {
-			if ( comparaObjects( normal.pop() , invertida.pop()) )
-				flag = true;
-			else
-				flag = false;
+			try 
+			{
+				if ( !comparaCaractere( (char) pilha.pop() , palavra.charAt(i)) )
+					return false;
+			} 
+			catch (ContainerEmptyException e) {
+				System.err.println( "Pilha vazia." );
+			}
 		}
 		
-		normal = null;
-		invertida = null;
-		
-		return flag;
-	}
-	
-	 /**
-	  * Recebe uma String do usuário, e a retorna.
-	  * 
-	  * @return A String digitada pelo usuário.
-	  */
-	private String inputString() {
-		return view.nextString();
+		return true;
 	}
 	
 	/**
-	 * Adiciona caractere por caractere de uma String na pilha, na ordem versa.
+	 * Adiciona char por char da palavra na pilha.
 	 * 
-	 * @param str String a ser inserida na pilha.
-	 * @throws (@exception ContainerFullException) Se a pilha esta cheia.
+	 * @param palavra Palavra a ser inserida.
+	 * @param pilha Pilha que irá armazenar os caracteres.
 	 */
-	private void addNormal( String str ) throws ContainerFullException {
-		for( int i = 0 ; i < str.length() ; i++ )
-			normal.push(str.charAt(i));
+	private void empilharPalavra( String palavra, Pilha<Character> pilha ) {
+		for( int i = 0 ; i < palavra.length() ; i++ ) {
+			try 
+			{
+				pilha.push(palavra.charAt(i));
+			} 
+			catch (ContainerFullException e) {
+				System.err.println( "Pilha cheia." );
+			}
+		}
 	}
-	
-	/**
-	 * Adiciona caractere por caractere de uma String na pilha, na ordem inversa.
-	 * 
-	 * @param str String a ser inserida na pilha.
-	 * @throws (@exception ContainerFullException) Se a pilha esta cheia.
-	 */
-	private void addInvertida( String str ) throws ContainerFullException {
-		for( int i = 0 ; i < str.length() ; i++ )
-			invertida.push(str.charAt(i));
-	}
+
 }
