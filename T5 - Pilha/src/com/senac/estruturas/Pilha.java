@@ -1,19 +1,21 @@
 package com.senac.estruturas;
 
-import java.util.Enumeration;
-import java.util.NoSuchElementException;
-
-import com.senac.estruturas.abstratos.AbstractContainer;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
 import com.senac.estruturas.exceptions.ContainerFullException;
-import com.senac.estruturas.interfaces.Visitor;
 
-public class Pilha extends AbstractContainer implements com.senac.estruturas.interfaces.Pilha {
+public class Pilha {
 
 	protected Object vetor[];
+	protected int count;
 	
+	/**
+	 * Inicializa um objeto Pilha recém-criado, com o tamanho definido por parâmetro.
+	 * 
+	 * @param tamanho O espaço total da pilha.
+	 */
 	public Pilha(int tamanho) {
 		vetor = new Object [tamanho];
+		count = 0;
 	}
 
 	/**
@@ -60,4 +62,12 @@ public class Pilha extends AbstractContainer implements com.senac.estruturas.int
 		return count == vetor.length -1;
 	}
 	
+	/**
+	 * Informa se a pilha está vazia.
+	 * 
+	 * @return Verdadeiro se estiver vazia, falso senão.
+	 */
+	public boolean isEmpty() {
+		return count == 0;
+	}
 }
