@@ -3,7 +3,15 @@ package com.senac.estruturas;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
 import com.senac.estruturas.exceptions.ContainerFullException;
 
-public class Pilha {
+/**
+ * Armazena itens em uma pilha, o tipo da pilha é definido na criação,sempre adicionando ou removendo o útlimo elemento. 
+ * Esta classe implementa a estrutura de dados pilha com um vetor estático, e generics para o tipo. 
+ * 
+ * @author Danti
+ *
+ * @param <T> O tipo dos itens que serão armazenados.
+ */
+public class Pilha<T> {
 
 	protected Object vetor[];
 	protected int count;
@@ -23,7 +31,7 @@ public class Pilha {
 	 * 
 	 * @return O último item da pilha.
 	 */
-	public Object getTop() throws ContainerEmptyException {
+	public Object peek() throws ContainerEmptyException {
 		if ( isEmpty() )
 			throw new ContainerEmptyException();
 		return vetor [count - 1];

@@ -25,20 +25,20 @@ public class ConversorBases {
 	 * @param pilha A pilha que será retirado os valores.
 	 * @return Uma String contendo os valores da pilha.
 	 */
-	private String somaPilha( Pilha pilha ) {
-		String total = "";
+	private String somaPilha( Pilha<Integer> pilha ) {
+		StringBuffer total = new StringBuffer();
 		
 		while( !pilha.isEmpty() ) {
 			try 
 			{
-				total += String.valueOf(pilha.pop());
+				total.append(String.valueOf(pilha.pop()));
 			} 
 			catch (ContainerEmptyException e) {
 				System.err.println( "Erro a pilha esta vazia." );
 			}
 		}
 		
-		return total;
+		return total.toString();
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class ConversorBases {
 	 * @return Uma String do número binário.
 	 */
 	public String converterDecimal( int decimal ) {
-		Pilha pilha = new Pilha(31);
+		Pilha<Integer> pilha = new Pilha<Integer>(31);
 		
 		while(decimal >= 2) {
 			try 
