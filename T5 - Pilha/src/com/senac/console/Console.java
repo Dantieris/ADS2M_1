@@ -2,6 +2,12 @@ package com.senac.console;
 
 import java.util.Scanner;
 
+/**
+ * Imprime mensagens na tela, e recebe informações digitadas pelo usuário.
+ * 
+ * @author Dantiéris Castilhos Rabelini
+ * @version 1.0
+ */
 public class Console {
 	
 	/**
@@ -32,7 +38,7 @@ public class Console {
 	}
 
 	/**
-	 * Recebe um número inteiro digitado pelo usuário, e o retorna.
+	 * Recebe um número inteiro digitado pelo usuário.
 	 * 
 	 * @return O número digitado.
 	 */

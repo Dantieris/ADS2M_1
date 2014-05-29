@@ -1,88 +1,74 @@
 package com.senac.controles;
 
-import com.senac.console.Console;
 import com.senac.estruturas.Pilha;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
 import com.senac.estruturas.exceptions.ContainerFullException;
 
 /**
- * Converte um número decimal para um número binário.
+ * Converte um número decimal para um número binário. 
+ * Esta classe faz a conversão de números decimais positivos, em binários, 
+ * e retorna uma String com os números binários. 
+ * A conversão é implementada utilizando a estrutura de dados pilha.
  * 
- * @author 631320025
+ * @author Dantiéris Castilhos Rabelini
+ * @version 1.0
  *
  */
 public class ConversorBases {
-	private int decimal;
-	private Pilha pilha;
-	private Console view;
+	/**
+	 * Inicializa um objeto ConversorBases recém-criado.
+	 */
+	public ConversorBases() {}
 	
 	/**
-	 * Inicializa um objeto ConversorBases com uma pilha de 5 espaços.
+	 * Concatena os valores da pilha, retornando uma String.
+	 * @param pilha A pilha que será retirado os valores.
+	 * @return Uma String contendo os valores da pilha.
 	 */
-	public ConversorBases() {
-		decimal = 0;
-		pilha 	= new Pilha(5);
-		view 	= new Console();
-	}
-	
-	/**
-	 * Inicializa um objeto ConversoBases com uma pilha de 5 espaços, e recebendo um número decimal.
-	 * 
-	 * @param decimal O número a ser convertido para binário.
-	 */
-	public ConversorBases( int decimal ) {
-		this.decimal = decimal;
-		pilha 		 = new Pilha(5);
-		view		 = new Console();
-	}
-	
-	/**
-	 * Soma todos os valores da pilha, e retorna o valor tota.
-	 * 
-	 * @return O valor total da soma.
-	 * @throws (@exception ContainerEmptyException) Se a pilha está vazia.
-	 */
-	private int somaPilha() throws ContainerEmptyException {
-		int total = 0;
-		for ( int i = 0 ; i < pilha.getCount() ; i++)
-			total += (int) pilha.pop();
+	private String somaPilha( Pilha pilha ) {
+		String total = "";
+		
+		while( !pilha.isEmpty() ) {
+			try 
+			{
+				total += String.valueOf(pilha.pop());
+			} 
+			catch (ContainerEmptyException e) {
+				System.err.println( "Erro a pilha esta vazia." );
+			}
+		}
+		
 		return total;
 	}
 	
 	/**
-	 * Recebe um número decimal e retorna em binário.
-	 * 
-	 * @return
-	 * @throws ContainerFullException
-	 * @throws ContainerEmptyException
+	 * Converte um número decimal em binário, e retorna o binário em uma String.
+	 * @param decimal O número a ser convertido.
+	 * @return Uma String do número binário.
 	 */
-	public int converterDecimal() throws ContainerFullException, ContainerEmptyException {
-		decimal = view.nextInt();
+	public String converterDecimal( int decimal ) {
+		Pilha pilha = new Pilha(31);
 		
-		while(decimal > 2) {
-			if ( pilha.isFull() )
-				aumentarPilha();
-			pilha.push( decimal%2 );
-			
+		while(decimal >= 2) {
+			try 
+			{
+				pilha.push( decimal%2 );
+			} 
+			catch (ContainerFullException e) 
+			{
+				System.err.println( "Erro a pilha ficou cheia." );
+			}
 			decimal = decimal/2;
 		}
+		try 
+		{
+			pilha.push(decimal);
+		} 
+		catch (ContainerFullException e) {
+			System.err.println( "Erro a pilha ficou cheia." );
+		}
 		
-		return somaPilha();
-	}
-	
-	/**
-	 * Aumenta o tamanho da pilha.
-	 * 
-	 * @throws (@exception ContainerFullException) Se a pilha está cheia.
-	 * @throws (@exception ContainerEmptyException) Se a pilha está vazia.
-	 */
-	private void aumentarPilha() throws ContainerFullException, ContainerEmptyException {
-		Pilha nova = new Pilha( pilha.getCount() + 3 );
-		
-		for ( int i = 0 ; i < pilha.getCount() ; i++ )
-			nova.push(pilha.pop());
-		
-		pilha = nova;
+		return somaPilha(pilha);
 	}
 	
 }
