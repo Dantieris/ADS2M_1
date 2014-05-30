@@ -156,4 +156,48 @@ public class CalculadorExpressoes {
 		return p;
 	}
 	
+	/**
+	 * Calcula uma expressao matematica infixa, retorna o resultado em um numero inteiro.
+	 * 
+	 * @param expressao A expressao a ser calculada.
+	 * @return Resultado da expressao.
+	 */
+	public int calcularExpressao( String expressao ) {
+		String posFixa = "";
+		
+		try {
+			posFixa = converterPosFixa(expressao);
+		} 
+		catch (ExpressaoInvalidaException e) {
+			System.err.println( "Erro expressão contém erro." );
+		}
+		
+		Scanner entrada = new Scanner( posFixa );
+		Pilha<Integer> pilha = new Pilha<Integer>();
+
+		while( entrada.hasNext() ) {
+			if ( entrada.hasNextInt() )
+				pilha.push(entrada.nextInt());
+			else {
+				try 
+				{
+					pilha.push(pilha.pop() + pilha.pop());
+				} 
+				catch (ContainerEmptyException e) {
+					System.err.println( "Pilha vazia." );
+				}
+			}
+				
+		}
+		
+		entrada.close();
+		try {
+			return pilha.pop();
+		} catch (ContainerEmptyException e) {
+			System.err.println( "Erro pilha vazia." );
+		}
+		
+		return 0;
+	}
+	
 }
