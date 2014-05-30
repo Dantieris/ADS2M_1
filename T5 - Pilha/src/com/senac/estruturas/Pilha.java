@@ -1,7 +1,6 @@
 package com.senac.estruturas;
 
 import com.senac.estruturas.exceptions.ContainerEmptyException;
-import com.senac.estruturas.exceptions.ContainerFullException;
 
 /**
  * Armazena itens em uma pilha, o tipo da pilha é definido na criação,sempre adicionando ou removendo o útlimo elemento. 
@@ -25,26 +24,35 @@ public class Pilha<T> {
 		vetor = new Object [tamanho];
 		count = 0;
 	}
+	
+	/**
+	 * Inicializa um objeto Pilha recém-criado, com um espaço disponível.
+	 */
+	public Pilha() {
+		vetor = new Object [1];
+		count = 0;
+	}
 
 	/**
 	 * Retorna o ultimo elemento da pilha.
 	 * 
 	 * @return O último item da pilha.
 	 */
-	public Object peek() throws ContainerEmptyException {
+	@SuppressWarnings("unchecked")
+	public T peek() throws ContainerEmptyException {
 		if ( isEmpty() )
 			throw new ContainerEmptyException();
-		return vetor [count - 1];
+		return (T) vetor [count - 1];
 	}
 
 	/**
 	 * Adiciona um elemento na pilha.
 	 * 
-	 * @param Object obj - O elemento a ser inserido na pilha.
+	 * @param T obj O elemento a ser inserido na pilha.
 	 */
-	public void push(Object obj) throws ContainerFullException {
+	public void push(T obj) {
 		if ( count == vetor.length )
-			throw new ContainerFullException ();
+			aumentaPilha();
 		vetor[count++] = obj;
 	}
 
@@ -53,10 +61,11 @@ public class Pilha<T> {
 	 * 
 	 * @return O elemento que foi retirado.
 	 */
-	public Object pop() throws ContainerEmptyException {
+	@SuppressWarnings("unchecked")
+	public T pop() throws ContainerEmptyException {
 		if ( isEmpty() )
 			throw new ContainerEmptyException ();
-		Object resultado = vetor [--count];
+		T resultado = (T) vetor [--count];
 		vetor [count] = null;
 		return resultado;
 	}
@@ -77,5 +86,15 @@ public class Pilha<T> {
 	 */
 	public boolean isEmpty() {
 		return count == 0;
+	}
+	
+	/**
+	 * Aumenta o tamanho da pilha em um espaço.
+	 */
+	private void aumentaPilha() {
+		Object[] tempVet = (Object[]) new Object[vetor.length + 1];
+
+		System.arraycopy(this.vetor, 0, tempVet, 0, vetor.length);
+		this.vetor = tempVet;
 	}
 }
