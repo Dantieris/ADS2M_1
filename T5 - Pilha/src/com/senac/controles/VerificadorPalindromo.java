@@ -2,7 +2,6 @@ package com.senac.controles;
 
 import com.senac.estruturas.Pilha;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
-import com.senac.estruturas.exceptions.ContainerFullException;
 
 /**
  * Verifica se uma palavra é um palimdromo. 
@@ -59,13 +58,7 @@ public class VerificadorPalindromo {
 	 */
 	private void empilharPalavra( String palavra, Pilha<Character> pilha ) {
 		for( int i = 0 ; i < palavra.length() ; i++ ) {
-			try 
-			{
-				pilha.push(palavra.charAt(i));
-			} 
-			catch (ContainerFullException e) {
-				System.err.println( "Pilha cheia." );
-			}
+			pilha.push(palavra.charAt(i));
 		}
 	}
 

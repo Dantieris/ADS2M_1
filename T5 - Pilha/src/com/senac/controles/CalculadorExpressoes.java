@@ -3,7 +3,6 @@ package com.senac.controles;
 import java.util.Scanner;
 
 import com.senac.estruturas.Pilha;
-import com.senac.estruturas.exceptions.ContainerFullException;
 
 public class CalculadorExpressoes {
 	
@@ -21,18 +20,11 @@ public class CalculadorExpressoes {
 			else {
 				if ( isOperador(elemento) ) {
 					if ( elemento.equals("\"") ) {
-						try 
-						{
-							if ( aspas++ <= 0 )
-								pilha.push(elemento.charAt(0));
-							else {
-								//desempilhar os elementos da pilha, e envie para a saida,
-								//até o operador ser o fecha aspas, que será descartado
-							}
-								
-						} 
-						catch (ContainerFullException e) {
-							System.err.println( "Pilha cheia." );
+						if ( aspas++ <= 0 )
+							pilha.push(elemento.charAt(0));
+						else {
+							//desempilhar os elementos da pilha, e envie para a saida,
+							//até o operador ser o fecha aspas, que será descartado
 						}
 					}
 					else {

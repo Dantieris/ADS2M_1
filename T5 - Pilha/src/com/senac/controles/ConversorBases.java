@@ -2,7 +2,6 @@ package com.senac.controles;
 
 import com.senac.estruturas.Pilha;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
-import com.senac.estruturas.exceptions.ContainerFullException;
 
 /**
  * Converte um número decimal para um número binário. 
@@ -50,23 +49,10 @@ public class ConversorBases {
 		Pilha<Integer> pilha = new Pilha<Integer>(31);
 		
 		while(decimal >= 2) {
-			try 
-			{
-				pilha.push( decimal%2 );
-			} 
-			catch (ContainerFullException e) 
-			{
-				System.err.println( "Erro a pilha ficou cheia." );
-			}
+			pilha.push( decimal%2 );
 			decimal = decimal/2;
 		}
-		try 
-		{
-			pilha.push(decimal);
-		} 
-		catch (ContainerFullException e) {
-			System.err.println( "Erro a pilha ficou cheia." );
-		}
+		pilha.push(decimal);
 		
 		return somaPilha(pilha);
 	}
