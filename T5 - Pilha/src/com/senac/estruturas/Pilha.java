@@ -3,7 +3,7 @@ package com.senac.estruturas;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
 
 /**
- * Armazena itens em uma pilha, o tipo da pilha é definido na criação,sempre adicionando ou removendo o útlimo elemento. 
+ * Esta classe contem os comportamentos de uma estrutura pilha, o tipo da pilha é definido na criação.
  * Esta classe implementa a estrutura de dados pilha com um vetor estático, e generics para o tipo. 
  * 
  * @author Danti
