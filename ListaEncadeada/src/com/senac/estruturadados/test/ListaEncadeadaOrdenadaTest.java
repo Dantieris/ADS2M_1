@@ -14,13 +14,11 @@ import com.senac.estruturadados.Nodo;
 
 public class ListaEncadeadaOrdenadaTest {
 
-	@SuppressWarnings("rawtypes")
-	private ListaEncadeadaOrdenada lista;
+	private ListaEncadeadaOrdenada<String> lista;
 	
-	@SuppressWarnings("rawtypes")
 	@Before
 	public void setUp() throws Exception {
-		lista = new ListaEncadeadaOrdenada();
+		lista = new ListaEncadeadaOrdenada<String>();
 	}
 
 	@After
@@ -28,6 +26,9 @@ public class ListaEncadeadaOrdenadaTest {
 		lista = null;
 	}
 
+	/**
+	 * Definir head como nulo é o mesmo que limpar a lista.
+	 */
 	@Test
 	public void testSetHeadNodoNulo() {
 		lista.setHead(null);
@@ -35,10 +36,12 @@ public class ListaEncadeadaOrdenadaTest {
 		assertEquals( null, lista.getHead());
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/**
+	 * Inserindo um nodo na lista.
+	 */
 	@Test
 	public void testSetHeadNodoValido() {
-		Nodo head = new Nodo();
+		Nodo<String> head = new Nodo<String>();
 		
 		head.setValor("valor");
 		lista.setHead( head );
@@ -46,14 +49,24 @@ public class ListaEncadeadaOrdenadaTest {
 		assertEquals( "valor", lista.getHead().getValor() );
 	}
 
-	@SuppressWarnings("rawtypes")
+	/**
+	 * Inserindo o primeiro Nodo.
+	 */
 	@Test
 	public void testInserirComListaVazia() {
-		Nodo primeiro = new Nodo();
+		Nodo<String> primeiro = new Nodo<String>();
 
 		lista.inserir( primeiro );
 		
-		assertTrue( lista.getHead().getNext() == primeiro );
+		assertTrue( lista.getHead() == primeiro );
+	}
+	
+	/**
+	 * Inserindo o segundo Nodo.
+	 */
+	@Test
+	public void testInserirSegundoNodo() {
+		
 	}
 }
 

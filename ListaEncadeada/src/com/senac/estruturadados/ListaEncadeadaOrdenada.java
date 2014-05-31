@@ -13,7 +13,7 @@ public class ListaEncadeadaOrdenada<T extends Comparable<T>> {
 	}
 
 	public void inserir( Nodo<T> nodo ) {
-		head.setNext(nodo);
+		head = nodo;
 	}
 	
 }
