@@ -13,16 +13,21 @@ import com.senac.bank.account.Conta;
 import com.senac.bank.exceptions.SaldoInsuficienteException;
 
 /**
+ * Classe de teste da classe Conta.
+ * 
  * @author Danti
  *
  */
 public class ContaTest {
 
+	private Conta conta;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		conta = new Conta();
 	}
 
 	/**
@@ -30,12 +35,11 @@ public class ContaTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		conta = null;
 	}
 
 	@Test
 	public void testDepositarValorPositivoEGetBalance() {
-		Conta conta = new Conta();
-		
 		conta.depositar(10);
 		
 		assertEquals( 10, conta.getBalance(), 0 );	
@@ -43,8 +47,6 @@ public class ContaTest {
 	
 	@Test
 	public void testFalharDepositoDeValorNegativo() {
-		Conta conta = new Conta();
-		
 		conta.depositar(-10);
 		
 		assertFalse( conta.getBalance() == -10 );
@@ -52,15 +54,11 @@ public class ContaTest {
 
 	@Test( expected = SaldoInsuficienteException.class )
 	public void testSacarValorMaiorQueSaldoDisponivelGeraExecao() throws SaldoInsuficienteException {
-		Conta conta = new Conta();
-		
 		conta.sacar(10);
 	}
 	
 	@Test
 	public void testSacarValorPositivo() throws SaldoInsuficienteException {
-		Conta conta = new Conta();
-		
 		conta.depositar(1000);
 		conta.sacar(500);
 		
@@ -69,12 +67,9 @@ public class ContaTest {
 	
 	@Test( expected = SaldoInsuficienteException.class )
 	public void testSacarValorNegativoGeraExcecao() throws SaldoInsuficienteException {
-		Conta conta = new Conta();
-		
 		conta.sacar(-10);
 	}
 	
-	@SuppressWarnings("unused")
 	@Test
 	public void testNumeroDaTerceiraContaCriadaAposUltimaConta() {
 		Conta ultima 	= new Conta();
@@ -82,13 +77,13 @@ public class ContaTest {
 		Conta segunda 	= new Conta();
 		Conta terceira 	= new Conta();
 		
+		assertEquals( ultima.getAccountNumber() + 1, primeira.getAccountNumber());
+		assertEquals( ultima.getAccountNumber() + 2, segunda.getAccountNumber());
 		assertEquals( (ultima.getAccountNumber() + 3), terceira.getAccountNumber() );
 	}
 	
 	@Test
 	public void testNumeroDeVerificacaoDaConta() {
-		Conta conta = new Conta();
-		
 		assertEquals( (conta.getAccountNumber() % 100), conta.getVerificationNumber() );
 	}
 	
@@ -108,8 +103,6 @@ public class ContaTest {
 	
 	@Test
 	public void testGetTypeRetornaTipoDaConta() {
-		Conta conta = new Conta();
-		
 		assertTrue( conta.getType() == "Comum" );
 	}
 	

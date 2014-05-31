@@ -1,36 +1,54 @@
 package com.senac.bank.system;
 
-import com.senac.bank.account.*;
+import com.senac.bank.account.Conta;
+import com.senac.bank.account.Especial;
+import com.senac.bank.account.Investimento;
 import com.senac.bank.console.BankConsole;
 import com.senac.bank.exceptions.NoClientFoundException;
 import com.senac.bank.exceptions.SaldoInsuficienteException;
 import com.senac.bank.members.Cliente;
 
+/**
+ * 
+ * Esta classe representa um gerenciador de contas/clientes bancários. Realiza as operações: 
+ * saque, deposito, dividendos, cadastro de contas/clientes.
+ * 
+ */
 public class Manager
 {
 	private Cliente client;
 	private Conta account;
 	private BankConsole console;
 	
+	/**
+	 * Inicializa um objeto Manager recém-criado.
+	 */
 	public Manager()
 	{
 		console = new BankConsole();
 	}
 	
-	//return the client.
+	/**
+	 * Informa o cliente atual do gerenciador.
+	 * 
+	 * @return O cliente.
+	 */
 	public Cliente getClient()
 	{
 		return this.client;
 	}
 
-	//register a client in the system.
+	/**
+	 * Cadastra um cliente novo no sistema.
+	 */
 	public void registeringClient()
 	{
-		client = new Cliente( console.inputName()  
-				, account );
+		client = new Cliente( console.inputName() , account );
 	}
 	
-	//register an account according to the type.
+	/**
+	 * Recebe um tipo de conta e realiza o seu cadastro.
+	 */
 	public void registeringAccount()
 	{
 		int op = console.inputInteger();
@@ -45,24 +63,37 @@ public class Manager
 
 	}
 	
+	/**
+	 * Cria um conta comum.
+	 * 
+	 * @return A conta criada.
+	 */
 	public Conta registeringCommonAccount() {
 		return new Conta();
 	}
 	
+	/**
+	 * Cria uma conta de investimentos.
+	 * 
+	 * @return A conta criada.
+	 */
 	public Conta registeringInvestmentAccount() {
 		return new Investimento();
 	}
 	
+	/**
+	 * Cria uma conta especial.
+	 * 
+	 * @return A conta criada.
+	 */
 	public Conta registeringEspecialAccount() {
 		return new Especial( 1000.0 );
 	}
 	
-	//show a menu with operations.
-	//1 to register client.
-	//2 to deposit an amount to the account.
-	//3 to withdraw an amount of the account.
-	//4 to print the extract.
-	//5 to close the application.
+	/**
+	 * Apresenta o menu de operações para o usuário, 
+	 * e de acordo com a escolha é feita a operação.
+	 */
 	public void menuOperations()
 	{
 			console.printMenuOperations();

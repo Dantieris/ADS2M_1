@@ -25,7 +25,7 @@ public class Deserto {
 	}
 
 	public int[] getUnidades() {
-		return unidades;
+		return unidades.clone();
 	}
 
 	public void addUnidade() {

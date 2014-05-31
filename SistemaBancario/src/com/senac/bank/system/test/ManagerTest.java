@@ -117,7 +117,7 @@ public class ManagerTest {
 		
 		gerenciador.registeringAccount();
 		
-		assertTrue( gerenciador.getClient().getAccount().equals(Conta.class) );
+		assertTrue( gerenciador.getClient().getAccount().getClass().equals(Conta.class) );
 	}
 	
 	@Test
