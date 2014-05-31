@@ -16,9 +16,10 @@ import com.senac.bank.exceptions.SaldoInsuficienteException;
 import com.senac.bankregisters.view.BankView;
 
 /**
- * Gerencia registros bancários, adiciona, atualiza, e registra estas informações em arquivos.
  * 
- * @author Danti
+ * Esta classe representa um gerenciador de registros bancários. 
+ * Adiciona e atualiza informações bancárias.
+ * 
  */
 
 public class RegistersManager {
@@ -29,10 +30,10 @@ public class RegistersManager {
 	private Formatter registers; 
 	
 	/**
-	 * Constroi um gerenciador de registros.
+	 * Inicializa um objeto RegistersManager recém-criado.
 	 * 
-	 * @throws (@exception IOException) 
-	 * @throws (@exception FileNotFoundException) Arquivo nao encontrado.
+	 * @throws @exception IOException Se houver falha no input ou output.
+	 * @throws @exception FileNotFoundException Se o arquivo não foi encontrado.
 	 */
 	public RegistersManager() throws IOException, FileNotFoundException
 	{
@@ -45,9 +46,9 @@ public class RegistersManager {
 	/**
 	 * Adiciona um registro bancario no arquivo.
 	 * 
-	 * @param contact Informações sobre o contato a ser inserido.
-	 * @param account Informações sobre a conta a ser inserida.
-	 * @throws (@exception FileNotFoundException) Arquivo nao encontrado.
+	 * @param contact O contato a ser inserido.
+	 * @param account A conta a ser inserida.
+	 * @throws FileNotFoundException Se o arquivo não foi encontrado.
 	 */
 	public void addBankRegister( String contact, String account ) throws FileNotFoundException
 	{
@@ -99,7 +100,7 @@ public class RegistersManager {
 	/**
 	 * Carrega dados dos registros bancarios, realiza operacoes de saque e dividendos, e armazena atualizacoes ao arquivo.
 	 * 
-	 * @throws (@exception FileNotFoundException) Arquivo nao encontrado. 
+	 * @throws FileNotFoundException Se o arquivo não foi encontrado. 
 	 */
 	public void updateBankRegisters() throws FileNotFoundException
 	{
@@ -162,14 +163,13 @@ public class RegistersManager {
 		}
 		
 	}
-	
-	// Separa em um vetor os valores de uma linha de registro
-	// indice 0 contem o numero da conta
-	// indice 1 contem o tipo da conta
-	// indice 2 contem o saldo da conta
-	// indice 3 contem o nome do cliente
-	// indice 4 contem o endereco do cliente
-	// indice 5 contem o telefone do cliente.
+
+	/**
+	 * Retorna um vetor contendo as iformações armazenadas no arquivo de registros bancários.
+	 * 
+	 * @return Um vetor contendo: 
+	 * Número da conta, tipo de conta, saldo atual, nome, endereço e telefone do cliente.
+	 */
 	public String[] getRegisterFromFile()
 	{ 
 		return bankRegisters.nextLine().split( ":" );
@@ -185,7 +185,7 @@ public class RegistersManager {
 	/**
 	 * Informa se o arquivo com registros esta vazio.
 	 * 
-	 * @return Retorna verdadeiro se o arquivo com os registros possui informacao, caso contrario retorna falso.
+	 * @return Verdadeiro se o arquivo com os registros possui informacao, caso contrario retorna falso.
 	 */
 	public boolean isRegistersEmpty() {
 		return bankRegisters.hasNext();

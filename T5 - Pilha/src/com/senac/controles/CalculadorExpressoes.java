@@ -170,7 +170,8 @@ public class CalculadorExpressoes {
     	case '+' :
 		case '-' : p = 2; break;
     	case '*' : 
-		case '/' : p = 3;
+		case '/' : p = 3; break;
+		default  : p = 0;
 		}
 		
 		return p;

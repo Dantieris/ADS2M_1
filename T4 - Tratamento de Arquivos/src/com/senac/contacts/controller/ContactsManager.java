@@ -11,12 +11,23 @@ import com.senac.PraticaOOP.Controler;
 import com.senac.bank.console.BankConsole;
 import com.senac.util.Pessoa;
 
+/**
+ * Esta classe representa um gerenciador de contatos,
+ *  gerar contatos aleatórios e gravar em um arquivo.txt.
+ *
+ */
 public class ContactsManager {
 	
 	private Controler contactsController;
 	private Formatter writer;
 	private BankConsole printer;
 
+	/**
+	 * Inicialia um objeto ContactsManager recém-criado.
+	 * 
+	 * @throws IOException Se houver problema de input ou output.
+	 * @throws FileNotFoundException Se o arquivo não for encontrado.
+	 */
 	public ContactsManager() throws IOException, FileNotFoundException
 	{
 		contactsController 	= new Controler();
@@ -24,13 +35,22 @@ public class ContactsManager {
 		writer = new Formatter( new BufferedWriter ( new FileWriter( "Contacts.txt" ) ) );
 	}
 	
-	// fecha o arquivo Contacts.txt, salvando o texto.
-	public void saveFile( Formatter ft )
+	/**
+	 * Salva as informações contidas no arquivo.
+	 * 
+	 * @param arquivo O arquivo a ser salvo. 
+	 */
+	public void saveFile( Formatter arquivo )
 	{
-		ft.close();
+		arquivo.close();
 	}
-	
-	// adiciona um contato ao arquivo Contacts.txt.
+
+	/**
+	 * Armazena um contato no arquivo de contatos.
+	 * 
+	 * @param contact O contato a ser armazenado.
+	 * @throws FormatterClosedException Se o arquivo estiver fechado.
+	 */
 	public void addContact( Pessoa contact ) throws FormatterClosedException
 	{
 		writer.format( "%s:%s:%s%n", contact.getNome(), 
@@ -38,6 +58,9 @@ public class ContactsManager {
 				contact.getTelefone()[0] );
 	}
 	
+	/**
+	 * Gera vinte contatos aleatórios e os armazena num arquivo.
+	 */
 	public void record20Contacts()
 	{
 		Pessoa contact = null;
