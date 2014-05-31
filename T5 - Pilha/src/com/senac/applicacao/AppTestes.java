@@ -5,6 +5,7 @@ import com.senac.controles.ConversorBases;
 import com.senac.controles.VerificadorPalindromo;
 import com.senac.estruturas.exceptions.ContainerEmptyException;
 import com.senac.estruturas.exceptions.ContainerFullException;
+import com.senac.exceptions.ExpressaoInvalidaException;
 
 /**
  * Classe que realiza os testes das aplicações: Conversor de bases, 
@@ -39,7 +40,7 @@ public class AppTestes {
 		CalculadorExpressoes ce = new CalculadorExpressoes();
 		
 		System.out.println( "Digite a expressao infixa:" );
-		System.out.println( ce.calcularExpressao( new java.util.Scanner(System.in).next() ) );
+		System.out.println( ce.calcularInfixa( new java.util.Scanner(System.in).nextLine()) );
 	}
 	
 	private static void menu() {
@@ -58,6 +59,7 @@ public class AppTestes {
 			case '1' : conversorBasesTest(); break;
 			case '2' : verificadorPalimdromoTest(); break;
 			case '3' : calculadorExpressoesTest(); break;
+			case 's' : System.exit(0);
 			default  : System.out.println( "Opção inválida" );
 			}
 		}
